@@ -4,7 +4,7 @@ tdresser@, npm@
 
 Last updated July 5, 2018
 
-The *Element Timing* API enables monitoring when large or developer-specified image elements are displayed on screen.
+The **Element Timing** API enables monitoring when large or developer-specified image elements are displayed on screen.
 
 
 ### Objectives
@@ -15,7 +15,7 @@ The *Element Timing* API enables monitoring when large or developer-specified im
 
 ### How do we register images for observation?
 
-There are two ways an image can be registered for observation: via an HTML attribute and when the image takes a large portion of the viewport.
+There are two ways an image can be registered for observation: via an HTML attribute and when the image takes a large portion of the viewport when it is first displayed.
 
 #### Attributes
 
@@ -35,12 +35,9 @@ const observer = new PerformanceObserver((list) => {
 observer.observe({entryTypes: ['element']});
 ```
 
-This is the preferred method of annotating hero elements, as it gives developers the power to decide which elements they consider important; however, in order to provide additional flexibility, especially for RUM analytics providers, we propose including one additional approach for registering elements.
-
-
 #### Implicit registration of large image elements
 
-We register a subset of HTML images by default to allow analytics providers to gather information without having to request HTML changes from sites. We use images that occupy a large percentage of the viewport upon being rendered. In particular, upon rendering, we register images that occupy a significant percentage of the viewport (say 15% as a placeholder, exact value TBD).
+We register a subset of HTML images by default to allow RUM analytics providers to gather information without having to request HTML changes from sites. We use images that occupy a large percentage of the viewport upon being rendered. In particular, upon rendering, we register images that occupy a significant percentage of the viewport (say 15% as a placeholder, exact value TBD).
 
 ### Questions
 
