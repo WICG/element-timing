@@ -22,7 +22,6 @@ There are two ways an image can be registered for observation: via an HTML attri
 When an 'img' element with the 'elementtiming' attribute is added to the DOM, it will be observed. It should be noted that setting the elementtiming attribute does not work retroactively: once an element has loaded and is rendered, setting the attribute will have no effect. Thus, it is strongly encouraged to set the attribute before the element is added to the document (in HTML, or if set on Javascript, before adding it to the document). Sample code:
 
 ```
-Example:
 <img src="my_image.jpg" elementtiming="foobar">
 
 const observer = new PerformanceObserver((list) => {
