@@ -2,11 +2,7 @@
 
 tdresser@, npm@
 
-Last updated June 20, 2018
-
-
-[TOC]
-
+Last updated July 5, 2018
 
 
 ### Objectives {#objectives}
@@ -17,10 +13,10 @@ Last updated June 20, 2018
 1.  Enable analytics providers to measure display time of key images, without explicit opt in from web developers. In many cases it's not feasible for developers to modify their HTML just to get better performance insights, so it's important to provide basic information even for websites that cannot annotate their elements.
 
 
-### How do we register elements for observation? {#how-do-we-register-elements-for-observation}
+### How do we register elements for observation?
 
 
-#### Attributes {#attributes}
+#### Attributes
 
 
 ```
@@ -47,7 +43,7 @@ This is the preferred method of annotating hero elements, as it gives developers
 We register a subset of HTML images by default to allow analytics providers to gather information without having to request HTML changes from sites. We use images that occupy a large percentage of the viewport upon being rendered. In particular, upon rendering, we register images that occupy a significant percentage of the viewport (say 15% as a placeholder, exact value TBD).
 
 
-#### Occluded elements {#occluded-elements}
+#### Occluded elements
 
 The entry creation will not be based strictly on _visibility_: for instance if the element is there, but hidden by a full-screen pop-up on the page, or is the style visibility is set to none, or the opacity is 0.
 
