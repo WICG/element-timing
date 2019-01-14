@@ -2,8 +2,6 @@
 
 tdresser@, npm@
 
-Last updated July 5, 2018
-
 The **Element Timing** API enables monitoring when large or developer-specified image elements are displayed on screen.
 
 
@@ -37,6 +35,10 @@ observer.observe({entryTypes: ['element']});
 #### Implicit registration of large image elements
 
 We register a subset of HTML images by default to allow RUM analytics providers to gather information without having to request HTML changes from sites. We use images that occupy a large percentage of the viewport upon being rendered. In particular, upon rendering, we register images that occupy a significant percentage of the viewport (say 15% as a placeholder, exact value TBD).
+
+#### Origin restrictions
+
+Allowing third-party origins to measure the size of an arbitrary image resource and the time it takes to render could expose certain private content such as whether a user is logged into a website. Therefore, for privacy and security reasons, only entries corresponding to a CORS-same-origin response should be exposed.
 
 ### Questions
 
