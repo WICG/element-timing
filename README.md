@@ -1,6 +1,6 @@
-# Element Timing V1 Explainer
+# Element Timing for Images: Explainer
 
-tdresser@, npm@
+npm@, tdresser@
 
 The **Element Timing** API enables monitoring when large or developer-specified image elements are displayed on screen.
 
