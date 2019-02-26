@@ -1214,7 +1214,7 @@ Possible extra rowspan handling
 </style>
   <meta content="Bikeshed version 1cff2db4ee2c3bba7a4077d3007528ec73b0485d" name="generator">
   <link href="https://wicg.github.io/element-timing" rel="canonical">
-  <meta content="00d6d47ee98a1f9f00778ed246cfb1f024e85036" name="document-revision">
+  <meta content="1c8ea96c6c92ddd2a4eab750ba561be2ba473466" name="document-revision">
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -1700,14 +1700,13 @@ Then, query the first paint of that iframe to obtain the rendering timestamp of 
 This is quite inefficient and the polyfill itself might affect the timing obtained.
 Due to the difficulty in obtaining this information today, we choose not to expose the display timestamp for images that fail the <a data-link-type="dfn" href="https://w3c.github.io/resource-timing#dfn-timing-allow-check" id="ref-for-dfn-timing-allow-check②">timing allow check</a>.
 For clarity, here is a code snippet using the PaintTiming API:</p>
-<pre class="example highlight" id="example-2e92cb56"><a class="self-link" href="#example-2e92cb56"></a>// Script in the attacker frame.
+<pre class="example highlight" id="example-5e4b94b5"><a class="self-link" href="#example-5e4b94b5"></a>// In the attacker frame.
+<c- p>&lt;</c-><c- f>iframe</c-> <c- e>src</c-><c- o>=</c-><c- s>attack.html</c-><c- p>>&lt;/</c-><c- f>iframe</c-><c- p>></c->
 <c- p>&lt;</c-><c- f>script</c-><c- p>></c->
-<c- kr>const</c-> iframe <c- o>=</c-> document<c- p>.</c->createElement<c- p>(</c-><c- t>'iframe'</c-><c- p>);</c->
-iframe<c- p>.</c->src <c- o>=</c-> <c- t>'attack.html'</c-><c- p>;</c->
-window<c- p>.</c->onmessage <c- o>=</c-> e <c- p>=></c-> <c- p>{</c->
-    <c- a>let</c-> timestamp <c- o>=</c-> e<c- p>.</c->data<c- p>;</c->
-    <c- c1>// Acquired the display timestamp for 'victim.jpg'!</c->
-<c- p>}</c->
+    window<c- p>.</c->onmessage <c- o>=</c-> e <c- p>=></c-> <c- p>{</c->
+        <c- a>let</c-> timestamp <c- o>=</c-> e<c- p>.</c->data<c- p>;</c->
+        <c- c1>// Acquired the display timestamp for 'victim.jpg'!</c->
+    <c- p>}</c->
 <c- p>&lt;/</c-><c- f>script</c-><c- p>></c->
 
 // In the attack.html iframe.
