@@ -216,14 +216,13 @@ Due to the difficulty in obtaining this information today, we choose not to expo
 For clarity, here is a code snippet using the PaintTiming API:
 
 <xmp class="example highlight" highlight=html>
-    // Script in the attacker frame.
+    // In the attacker frame.
+    <iframe src=attack.html></iframe>
     <script>
-    const iframe = document.createElement('iframe');
-    iframe.src = 'attack.html';
-    window.onmessage = e => {
-        let timestamp = e.data;
-        // Acquired the display timestamp for 'victim.jpg'!
-    }
+        window.onmessage = e => {
+            let timestamp = e.data;
+            // Acquired the display timestamp for 'victim.jpg'!
+        }
     </script>
 
     // In the attack.html iframe.
