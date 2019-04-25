@@ -26,6 +26,7 @@ urlPrefix: https://w3c.github.io/performance-timeline/; spec: PERFORMANCE-TIMELI
 urlPrefix: https://dom.spec.whatwg.org/; spec: DOM;
     type: attribute; for: Element;
         text: id; url: #dom-element-id;
+    type: dfn; url: #connected; text: connected;
 urlPrefix: https://w3c.github.io/IntersectionObserver; spec: INTERSECTION-OBSERVER;
     type: interface; url: #intersectionobserver; text: IntersectionObserver;
     type: dfn; url: #calculate-intersection-rect-algo; text: intersection rect algorithm;
@@ -33,17 +34,24 @@ urlPrefix: https://w3c.github.io/paint-timing/; spec: PAINT-TIMING;
     type: dfn; url: #first-paint; text: first paint;
 urlPrefix: https://html.spec.whatwg.org/multipage; spec: HTML;
     type: dfn; url: #image-request; text: image request;
-    type: dfn; url: images.html/#img-all; text: completely available;
-    type: dfn; url: urls-and-fetching.html#resolve-a-url; text: resolved url;
+    type: dfn; url: /images.html#img-all; text: completely available;
+    type: dfn; url: /urls-and-fetching.html#resolve-a-url; text: resolved url;
+    type: attribute; for: img;
+        text:naturalWidth; url: #dom-img-naturalwidth;
+        text:naturalHeight; url: #dom-img-naturalheight;
 urlPrefix: https://w3c.github.io/resource-timing; spec: RESOURCE-TIMING;
     type: dfn; url: #dfn-timing-allow-check; text: timing allow check;
+    type: interface; url: #sec-performanceresourcetiming; text: PerformanceResourceTiming;
     type: attribute; for: PerformanceResourceTiming;
-        text: responseEnd; url: ##dom-performanceresourcetiming-responseend;
+        text: responseEnd; url: #dom-performanceresourcetiming-responseend;
 urlPrefix: https://w3c.github.io/hr-time; spec: HR-TIME;
     type: dfn; url: #dfn-current-high-resolution-time; text: current high resolution time;
     type: interface; url: #dom-domhighrestimestamp; text: DOMHighResTimeStamp;
 urlPrefix: https://drafts.csswg.org/css-backgrounds-3; spec: CSS-BACKGROUNDS-3;
     type: dfn; url: #propdef-background-image; text: background-image;
+urlPrefix: https://fetch.spec.whatwg.org; spec: FETCH;
+    type: dfn; url: #concept-request; text: fetch request;
+    type: dfn; url: #concept-response; text: fetch response;
 </pre>
 
 Introduction {#sec-intro}
@@ -115,11 +123,44 @@ interface PerformanceElementTiming : PerformanceEntry {
     readonly attribute DOMRectReadOnly intersectionRect;
     readonly attribute DOMHighResTimeStamp responseEnd;
     readonly attribute DOMString identifier;
+    readonly attribute unsigned long long naturalWidth;
+    readonly attribute unsigned long long naturalHeight;
+    readonly attribute DOMString id;
+    readonly attribute Element? element;
 };
 </pre>
 
-Each {{PerformanceElementTiming}} object reports timing information about one associated {{Element}}.
-The values of the attributes of {{PerformanceElementTiming}} are set in the processing model in [[#sec-report-element]].
+A {{PerformanceElementTiming}} object reports timing information about one associated image.
+
+Each {{PerformanceElementTiming}} object has these associated concepts, all of which are set on creation:
+* A <dfn>request</dfn> containing the image request.
+* A <dfn>response</dfn> containing the image response.
+* An <dfn>element</dfn> containing the associated {{Element}}.
+
+The associated concepts and some attributes for {{PerformanceElementTiming}} are specified in the processing model in [[#sec-report-element]].
+
+The {{PerformanceEntry/entryType}} attribute's getter must return the {{DOMString}} <code>"element"</code>.
+
+The {{PerformanceEntry/name}} attribute's getter must return <a>request</a>'s <a>resolved URL</a>.
+This is consistent with {{PerformanceResourceTiming}}'s name attribute.
+
+The {{PerformanceEntry/startTime}} attribute must return the value it was initialized to.
+
+The {{PerformanceEntry/duration}} attribute's getter must return 0.
+
+The {{PerformanceElementTiming/intersectionRect}} attribute must return the value it was initialized to.
+
+The {{PerformanceElementTiming/responseEnd}} attribute's getter must run the same steps as {{PerformanceResourceTiming}}'s {{PerformanceResourceTiming/responseEnd}} attribute getter, using <a>request</a> and <a>response</a>.
+
+The {{PerformanceElementTiming/identifier}} attribute's getter must return <a>element</a>'s {{elementtiming}} attribute value.
+
+The {{PerformanceElementTiming/naturalWidth}} attribute must return the value it was initialized to.
+
+The {{PerformanceElementTiming/naturalHeight}} attribute must return the value it was initialized to.
+
+The {{PerformanceElementTiming/id}} attribute's getter must return <a>element</a>'s {{Element/id}} attribute value.
+
+The {{PerformanceElementTiming/element}} attribute's getter must return <a>element</a> if <a>element</a> is <a>connected</a>, and must return <code>null</code> otherwise.
 
 Processing model {#sec-processing-model}
 ========================================
@@ -142,7 +183,8 @@ partial interface Element {
 The {{Element/elementtiming}} attribute, when set to a {{DOMString}} of non-zero length, will indicate that the image must be registered for observation.
 Its value is read by the <a>report element timing</a> algorithm.
 
-Every image resource that is fetched from a URL has an <a>image request</a>. The request has an <dfn>associated element</dfn>, the {{Element}} causing this image resource.
+Every image resource that is fetched from a URL has an associated <a>image request</a>, which is a <a>fetch request</a>.
+The request has an <dfn>associated element</dfn>, the {{Element}} causing this image resource.
 
 NOTE: we assume that there is one <a>image request</a> for each {{Element}} that a <a>background-image</a> property affects and for each URL that the <a>background-image</a> property specifies. So, for example, if there is a style with two URLs affecting all <{div}>s, and there are two <{div}>s, then there will be four <a>image requests</a>. This means that a single <a>background-image</a> property could produce multiple {{PerformanceElementTiming}} entries because it can affect multiple elements and because it can specify multiple URLs.
 
@@ -172,16 +214,16 @@ Report Element Timing {#sec-report-element}
     When asked to <dfn>report element timing</dfn> given an |image request| and a timestamp |renderTime|, perform the following steps:
 
     1. Let |image| be |image request|'s <a>associated element</a>.
+    1. Let |image response| be the associated <a>fetch response</a> from fetching |image request|.
     1. Let |intersectionRect| be the value returned by the <a>intersection rect algorithm</a> using |image| as the target and viewport as the root.
     1. If the |image|'s {{Element/elementtiming}} attribute getter returns a {{DOMString}} of zero length and if |intersectionRect|'s size is smaller than 15% of the viewport size, then abort these steps.
     1. Create a {{PerformanceElementTiming}} object |entry|.
-    1. Set |entry|'s {{PerformanceEntry/entryType}} to the {{DOMString}} <code>"element"</code>.
-    1. Set |entry|'s {{PerformanceEntry/name}} to |image request|'s resource <a>resolved URL</a>.
+    1. Set |entry|'s <a>request</a> to |image request|.
+    1. Set |entry|'s <a>response</a> to |image response|.
+    1. Set |entry|'s <a>element</a> to |image|.
     1. Set |entry|'s {{PerformanceEntry/startTime}} to |renderTime|.
-    1. Set |entry|'s {{PerformanceEntry/duration}} to 0.
     1. Set |entry|'s {{intersectionRect}} to the value returned by the <a>intersection rect algorithm</a> using |image| as the target and viewport as the root.
-    1. Set |entry|'s {{responseEnd}} to |image request|'s resource {{PerformanceResourceTiming/responseEnd}}.
-    1. Set |entry|'s {{identifier}} to |image|'s {{elementtiming}} attribute value.
+    1. Set |entry|'s {{PerformanceElementTiming/naturalWidth}} and {{PerformanceElementTiming/naturalHeight}} by running the same steps for an <{img}>'s {{img/naturalWidth}} and {{img/naturalHeight}} attribute getters, but using |image| as the image.
     1. <a>Queue the PerformanceEntry</a> |entry|.
 </div>
 
