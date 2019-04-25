@@ -34,7 +34,6 @@ A `PerformanceElementTiming` entry has the following attributes:
 * `naturalWidth`: the [intrinsic](https://drafts.csswg.org/css2/conform.html#intrinsic) width of the image. It matches with the corresponding DOM [attribute](https://html.spec.whatwg.org/multipage/embedded-content.html#dom-img-naturalwidth) for img.
 * `naturalHeight`: the [intrinsic](https://drafts.csswg.org/css2/conform.html#intrinsic) height of the image. It matches with the corresponding DOM [attribute](https://html.spec.whatwg.org/multipage/embedded-content.html#dom-img-naturalheight) for img.
 * `id`: the element's ID.
-* `before_user_input`: set to true if the image was rendered before any tap, click, or scroll.
 * `element`: points to the element. This will be "null" if the element is [disconnected](https://dom.spec.whatwg.org/#connected).
 
 Note: for background images, the element is the one being affected by the background image style.
