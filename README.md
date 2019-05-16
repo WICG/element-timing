@@ -5,7 +5,7 @@ The **Element Timing** API enables monitoring when large or developer-specified 
 
 ### Objectives
 
-1.  Inform developers when specific 'hero' elements are first displayed on the screen. We support the following image elements: \<img\>, \<image\> inside \<svg\>, and background-images. We also support observing certain groups of text nodes. Web developers can better understand which are the critical images and text of their sites, so after annotating them the browser can provide timing information about those.
+1.  Inform developers when specific 'hero' elements are first displayed on the screen. We support the following image elements: \<img\>, \<image\> inside \<svg\>, and background-images. We also support observing certain groups of text nodes. Web developers can better understand which are the critical images and text of their sites, so after annotating them the browser can provide timing information about those. This image and text converage means that the majority of web content can be timed via this API.
 1.  Enable analytics providers to measure display time of key images or text, without explicit opt in from web developers. In many cases it's not feasible for developers to modify their HTML just to get better performance insights, so it's important to provide basic information even for websites that cannot annotate their elements.
 
 
@@ -47,11 +47,16 @@ const observer = new PerformanceObserver((list) => {
   let perfEntries = list.getEntries().forEach(function(entry) {
       // Send the information to analytics, or in this case just log it to console.
       // |entry.startTime| contains the timestamp of when the image is displayed.
-      console.log("My image took " + entry.startTime + " to render!");
+      if (entry.identifier === 'foobar')
+        console.log("My image took " + entry.startTime + " to render!");
    });
 });
 observer.observe({entryTypes: ['element']});
 ```
+
+#### Text grouping
+
+We say that a text node belongs to the closest DOM element ancestor that is a block element.
 
 #### Origin restrictions
 
@@ -61,7 +66,19 @@ However, to enable a more holistic picture, the rest of the information is expos
 
 ### Questions
 
+#### What about Shadow DOM?
+
+TODO
+
 #### What about invisible or occluded elements?
 
 The entry creation might be affected by _visibility_: for instance, elements are not exposed if the style visibility is set to none, or the opacity is 0. However, occlusion will not affect entry creation: an entry is seen if the element is there, but hidden by a full-screen pop-up on the page.
+
+#### What are some differences between text and image observation?
+
+* Whereas for images it is OK to care only about those which are associated to a resource, for text that is definitely not the case. An image not associated to a resource will need to be constructed manually and it is uncommon for such an image to be part of the key content of a website. On the other hand, text is relevant regardless of whether it is associated to a webfont or not. A webfont only makes it ‘pretty text’.
+
+* Image rendering steps are different from text rendering steps. For images, initial paints may not include all of the image content and may be low quality. It is only once we have fully loaded and decoded the image that we can be certain that the content being displayed is meaningful. In contrast, any text painted is meaningful because there is no such thing as painting garbled text. Text may still have various rendering steps, but that just happens when webfonts take a while to load and the browser uses a fallback font to render text so that the user can access the content earlier.
+
+* Text is actually simpler when it comes to security and privacy considerations. Cross-origin images could reveal a lot of information about users, but text and webfonts embedded in a website do not. Therefore, whereas for images we had to consider resources that passed the timing allow check versus resources that did not, for text this distinction is not needed.
 
