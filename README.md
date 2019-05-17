@@ -15,21 +15,40 @@ There are two ways an element can be registered for observation. The first way i
 
 * If the element is an image, there will be an entry for the image.
 * If the element is affected by (possibly multiple) background images, there will be one entry for each of those background images.
-* If the element is associated to at least a text node and it is implicitly registered for observation, there will be one entry for the associated text nodes.
+* If the element is associated to at least one text node and it is implicitly registered for observation, there will be one entry for the associated text nodes.
 
-The second way is implicitly: when the element content takes a large portion of the viewport when it is first displayed. That is, when an image (which could also be a background-image) occupies a large portion of the viewport, then an entry is dispatched for it. Similarly, when the area occupied by the text nodes associated to an element is large, then an entry is dispatched for that group of text. We register a subset of images and text by default to allow RUM analytics providers to gather information without having to request HTML changes from sites.
+The second way is implicitly: when the element content takes a large portion of the viewport at the time it is first displayed. That is, when an image (which could also be a background-image) occupies a large portion of the viewport, then an entry is dispatched for it. Similarly, when the area occupied by the text nodes associated to an element is large, then an entry is dispatched for that group of text. We register a subset of images and text by default to allow RUM analytics providers to gather information without having to request HTML changes from sites.
 
 TODO: fix implicit registration.
+
+#### Image considerations
+
+We define the **image rendering timestamp** as the next paint that occurs after the image has become fully loaded. This is important to distinguish as progressively rendered images may have multiple initial renderings before the image has even been fully received by the user agent.
+
+Allowing third-party origins to measure the time an arbitrary image resource takes to render could expose certain private content such as whether a user is logged into a website. Therefore, for privacy and security reasons, the <em>image rendering timestamp</em> is only exposed in entries corresponding to resources that pass the [timing allow check](https://w3c.github.io/resource-timing/#dfn-timing-allow-check). However, to enable a more holistic picture, the rest of the information is exposed for arbitrary images.
+
+#### Text considerations
+
+We say that a text node **belongs to** its [containing block](https://www.w3.org/TR/CSS2/visudet.html#containing-block-details). This means that an element could have 0 or many associated text nodes with it.
+
+We say that an element is **text-painted** if the following two conditions are satisfied:
+
+* At least one text node <em>belongs to</em> the element.
+* All of the text nodes which belong to the element have been painted at least once.
+
+Thus, the **text rendering timestamp** of an element is the time when it becomes <em>text-painted</em>.
+
+Given a group of text nodes, we define the **text rect** as the geometric union of the text node display rectangles within the viewport.
 
 ### What information is exposed?
 
 A `PerformanceElementTiming` entry has the following attributes:
-* `name`: the initial URL for the resource request if the entry is for an image, or the first characters of the text if it is text.
+* `name`: for images, the initial URL for the resource request. For text: the first characters of the associated text.
 * `entryType`: it will always be the string "element".
-* `startTime`: the rendering timestamp.
+* `startTime`: for images, the <em>image rendering timestamp</em>, or 0 when the resource does not pass the [timing allow check](https://w3c.github.io/resource-timing/#dfn-timing-allow-check). For text, the <em>text rendering timestamp</em>.
 * `duration`: it will always be set to 0.
-* `intersectionRect`: the display rectangle of the image or text content within the viewport.
-* `responseEnd`: if the entry is for an image, the timestamp of when the last byte of the resource response was received, same as ResourceTiming's [responseEnd](https://w3c.github.io/resource-timing/#dom-performanceresourcetiming-responseend). Otherwise, 0.
+* `intersectionRect`: for images, the display rectangle of the image within the viewport. For text, the <em>text rect</em> of the associated text.
+* `responseEnd`: for images, the timestamp of when the last byte of the resource response was received, same as ResourceTiming's [responseEnd](https://w3c.github.io/resource-timing/#dom-performanceresourcetiming-responseend). For text, 0.
 * `identifier`: the value of the `elementtiming` attribute of the element.
 * `naturalWidth`: the [intrinsic](https://drafts.csswg.org/css2/conform.html#intrinsic) width of the image. It matches with the corresponding DOM [attribute](https://html.spec.whatwg.org/multipage/embedded-content.html#dom-img-naturalwidth) for img. 0 for text.
 * `naturalHeight`: the [intrinsic](https://drafts.csswg.org/css2/conform.html#intrinsic) height of the image. It matches with the corresponding DOM [attribute](https://html.spec.whatwg.org/multipage/embedded-content.html#dom-img-naturalheight) for img. 0 for text.
@@ -53,16 +72,6 @@ const observer = new PerformanceObserver((list) => {
 });
 observer.observe({entryTypes: ['element']});
 ```
-
-#### Text grouping
-
-We say that a text node belongs to the closest DOM element ancestor that is a block element.
-
-#### Origin restrictions
-
-Allowing third-party origins to measure the time an arbitrary image resource takes to render could expose certain private content such as whether a user is logged into a website. Therefore, for privacy and security reasons, only rendering timing for entries corresponding to resources that pass the [timing allow check](https://w3c.github.io/resource-timing/#dfn-timing-allow-check) are exposed.
-
-However, to enable a more holistic picture, the rest of the information is exposed for arbitrary images. That is, its `startTime` will be 0 but the other attributes will be set as described above.
 
 ### Questions
 
