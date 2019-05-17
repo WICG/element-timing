@@ -21,13 +21,13 @@ The second way is implicitly: when the element content takes a large portion of 
 
 TODO: fix implicit registration.
 
-#### Image considerations
+### Image considerations
 
 We define the **image rendering timestamp** as the next paint that occurs after the image has become fully loaded. This is important to distinguish as progressively rendered images may have multiple initial renderings before the image has even been fully received by the user agent.
 
 Allowing third-party origins to measure the time an arbitrary image resource takes to render could expose certain private content such as whether a user is logged into a website. Therefore, for privacy and security reasons, the <em>image rendering timestamp</em> is only exposed in entries corresponding to resources that pass the [timing allow check](https://w3c.github.io/resource-timing/#dfn-timing-allow-check). However, to enable a more holistic picture, the rest of the information is exposed for arbitrary images.
 
-#### Text considerations
+### Text considerations
 
 We say that a text node **belongs to** its [containing block](https://www.w3.org/TR/CSS2/visudet.html#containing-block-details). This means that an element could have 0 or many associated text nodes with it.
 
