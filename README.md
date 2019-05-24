@@ -82,7 +82,7 @@ The entry creation might be affected by _visibility_: for instance, elements are
 
 #### What are some differences between text and image observation?
 
-* Whereas for images it is OK to care only about those which are associated to a resource, for text that is definitely not the case. An image not associated to a resource will need to be constructed manually and it is uncommon for such an image to be part of the key content of a website. Note that we consider inline images to have an associated resource, it is just inlined. On the other hand, text is relevant regardless of whether it is associated to a webfont or not.
+* Whereas for images it is OK to care only about those which are associated to a resource, for text that is definitely not the case. An image not associated to a resource will need to be constructed manually and it is uncommon for such an image to be part of the key content of a website. Note that we consider inline images (those with data URIs) to have an associated resource, it is just inlined. On the other hand, text is relevant regardless of whether it is associated to a webfont or not.
 
 * Image rendering steps are different from text rendering steps. For images, initial paints may not include all of the image content and may be low quality. It is only once we have fully loaded and decoded the image that we can be certain that the content being displayed is meaningful. In contrast, any text painted is meaningful. It should be noted that this is not perfect because there could be block level elements containing some text that renders quickly and some text that is blocked on webfonts. In this case, for the purposes of Element Timing, the text blocked by webfonts will be completely ignored.
 
