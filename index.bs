@@ -127,6 +127,7 @@ interface PerformanceElementTiming : PerformanceEntry {
     readonly attribute unsigned long long naturalHeight;
     readonly attribute DOMString id;
     readonly attribute Element? element;
+    readonly attribute DOMString url;
 };
 </pre>
 
@@ -141,8 +142,7 @@ The associated concepts and some attributes for {{PerformanceElementTiming}} are
 
 The {{PerformanceEntry/entryType}} attribute's getter must return the {{DOMString}} <code>"element"</code>.
 
-The {{PerformanceEntry/name}} attribute's getter must return <a>request</a>'s <a>resolved URL</a>.
-This is consistent with {{PerformanceResourceTiming}}'s name attribute.
+The {{PerformanceEntry/name}} attribute's getter must return the value it was initialized to.
 
 The {{PerformanceEntry/startTime}} attribute must return the value it was initialized to.
 
@@ -161,6 +161,8 @@ The {{PerformanceElementTiming/naturalHeight}} attribute must return the value i
 The {{PerformanceElementTiming/id}} attribute's getter must return <a>element</a>'s {{Element/id}} attribute value.
 
 The {{PerformanceElementTiming/element}} attribute's getter must return <a>element</a> if <a>element</a> is <a>connected</a>, and must return <code>null</code> otherwise.
+
+The {{PerformanceElementTiming/url}} attribute's getter must return <a>request</a>'s <a>resolved URL</a>.
 
 Processing model {#sec-processing-model}
 ========================================
@@ -221,6 +223,7 @@ Report Element Timing {#sec-report-element}
     1. Set |entry|'s <a>request</a> to |image request|.
     1. Set |entry|'s <a>response</a> to |image response|.
     1. Set |entry|'s <a>element</a> to |image|.
+    1. Set |entry|'s {{PerformanceEntry/name}} to the {{DOMString}} "image-paint".
     1. Set |entry|'s {{PerformanceEntry/startTime}} to |renderTime|.
     1. Set |entry|'s {{intersectionRect}} to the value returned by the <a>intersection rect algorithm</a> using |image| as the target and viewport as the root.
     1. Set |entry|'s {{PerformanceElementTiming/naturalWidth}} and {{PerformanceElementTiming/naturalHeight}} by running the same steps for an <{img}>'s {{img/naturalWidth}} and {{img/naturalHeight}} attribute getters, but using |image| as the image.
