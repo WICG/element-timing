@@ -19,8 +19,6 @@ There are two ways an element can be registered for observation. The first way i
 
 The second way is implicitly: when the element content takes a large portion of the viewport at the time it is first displayed. That is, when an image (which could also be a background-image) occupies a large portion of the viewport, then an entry is dispatched for it. Similarly, when the area occupied by the text nodes associated to an element is large, then an entry is dispatched for that group of text. We register a subset of images and text by default to allow RUM analytics providers to gather information without having to request HTML changes from sites.
 
-TODO: fix implicit registration.
-
 ### Image considerations
 
 We define the **image rendering timestamp** as the next paint that occurs after the image has become fully loaded. This is important to distinguish as progressively rendered images may have multiple initial renderings before the image has even been fully received by the user agent.
@@ -40,7 +38,7 @@ Given a group of text nodes, we define the **text rect** as the smallest rectang
 ### What information is exposed?
 
 A `PerformanceElementTiming` entry has the following attributes:
-* `name`: for images, the initial URL for the resource request. For text: the first characters of the associated text.
+* `name`: for images, "image-paint". For text: "text-paint".
 * `entryType`: it will always be the string "element".
 * `startTime`: for images, the <em>image rendering timestamp</em>, or 0 when the resource does not pass the [timing allow check](https://w3c.github.io/resource-timing/#dfn-timing-allow-check). For text, the <em>text rendering timestamp</em>.
 * `duration`: it will always be set to 0.
@@ -51,6 +49,7 @@ A `PerformanceElementTiming` entry has the following attributes:
 * `naturalHeight`: the [intrinsic](https://drafts.csswg.org/css2/conform.html#intrinsic) height of the image. It matches with the corresponding DOM [attribute](https://html.spec.whatwg.org/multipage/embedded-content.html#dom-img-naturalheight) for img. 0 for text.
 * `id`: the element's ID.
 * `element`: points to the element. This will be "null" if the element is [disconnected](https://dom.spec.whatwg.org/#connected).
+* `url`: for images, the initial URL for the resource request. For text, this will be an empty string.
 
 Note: for background images, the element is the one being affected by the background image style.
 
@@ -74,7 +73,7 @@ observer.observe({entryTypes: ['element']});
 
 #### What about Shadow DOM?
 
-TODO
+Unfortunately Shadow DOM elements are not currently supported. We intend to 
 
 #### What about invisible or occluded elements?
 
