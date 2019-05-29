@@ -23,6 +23,7 @@ urlPrefix: https://w3c.github.io/performance-timeline/; spec: PERFORMANCE-TIMELI
         text: duration; url: #dom-performanceentry-duration;
     type: dfn; url: #dfn-register-a-performance-entry-type; text: register a performance entry type;
     type: dfn; url: #dfn-queue-a-performanceentry; text: queue the PerformanceEntry;
+    type: interface; url: #the-performanceobserver-interface; text: PerformanceObserver;
 urlPrefix: https://dom.spec.whatwg.org/; spec: DOM;
     type: attribute; for: Element;
         text: id; url: #dom-element-id;
@@ -173,8 +174,8 @@ The {{PerformanceElementTiming/element}} attribute's getter must run these steps
 <div algorithm="PerformanceElementTiming element">
     1. Let |element| be the <a>context object</a>'s <a>element</a>.
     1. If |element| is not <a>connected</a>, return <code>null</code>.
-    1. Let |window| be the <a>context object</a>'s <a>relevant global object</a>.
-    1. Let |document| be |window|'s <a>associated document</a>.
+    1. Let |settings| be the <a>context object</a>'s <a>relevant settings object</a>.
+    1. Let |document| be |settings|'s <a>responsible document</a>.
     1. If |element|'s <a for="tree">root</a> is not equal to |document|, return <code>null</code>.
     1. Return |element|.
 </div>
@@ -352,4 +353,11 @@ This solution is inefficient because it requires registering the observer once t
 For images, we compute the {{intersectionRect}} once the image has loaded if it does not pass the <a>timing allow check</a>.
 Computing it at this point in time allows exposing the entry at that time.
 If we were to compute the rect only until the image is fully displayed, we'd only be able to expose the entry after that time.
+
+If we do not want to expose the rendering timetamp of an image, it's preferable to dispatch the entry to the {{PerformanceObserver}} right away.
+Suppose we waited and exposed all the entries during the <a>element timing processing</a> algorithm.
+An attacker could infer nontrivial information about the rendering timestamp of an image.
+It would do so by only observing the timing for that image.
+Even though the timestamp is not exposed as a member of the {{PerformanceElementTiming}} entry received,
+the fact that we wait until the next <a>update the rendering</a> step means that the attacker can distinguish between a very slow rendering time and a very fast rendering time by measuring the time at which it received the entry.
 This would unintentionally leak some of the display timing of the image.
