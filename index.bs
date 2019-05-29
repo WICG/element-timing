@@ -139,10 +139,8 @@ interface PerformanceElementTiming : PerformanceEntry {
 A {{PerformanceElementTiming}} object reports timing information about one associated image.
 
 Each {{PerformanceElementTiming}} object has these associated concepts, all of which are set on creation:
-* A <dfn>type</dfn> containing the type of content associated with the entry.
-    This will be one of "image" or "text".
-* A <dfn>request</dfn> containing the image request (only useful when <a>type</a> is "image").
-* A <dfn>response</dfn> containing the image response (only useful when <a>type</a> is "image").
+* A <dfn>request</dfn> containing the image request (if the entry is for image content).
+* A <dfn>response</dfn> containing the image response (if the entry is for image content).
 * An <dfn>element</dfn> containing the associated {{Element}}.
 
 The associated concepts and some attributes for {{PerformanceElementTiming}} are specified in the processing model in [[#sec-report-image-element]] and [[#sec-report-text]].
@@ -159,7 +157,7 @@ The {{PerformanceElementTiming/intersectionRect}} attribute must return the valu
 
 The {{PerformanceElementTiming/responseEnd}} attribute's getter must run these steps:
 <div algorithm="PerformanceElementTiming responseEnd">
-    1. If the <a>context object</a>'s <a>type</a> is not "image", return 0.
+    1. If the <a>context object</a>'s <a>request</a> is <code>null</code>, return 0.
     1. Return the {{response end time}} of the fetch associated to the <a>context object</a>'s <a>request</a> and <a>response</a>.
 </div>
 
