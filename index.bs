@@ -215,7 +215,7 @@ When an <a>image request</a> has become <a>completely available</a> and decoded,
     1. Let |element| be |image request|'s <a>associated element</a>.
     1. If |element| is not <{img}>, <{image}>, or <a>background-image</a>, return.
     1. If the <a>timing allow check</a> fails for |image request|'s resource, then:
-        1. Run the <a>report image element timing</a> algorithm, passing in |image request|.
+        1. Run the <a>report image element timing</a> algorithm, passing in |image request| and 0.
     1. Otherwise, run the following steps:
         1. Let |root| be |element|'s <a for="tree">root</a>.
         1. If |root| is not a {{Document}}, return.
@@ -280,7 +280,7 @@ Report text Element Timing {#sec-report-text}
     1. Intersect |intersectionRect| with the visual viewport.
     1. If |element|'s {{Element/elementtiming}} attribute getter returns a {{DOMString}} of zero length and if |intersectionRect|'s size is smaller than 15% of the viewport size, then abort these steps.
     1. Create a {{PerformanceElementTiming}} object |entry|.
-    1. Set |entry|'s <a>request</a> <a>response</a> to <code>null</code>.
+    1. Set |entry|'s <a>request</a> and <a>response</a> to <code>null</code>.
     1. Set |entry|'s <a>element</a> to |element|.
     1. Set |entry|'s {{PerformanceEntry/name}} to the {{DOMString}} "text-paint".
     1. Set |entry|'s {{PerformanceEntry/startTime}} to |renderTime|.
@@ -318,8 +318,8 @@ We choose to expose the {{responseEnd}} because it is very easy to obtain even w
 In addition, we believe any fix to remove the leak provided by image onload handlers or ResourceTiming could also fix the leak provided by this API.
 
 The {{PerformanceEntry/startTime}} (display timestamp) can also be polyfilled via the PaintTiming API.
-To do this, add an iframe that contains trivial content on the onload handler of the target image.
-Then, query the first paint of that iframe to obtain the rendering timestamp of the image element.
+To do this, add an iframe that contains trivial content on the onload handler of the target image or text content.
+Then, query the first paint of that iframe to obtain the rendering timestamp of the content.
 This is quite inefficient and the polyfill itself might affect the timing obtained.
 Due to the difficulty in obtaining this information today, we choose not to expose the display timestamp for images that fail the <a>timing allow check</a>.
 For clarity, here is a code snippet using the PaintTiming API:
@@ -347,9 +347,9 @@ For clarity, here is a code snippet using the PaintTiming API:
 
 The other nontrivial parameter being exposed here is the {{intersectionRect}}.
 This can already be polyfilled, for example using {{IntersectionObserver}}.
-The polyfill process would be similar: add an {{IntersectionObserver}} on the onload handler of the target image.
-This solution is inefficient because it requires registering the observer once the image has loaded, but it should still provide the same level of accuracy.
-We compute the {{intersectionRect}} once the image has loaded if it does not pass the <a>timing allow check</a>.
+The polyfill process would be similar: add an {{IntersectionObserver}} on the onload handler of the target image or text content.
+This solution is inefficient because it requires registering the observer once the content has loaded, but it should still provide the same level of accuracy.
+For images, we compute the {{intersectionRect}} once the image has loaded if it does not pass the <a>timing allow check</a>.
 Computing it at this point in time allows exposing the entry at that time.
 If we were to compute the rect only until the image is fully displayed, we'd only be able to expose the entry after that time.
 This would unintentionally leak some of the display timing of the image.
