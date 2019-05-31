@@ -85,9 +85,7 @@ The Element Timing API supports timing information about the following elements:
 * Elements with a <a>background-image</a>.
 * Groups of text nodes, which are aggregated as described in [[#sec-modifications-CSS]].
 
-The following subset of elements are measured:
-* Elements that are annotated using the "elementtiming" attribute.
-* Elements that occupy a more than 15% of the viewport when they are displayed on the screen.
+The {{Element|Elements}} that are annotated using the "elementtiming" attribute are measured.
 
 Usage example {#sec-example}
 ------------------------
@@ -257,8 +255,7 @@ Report image Element Timing {#sec-report-image-element}
 
     1. Let |image| be |imageRequest|'s <a>associated element</a>.
     1. Let |imageResponse| be the associated <a>fetch response</a> from fetching |imageRequest|.
-    1. Let |intersectionRect| be the value returned by the <a>intersection rect algorithm</a> using |image| as the target and viewport as the root.
-    1. If the |image|'s {{Element/elementtiming}} attribute getter returns a {{DOMString}} of zero length and if |intersectionRect|'s size is smaller than 15% of the viewport size, then abort these steps.
+    1. If the |image|'s {{Element/elementtiming}} attribute getter returns a {{DOMString}} of zero length, then abort these steps.
     1. Create a {{PerformanceElementTiming}} object |entry|.
     1. Set |entry|'s <a>request</a> to |imageRequest|.
     1. Set |entry|'s <a>response</a> to |imageResponse|.
