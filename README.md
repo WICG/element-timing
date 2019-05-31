@@ -1,6 +1,6 @@
 # Element Timing: Explainer
 
-The **Element Timing** API enables monitoring when large or developer-specified image elements or groups of text nodes are displayed on screen. The way text nodes are grouped is described below.
+The **Element Timing** API enables monitoring when developer-specified image elements or groups of text nodes are displayed on screen. The way text nodes are grouped is described below.
 
 
 ### Objectives
@@ -11,13 +11,11 @@ The **Element Timing** API enables monitoring when large or developer-specified 
 
 ### How do we register elements for observation?
 
-There are two ways an element can be registered for observation. The first way is explicitly via the `elementtiming` HTML attribute. Having this attribute set will signal the browser to expose render timing information for this element (its source image, background image, and/or text). It should be noted that setting the `elementtiming` attribute does not work retroactively: once an element has loaded and is rendered, setting the attribute will have no effect. Thus, it is strongly encouraged to set the attribute before the element is added to the document (in HTML, or if set on Javascript, before adding it to the document). Having the attribute implies that:
+An element can be registered for observation via the `elementtiming` HTML attribute. Having this attribute set will signal the browser to expose render timing information for this element (its source image, background image, and/or text). It should be noted that setting the `elementtiming` attribute does not work retroactively: once an element has loaded and is rendered, setting the attribute will have no effect. Thus, it is strongly encouraged to set the attribute before the element is added to the document (in HTML, or if set on Javascript, before adding it to the document). Having the attribute implies that:
 
 * If the element is an image, there will be an entry for the image.
 * If the element is affected by (possibly multiple) background images, there will be one entry for each of those background images.
 * If the element is associated to at least one text node, there will be one entry for the group of associated text nodes.
-
-The second way is implicitly: when the element content takes a large portion of the viewport at the time it is first displayed. That is, when an image (which could also be a background-image) occupies a large portion of the viewport, then an entry is dispatched for it. Similarly, when the area occupied by the text nodes associated to an element is large, then an entry is dispatched for that group of text. We register a subset of images and text by default to allow RUM analytics providers to gather information without having to request HTML changes from sites.
 
 ### Image considerations
 
