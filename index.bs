@@ -255,7 +255,6 @@ Report image Element Timing {#sec-report-image-element}
 
     1. Let |image| be |imageRequest|'s <a>associated element</a>.
     1. Let |imageResponse| be the associated <a>fetch response</a> from fetching |imageRequest|.
-    1. Let |intersectionRect| be the value returned by the <a>intersection rect algorithm</a> using |image| as the target and viewport as the root.
     1. If the |image|'s {{Element/elementtiming}} attribute getter returns a {{DOMString}} of zero length, then abort these steps.
     1. Create a {{PerformanceElementTiming}} object |entry|.
     1. Set |entry|'s <a>request</a> to |imageRequest|.
