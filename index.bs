@@ -127,8 +127,8 @@ interface PerformanceElementTiming : PerformanceEntry {
     readonly attribute DOMRectReadOnly intersectionRect;
     readonly attribute DOMHighResTimeStamp responseEnd;
     readonly attribute DOMString identifier;
-    readonly attribute unsigned long long naturalWidth;
-    readonly attribute unsigned long long naturalHeight;
+    readonly attribute unsigned long naturalWidth;
+    readonly attribute unsigned long naturalHeight;
     readonly attribute DOMString id;
     readonly attribute Element? element;
     readonly attribute DOMString url;
