@@ -71,7 +71,7 @@ observer.observe({entryTypes: ['element']});
 
 #### What about Shadow DOM?
 
-Unfortunately Shadow DOM elements are not currently supported. We intend to 
+Unfortunately Shadow DOM elements are not currently supported. 
 
 #### What about invisible or occluded elements?
 
