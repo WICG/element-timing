@@ -25,7 +25,7 @@ urlPrefix: https://w3c.github.io/performance-timeline/; spec: PERFORMANCE-TIMELI
     type: dfn; url: #dfn-queue-a-performanceentry; text: queue the PerformanceEntry;
     type: interface; url: #the-performanceobserver-interface; text: PerformanceObserver;
     type: attribute; for: PerformanceObserver;
-        text: supportedEntryTypes; url: ##supportedentrytypes-attribute;
+        text: supportedEntryTypes; url: #supportedentrytypes-attribute;
 urlPrefix: https://dom.spec.whatwg.org/; spec: DOM;
     type: attribute; for: Element;
         text: id; url: #dom-element-id;
