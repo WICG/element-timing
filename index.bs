@@ -187,7 +187,7 @@ The {{PerformanceElementTiming/url}} attribute's getter must return <a>request</
 Processing model {#sec-processing-model}
 ========================================
 
-Note: A user agent implementing the Element Timing API would need to include <code>"element"</code> in {{PerformanceObserver/supportedEntryTypes}}.
+Note: A user agent implementing the Element Timing API would need to include <code>"element"</code> in {{PerformanceObserver/supportedEntryTypes}} for {{Window}} contexts.
 This allows developers to detect support for element timing.
 
 Modifications to the DOM specification {#sec-modifications-DOM}
