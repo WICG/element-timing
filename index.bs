@@ -275,7 +275,7 @@ Report text Element Timing {#sec-report-text}
         1. Augment |intersectionRect| to be smallest rectangle containing the border box of |text| and |intersectionRect|.
     1. Intersect |intersectionRect| with the visual viewport.
     1. Let |exposedElement| be the result of running [=get an element=] with |element| and |document| as input.
-    1. If |exposedElement| is not null, call the <a>potentially add a Largest-Contentful-Paint-Candidate entry</a> algorithm with |intersectionRect|, null, |renderTime|, |exposedElement| and |document|.
+    1. If |exposedElement| is not null, call the <a>potentially add a Largest-Contentful-Paint-Candidate entry</a> algorithm with |intersectionRect|, null, |renderTime|, |exposedElement|, and |document|.
     1. If |element|'s {{Element/elementtiming}} attribute getter returns a {{DOMString}} of zero length and if |intersectionRect|'s size is smaller than 15% of the viewport size, then abort these steps.
     1. Create a {{PerformanceElementTiming}} object |entry|.
     1. Set |entry|'s <a>element</a> to |element|.
