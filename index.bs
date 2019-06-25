@@ -251,7 +251,7 @@ Report image Element Timing {#sec-report-image-element}
     1. Let |imageResponse| be the associated <a>fetch response</a> from fetching |imageRequest|.
     1. Let |intersectionRect| be the value returned by the <a>intersection rect algorithm</a> using |image| as the target and viewport as the root.
     1. Let |exposedElement| be the result of running [=get an element=] with |image| and |document| as input.
-    1. If |exposedElement| is not null, call the <a>potentially add a Largest-Contentful-Paint-Candidate entry</a> algorithm with |intersectionRect|, |imageRequest|, |renderTime|, |image| and |document|.
+    1. If |exposedElement| is not null, call the <a>potentially add a Largest-Contentful-Paint-Candidate entry</a> algorithm with |intersectionRect|, |imageRequest|, |renderTime|, |image|, and |document|.
     1. If the |image|'s {{Element/elementtiming}} attribute getter returns a {{DOMString}} of zero length, then abort these steps.
     1. Create a {{PerformanceElementTiming}} object |entry|.
     1. Set |entry|'s <a>request</a> to |imageRequest|.
