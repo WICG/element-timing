@@ -1215,7 +1215,7 @@ Possible extra rowspan handling
   <link href="https://www.w3.org/StyleSheets/TR/2016/W3C-ED" rel="stylesheet">
   <meta content="Bikeshed version 872cce6d3026423d677f3bd5837f1a1a46299a04" name="generator">
   <link href="https://wicg.github.io/element-timing" rel="canonical">
-  <meta content="d584762b6c03905ade823d93435d4a8f3c3c8ada" name="document-revision">
+  <meta content="2dee5ee810e32148ff7a9293194e65a72d56312f" name="document-revision">
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -1473,7 +1473,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">Element Timing API</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2019-06-14">14 June 2019</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2019-06-25">25 June 2019</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1531,6 +1531,8 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
       <li><a href="#sec-report-image-element"><span class="secno">3.4</span> <span class="content">Report image Element Timing</span></a>
       <li><a href="#sec-report-text"><span class="secno">3.5</span> <span class="content">Report text Element Timing</span></a>
       <li><a href="#sec-element-processing"><span class="secno">3.6</span> <span class="content">Element Timing processing</span></a>
+      <li><a href="#sec-get-an-element"><span class="secno">3.7</span> <span class="content">Get an element algorithm</span></a>
+      <li><a href="#sec-get-resonse-end"><span class="secno">3.8</span> <span class="content">Get response end time algorithm</span></a>
      </ol>
     <li><a href="#sec-security"><span class="secno">4</span> <span class="content">Security &amp; privacy considerations</span></a>
     <li><a href="#conformance"><span class="secno"></span> <span class="content"> Conformance</span></a>
@@ -1630,38 +1632,14 @@ For example, developers could monitor the time it takes for a widget to show up 
    <p>The <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/performance-timeline/#dom-performanceentry-starttime" id="ref-for-dom-performanceentry-starttime">startTime</a></code> attribute must return the value it was initialized to.</p>
    <p>The <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/performance-timeline/#dom-performanceentry-duration" id="ref-for-dom-performanceentry-duration">duration</a></code> attribute’s getter must return 0.</p>
    <p>The <code class="idl"><a data-link-type="idl" href="#dom-performanceelementtiming-intersectionrect" id="ref-for-dom-performanceelementtiming-intersectionrect">intersectionRect</a></code> attribute must return the value it was initialized to.</p>
-   <p>The <code class="idl"><a data-link-type="idl" href="#dom-performanceelementtiming-responseend" id="ref-for-dom-performanceelementtiming-responseend">responseEnd</a></code> attribute’s getter must run these steps:</p>
-   <div class="algorithm" data-algorithm="PerformanceElementTiming responseEnd">
-    <ol>
-     <li data-md>
-      <p>If the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object" id="ref-for-context-object">context object</a>’s <a data-link-type="dfn" href="#request" id="ref-for-request">request</a> is <code class="highlight"><c- kc>null</c-></code>, return 0.</p>
-     <li data-md>
-      <p>Return the <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/resource-timing#dfn-get-response-end-time" id="ref-for-dfn-get-response-end-time">response end time</a></code> of the fetch associated to the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object" id="ref-for-context-object①">context object</a>’s <a data-link-type="dfn" href="#request" id="ref-for-request①">request</a> and <a data-link-type="dfn" href="#response" id="ref-for-response">response</a>.</p>
-    </ol>
-   </div>
+   <p>The <code class="idl"><a data-link-type="idl" href="#dom-performanceelementtiming-responseend" id="ref-for-dom-performanceelementtiming-responseend">responseEnd</a></code> attribute’s getter must return the result of running <a data-link-type="dfn" href="#get-response-end-time" id="ref-for-get-response-end-time">get response end time</a> with the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object" id="ref-for-context-object">context object</a>’s <a data-link-type="dfn" href="#request" id="ref-for-request">request</a> as input.</p>
    <p>The <code class="idl"><a data-link-type="idl" href="#dom-performanceelementtiming-identifier" id="ref-for-dom-performanceelementtiming-identifier">identifier</a></code> attribute’s getter must return <a data-link-type="dfn" href="#element" id="ref-for-element③">element</a>’s <code class="idl"><a data-link-type="idl" href="#dom-element-elementtiming" id="ref-for-dom-element-elementtiming">elementtiming</a></code> attribute value.</p>
    <p>The <code class="idl"><a data-link-type="idl" href="#dom-performanceelementtiming-naturalwidth" id="ref-for-dom-performanceelementtiming-naturalwidth">naturalWidth</a></code> attribute must return the value it was initialized to.</p>
    <p>The <code class="idl"><a data-link-type="idl" href="#dom-performanceelementtiming-naturalheight" id="ref-for-dom-performanceelementtiming-naturalheight">naturalHeight</a></code> attribute must return the value it was initialized to.</p>
    <p>The <code class="idl"><a data-link-type="idl" href="#dom-performanceelementtiming-id" id="ref-for-dom-performanceelementtiming-id">id</a></code> attribute’s getter must return <a data-link-type="dfn" href="#element" id="ref-for-element④">element</a>’s <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#dom-element-id" id="ref-for-dom-element-id">id</a></code> attribute value.</p>
-   <p>The <code class="idl"><a data-link-type="idl" href="#dom-performanceelementtiming-element" id="ref-for-dom-performanceelementtiming-element">element</a></code> attribute’s getter must run these steps:</p>
-   <div class="algorithm" data-algorithm="PerformanceElementTiming element">
-    <ol>
-     <li data-md>
-      <p>Let <var>element</var> be the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object" id="ref-for-context-object②">context object</a>’s <a data-link-type="dfn" href="#element" id="ref-for-element⑤">element</a>.</p>
-     <li data-md>
-      <p>If <var>element</var> is not <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#connected" id="ref-for-connected">connected</a>, return <code class="highlight"><c- kc>null</c-></code>.</p>
-     <li data-md>
-      <p>Let <var>settings</var> be the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object" id="ref-for-context-object③">context object</a>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#relevant-settings-object" id="ref-for-relevant-settings-object">relevant settings object</a>.</p>
-     <li data-md>
-      <p>Let <var>document</var> be <var>settings</var>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#responsible-document" id="ref-for-responsible-document">responsible document</a>.</p>
-     <li data-md>
-      <p>If <var>element</var>’s <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-tree-root" id="ref-for-concept-tree-root">root</a> is not equal to <var>document</var>, return <code class="highlight"><c- kc>null</c-></code>.</p>
-     <li data-md>
-      <p>Return <var>element</var>.</p>
-    </ol>
-   </div>
+   <p>The <code class="idl"><a data-link-type="idl" href="#dom-performanceelementtiming-element" id="ref-for-dom-performanceelementtiming-element">element</a></code> attribute’s getter must run the <a data-link-type="dfn" href="#get-an-element" id="ref-for-get-an-element">get an element</a> algorithm with <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object" id="ref-for-context-object①">context object</a>’s <a data-link-type="dfn" href="#element" id="ref-for-element⑤">element</a> and null as inputs.</p>
    <p class="note" role="note"><span>Note:</span> This means that an element that is no longer <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-tree-descendant" id="ref-for-concept-tree-descendant">descendant</a> of the <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#document" id="ref-for-document">Document</a></code> will no longer be returned by <code class="idl"><a data-link-type="idl" href="#dom-performanceelementtiming-element" id="ref-for-dom-performanceelementtiming-element①">element</a></code>'s attribute getter.</p>
-   <p>The <code class="idl"><a data-link-type="idl" href="#dom-performanceelementtiming-url" id="ref-for-dom-performanceelementtiming-url">url</a></code> attribute’s getter must return <a data-link-type="dfn" href="#request" id="ref-for-request②">request</a>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/urls-and-fetching.html#resolve-a-url" id="ref-for-resolve-a-url">resolved URL</a>.</p>
+   <p>The <code class="idl"><a data-link-type="idl" href="#dom-performanceelementtiming-url" id="ref-for-dom-performanceelementtiming-url">url</a></code> attribute’s getter must return <a data-link-type="dfn" href="#request" id="ref-for-request①">request</a>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/urls-and-fetching.html#resolve-a-url" id="ref-for-resolve-a-url">resolved URL</a>.</p>
    <h2 class="heading settled" data-level="3" id="sec-processing-model"><span class="secno">3. </span><span class="content">Processing model</span><a class="self-link" href="#sec-processing-model"></a></h2>
    <p class="note" role="note"><span>Note:</span> A user agent implementing the Element Timing API would need to include <code class="highlight"><c- u>"element"</c-></code> in <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/performance-timeline/#supportedentrytypes-attribute" id="ref-for-supportedentrytypes-attribute">supportedEntryTypes</a></code> for <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/window-object.html#window" id="ref-for-window">Window</a></code> contexts.
 This allows developers to detect support for element timing.</p>
@@ -1695,7 +1673,7 @@ When an <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage#ima
       <p>Otherwise, run the following steps:</p>
       <ol>
        <li data-md>
-        <p>Let <var>root</var> be <var>element</var>’s <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-tree-root" id="ref-for-concept-tree-root①">root</a>.</p>
+        <p>Let <var>root</var> be <var>element</var>’s <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-tree-root" id="ref-for-concept-tree-root">root</a>.</p>
        <li data-md>
         <p>If <var>root</var> is not a <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#document" id="ref-for-document②">Document</a></code>, return.</p>
        <li data-md>
@@ -1725,20 +1703,26 @@ When an <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage#ima
    </ol>
    <h3 class="heading settled" data-level="3.4" id="sec-report-image-element"><span class="secno">3.4. </span><span class="content">Report image Element Timing</span><a class="self-link" href="#sec-report-image-element"></a></h3>
    <div class="algorithm" data-algorithm="report image element timing">
-     When asked to <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="report-image-element-timing">report image element timing</dfn> given an <var>imageRequest</var> and a timestamp <var>renderTime</var>, perform the following steps: 
+     When asked to <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="report-image-element-timing">report image element timing</dfn> given an <var>imageRequest</var>, a DOMHighResTimestamp <var>renderTime</var> and a {{Docuemnt|| <var>document</var>, perform the following steps: 
     <ol>
      <li data-md>
       <p>Let <var>image</var> be <var>imageRequest</var>’s <a data-link-type="dfn" href="#associated-element" id="ref-for-associated-element①">associated element</a>.</p>
      <li data-md>
       <p>Let <var>imageResponse</var> be the associated <a data-link-type="dfn" href="https://fetch.spec.whatwg.org#concept-response" id="ref-for-concept-response">fetch response</a> from fetching <var>imageRequest</var>.</p>
      <li data-md>
+      <p>Let <var>intersectionRect</var> be the value returned by the <a data-link-type="dfn" href="https://w3c.github.io/IntersectionObserver#calculate-intersection-rect-algo" id="ref-for-calculate-intersection-rect-algo">intersection rect algorithm</a> using <var>image</var> as the target and viewport as the root.</p>
+     <li data-md>
+      <p>Let <var>exposedElement</var> be the result of running <a data-link-type="dfn" href="#get-an-element" id="ref-for-get-an-element①">get an element</a> with <var>image</var> and <var>document</var> as input.</p>
+     <li data-md>
+      <p>If <var>exposedElement</var> is not null, call the <a data-link-type="dfn" href="https://wicg.github.io/largest-contentful-paint/#potentially-add-a-performancelargestcontentfulpaintcandidate-entry" id="ref-for-potentially-add-a-performancelargestcontentfulpaintcandidate-entry">potentially add a Largest-Contentful-Paint-Candidate entry</a> algorithm with <var>intersectionRect</var>, <var>imageRequest</var>, <var>renderTime</var>, <var>image</var>, and <var>document</var>.</p>
+     <li data-md>
       <p>If the <var>image</var>’s <code class="idl"><a data-link-type="idl" href="#dom-element-elementtiming" id="ref-for-dom-element-elementtiming②">elementtiming</a></code> attribute getter returns a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMString" id="ref-for-idl-DOMString⑥">DOMString</a></code> of zero length, then abort these steps.</p>
      <li data-md>
       <p>Create a <code class="idl"><a data-link-type="idl" href="#performanceelementtiming" id="ref-for-performanceelementtiming⑤">PerformanceElementTiming</a></code> object <var>entry</var>.</p>
      <li data-md>
-      <p>Set <var>entry</var>’s <a data-link-type="dfn" href="#request" id="ref-for-request③">request</a> to <var>imageRequest</var>.</p>
+      <p>Set <var>entry</var>’s <a data-link-type="dfn" href="#request" id="ref-for-request②">request</a> to <var>imageRequest</var>.</p>
      <li data-md>
-      <p>Set <var>entry</var>’s <a data-link-type="dfn" href="#response" id="ref-for-response①">response</a> to <var>imageResponse</var>.</p>
+      <p>Set <var>entry</var>’s <a data-link-type="dfn" href="#response" id="ref-for-response">response</a> to <var>imageResponse</var>.</p>
      <li data-md>
       <p>Set <var>entry</var>’s <a data-link-type="dfn" href="#element" id="ref-for-element①④">element</a> to <var>image</var>.</p>
      <li data-md>
@@ -1746,7 +1730,7 @@ When an <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage#ima
      <li data-md>
       <p>Set <var>entry</var>’s <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/performance-timeline/#dom-performanceentry-starttime" id="ref-for-dom-performanceentry-starttime①">startTime</a></code> to <var>renderTime</var>.</p>
      <li data-md>
-      <p>Set <var>entry</var>’s <code class="idl"><a data-link-type="idl" href="#dom-performanceelementtiming-intersectionrect" id="ref-for-dom-performanceelementtiming-intersectionrect①">intersectionRect</a></code> to the value returned by the <a data-link-type="dfn" href="https://w3c.github.io/IntersectionObserver#calculate-intersection-rect-algo" id="ref-for-calculate-intersection-rect-algo">intersection rect algorithm</a> using <var>image</var> as the target and viewport as the root.</p>
+      <p>Set <var>entry</var>’s <code class="idl"><a data-link-type="idl" href="#dom-performanceelementtiming-intersectionrect" id="ref-for-dom-performanceelementtiming-intersectionrect①">intersectionRect</a></code> to <var>intersectionRect</var>.</p>
      <li data-md>
       <p>Set <var>entry</var>’s <code class="idl"><a data-link-type="idl" href="#dom-performanceelementtiming-naturalwidth" id="ref-for-dom-performanceelementtiming-naturalwidth①">naturalWidth</a></code> and <code class="idl"><a data-link-type="idl" href="#dom-performanceelementtiming-naturalheight" id="ref-for-dom-performanceelementtiming-naturalheight①">naturalHeight</a></code> by running the same steps for an <code class="highlight"><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-img-element" id="ref-for-the-img-element①">img</a></code>'s <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage#dom-img-naturalwidth" id="ref-for-dom-img-naturalwidth">naturalWidth</a></code> and <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage#dom-img-naturalheight" id="ref-for-dom-img-naturalheight">naturalHeight</a></code> attribute getters, but using <var>image</var> as the image.</p>
      <li data-md>
@@ -1755,7 +1739,7 @@ When an <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage#ima
    </div>
    <h3 class="heading settled" data-level="3.5" id="sec-report-text"><span class="secno">3.5. </span><span class="content">Report text Element Timing</span><a class="self-link" href="#sec-report-text"></a></h3>
    <div class="algorithm" data-algorithm="report text element timing">
-     When asked to <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="report-text-element-timing">report text element timing</dfn> given an <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#element" id="ref-for-element①⑤">Element</a></code> <var>element</var> and a timestamp <var>renderTime</var>, perform the following steps: 
+     When asked to <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="report-text-element-timing">report text element timing</dfn> given an <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#element" id="ref-for-element①⑤">Element</a></code> <var>element</var>, a DOMHighResTimestamp <var>renderTime</var> and a <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#document" id="ref-for-document⑥">Document</a></code> <var>document</var>, perform the following steps: 
     <ol>
      <li data-md>
       <p>Let <var>intersectionRect</var> be an empty rectangle.</p>
@@ -1767,6 +1751,10 @@ When an <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage#ima
       </ol>
      <li data-md>
       <p>Intersect <var>intersectionRect</var> with the visual viewport.</p>
+     <li data-md>
+      <p>Let <var>exposedElement</var> be the result of running <a data-link-type="dfn" href="#get-an-element" id="ref-for-get-an-element②">get an element</a> with <var>element</var> and <var>document</var> as input.</p>
+     <li data-md>
+      <p>If <var>exposedElement</var> is not null, call the <a data-link-type="dfn" href="https://wicg.github.io/largest-contentful-paint/#potentially-add-a-performancelargestcontentfulpaintcandidate-entry" id="ref-for-potentially-add-a-performancelargestcontentfulpaintcandidate-entry①">potentially add a Largest-Contentful-Paint-Candidate entry</a> algorithm with <var>intersectionRect</var>, null, <var>renderTime</var>, <var>exposedElement</var>, and <var>document</var>.</p>
      <li data-md>
       <p>If <var>element</var>’s <code class="idl"><a data-link-type="idl" href="#dom-element-elementtiming" id="ref-for-dom-element-elementtiming③">elementtiming</a></code> attribute getter returns a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMString" id="ref-for-idl-DOMString⑧">DOMString</a></code> of zero length and if <var>intersectionRect</var>’s size is smaller than 15% of the viewport size, then abort these steps.</p>
      <li data-md>
@@ -1787,13 +1775,13 @@ When an <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage#ima
    </div>
    <h3 class="heading settled" data-level="3.6" id="sec-element-processing"><span class="secno">3.6. </span><span class="content">Element Timing processing</span><a class="self-link" href="#sec-element-processing"></a></h3>
    <div class="algorithm" data-algorithm="process element timing">
-     The <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="element-timing-processing">element timing processing</dfn> algorithm receives a <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#document" id="ref-for-document⑥">Document</a></code> <var>doc</var> and a timestamp <var>now</var> and performs the following steps: 
+     The <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="element-timing-processing">element timing processing</dfn> algorithm receives a <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#document" id="ref-for-document⑦">Document</a></code> <var>doc</var> and a timestamp <var>now</var> and performs the following steps: 
     <ol>
      <li data-md>
       <p>For each <var>imageRequest</var> in <var>doc</var>’s <a data-link-type="dfn" href="#images-pending-rendering" id="ref-for-images-pending-rendering①">images pending rendering</a> list:</p>
       <ol>
        <li data-md>
-        <p>Run the <a data-link-type="dfn" href="#report-image-element-timing" id="ref-for-report-image-element-timing②">report image element timing</a> algorithm passing in <var>imageRequest</var> and <var>now</var>.</p>
+        <p>Run the <a data-link-type="dfn" href="#report-image-element-timing" id="ref-for-report-image-element-timing②">report image element timing</a> algorithm passing in <var>imageRequest</var>, <var>now</var>, and <var>doc</var>.</p>
       </ol>
      <li data-md>
       <p>Clear <var>doc</var>’s <a data-link-type="dfn" href="#images-pending-rendering" id="ref-for-images-pending-rendering②">images pending rendering</a> list.</p>
@@ -1807,8 +1795,34 @@ When an <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage#ima
        <li data-md>
         <p><a data-link-type="dfn" href="https://infra.spec.whatwg.org/#set-append" id="ref-for-set-append②">Append</a> <var>element</var> to <var>doc</var>’s <a data-link-type="dfn" href="#set-of-elements-with-rendered-text" id="ref-for-set-of-elements-with-rendered-text①">set of elements with rendered text</a>.</p>
        <li data-md>
-        <p>Run the <a data-link-type="dfn" href="#report-text-element-timing" id="ref-for-report-text-element-timing①">report text element timing</a> given <var>element</var> and <var>now</var>.</p>
+        <p>Run the <a data-link-type="dfn" href="#report-text-element-timing" id="ref-for-report-text-element-timing①">report text element timing</a> given <var>element</var>, <var>now</var>, and <var>doc</var>.</p>
       </ol>
+    </ol>
+   </div>
+   <h3 class="heading settled" data-level="3.7" id="sec-get-an-element"><span class="secno">3.7. </span><span class="content">Get an element algorithm</span><a class="self-link" href="#sec-get-an-element"></a></h3>
+   <div class="algorithm" data-algorithm="PerformanceElementTiming element">
+     When asked to run the <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="get-an-element">get an element</dfn> algorithm with <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#element" id="ref-for-element①⑧">Element</a></code> <var>element</var> and <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#document" id="ref-for-document⑧">Document</a></code> <var>document</var> as inputs, run these steps: 
+    <ol>
+     <li data-md>
+      <p>If <var>element</var> is not <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#connected" id="ref-for-connected">connected</a>, return <code class="highlight"><c- kc>null</c-></code>.</p>
+     <li data-md>
+      <p>Let <var>settings</var> be the <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#context-object" id="ref-for-context-object②">context object</a>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#relevant-settings-object" id="ref-for-relevant-settings-object">relevant settings object</a>.</p>
+     <li data-md>
+      <p>if <var>document</var> is null, let <var>document</var> be <var>settings</var>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#responsible-document" id="ref-for-responsible-document">responsible document</a>.</p>
+     <li data-md>
+      <p>If <var>element</var>’s <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-tree-root" id="ref-for-concept-tree-root①">root</a> is not equal to <var>document</var>, return <code class="highlight"><c- kc>null</c-></code>.</p>
+     <li data-md>
+      <p>Return <var>element</var>.</p>
+    </ol>
+   </div>
+   <h3 class="heading settled" data-level="3.8" id="sec-get-resonse-end"><span class="secno">3.8. </span><span class="content">Get response end time algorithm</span><a class="self-link" href="#sec-get-resonse-end"></a></h3>
+   <div class="algorithm" data-algorithm="PerformanceElementTiming responseEnd">
+     When asked to <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="get-response-end-time">get response end time</dfn> with <code class="idl"><a data-link-type="idl" href="https://fetch.spec.whatwg.org/#request" id="ref-for-request③">Request</a></code> <var>request</var> as input, run these steps: 
+    <ol>
+     <li data-md>
+      <p>If the <var>request</var> is <code class="highlight"><c- kc>null</c-></code>, return 0.</p>
+     <li data-md>
+      <p>Return the <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/resource-timing#dfn-get-response-end-time" id="ref-for-dfn-get-response-end-time">response end time</a></code> of the fetch associated to the <var>request</var>.</p>
     </ol>
    </div>
    <h2 class="heading settled" data-level="4" id="sec-security"><span class="secno">4. </span><span class="content">Security &amp; privacy considerations</span><a class="self-link" href="#sec-security"></a></h2>
@@ -2017,6 +2031,8 @@ This would unintentionally leak some of the display timing of the image.</p>
     </ul>
    <li><a href="#dom-element-elementtiming">elementtiming</a><span>, in §3.1</span>
    <li><a href="#element-timing-processing">element timing processing</a><span>, in §3.6</span>
+   <li><a href="#get-an-element">get an element</a><span>, in §3.7</span>
+   <li><a href="#get-response-end-time">get response end time</a><span>, in §3.8</span>
    <li><a href="#dom-performanceelementtiming-id">id</a><span>, in §2.1</span>
    <li><a href="#dom-performanceelementtiming-identifier">identifier</a><span>, in §2.1</span>
    <li><a href="#images-pending-rendering">images pending rendering</a><span>, in §3.1</span>
@@ -2064,7 +2080,9 @@ This would unintentionally leak some of the display timing of the image.</p>
     <li><a href="#ref-for-document">2.1. PerformanceElementTiming interface</a>
     <li><a href="#ref-for-document①">3.1. Modifications to the DOM specification</a> <a href="#ref-for-document②">(2)</a> <a href="#ref-for-document③">(3)</a>
     <li><a href="#ref-for-document④">3.3. Modifications to the HTML specification</a> <a href="#ref-for-document⑤">(2)</a>
-    <li><a href="#ref-for-document⑥">3.6. Element Timing processing</a>
+    <li><a href="#ref-for-document⑥">3.5. Report text Element Timing</a>
+    <li><a href="#ref-for-document⑦">3.6. Element Timing processing</a>
+    <li><a href="#ref-for-document⑧">3.7. Get an element algorithm</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-element">
@@ -2076,6 +2094,7 @@ This would unintentionally leak some of the display timing of the image.</p>
     <li><a href="#ref-for-element①①">3.2. Modifications to the CSS specification</a> <a href="#ref-for-element①②">(2)</a> <a href="#ref-for-element①③">(3)</a>
     <li><a href="#ref-for-element①⑤">3.5. Report text Element Timing</a>
     <li><a href="#ref-for-element①⑦">3.6. Element Timing processing</a>
+    <li><a href="#ref-for-element①⑧">3.7. Get an element algorithm</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-text">
@@ -2088,13 +2107,14 @@ This would unintentionally leak some of the display timing of the image.</p>
   <aside class="dfn-panel" data-for="term-for-connected">
    <a href="https://dom.spec.whatwg.org/#connected">https://dom.spec.whatwg.org/#connected</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-connected">2.1. PerformanceElementTiming interface</a>
+    <li><a href="#ref-for-connected">3.7. Get an element algorithm</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-context-object">
    <a href="https://dom.spec.whatwg.org/#context-object">https://dom.spec.whatwg.org/#context-object</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-context-object">2.1. PerformanceElementTiming interface</a> <a href="#ref-for-context-object①">(2)</a> <a href="#ref-for-context-object②">(3)</a> <a href="#ref-for-context-object③">(4)</a>
+    <li><a href="#ref-for-context-object">2.1. PerformanceElementTiming interface</a> <a href="#ref-for-context-object①">(2)</a>
+    <li><a href="#ref-for-context-object②">3.7. Get an element algorithm</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-concept-tree-descendant">
@@ -2119,8 +2139,14 @@ This would unintentionally leak some of the display timing of the image.</p>
   <aside class="dfn-panel" data-for="term-for-concept-tree-root">
    <a href="https://dom.spec.whatwg.org/#concept-tree-root">https://dom.spec.whatwg.org/#concept-tree-root</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-concept-tree-root">2.1. PerformanceElementTiming interface</a>
-    <li><a href="#ref-for-concept-tree-root①">3.1. Modifications to the DOM specification</a>
+    <li><a href="#ref-for-concept-tree-root">3.1. Modifications to the DOM specification</a>
+    <li><a href="#ref-for-concept-tree-root①">3.7. Get an element algorithm</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-request">
+   <a href="https://fetch.spec.whatwg.org/#request">https://fetch.spec.whatwg.org/#request</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-request③">3.8. Get response end time algorithm</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-concept-request">
@@ -2211,7 +2237,7 @@ This would unintentionally leak some of the display timing of the image.</p>
   <aside class="dfn-panel" data-for="term-for-relevant-settings-object">
    <a href="https://html.spec.whatwg.org/multipage/webappapis.html#relevant-settings-object">https://html.spec.whatwg.org/multipage/webappapis.html#relevant-settings-object</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-relevant-settings-object">2.1. PerformanceElementTiming interface</a>
+    <li><a href="#ref-for-relevant-settings-object">3.7. Get an element algorithm</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-resolve-a-url">
@@ -2223,7 +2249,7 @@ This would unintentionally leak some of the display timing of the image.</p>
   <aside class="dfn-panel" data-for="term-for-responsible-document">
    <a href="https://html.spec.whatwg.org/multipage/webappapis.html#responsible-document">https://html.spec.whatwg.org/multipage/webappapis.html#responsible-document</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-responsible-document">2.1. PerformanceElementTiming interface</a>
+    <li><a href="#ref-for-responsible-document">3.7. Get an element algorithm</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-update-the-rendering">
@@ -2256,6 +2282,13 @@ This would unintentionally leak some of the display timing of the image.</p>
    <a href="https://w3c.github.io/IntersectionObserver#calculate-intersection-rect-algo">https://w3c.github.io/IntersectionObserver#calculate-intersection-rect-algo</a><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-calculate-intersection-rect-algo">3.4. Report image Element Timing</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-potentially-add-a-performancelargestcontentfulpaintcandidate-entry">
+   <a href="https://wicg.github.io/largest-contentful-paint/#potentially-add-a-performancelargestcontentfulpaintcandidate-entry">https://wicg.github.io/largest-contentful-paint/#potentially-add-a-performancelargestcontentfulpaintcandidate-entry</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-potentially-add-a-performancelargestcontentfulpaintcandidate-entry">3.4. Report image Element Timing</a>
+    <li><a href="#ref-for-potentially-add-a-performancelargestcontentfulpaintcandidate-entry①">3.5. Report text Element Timing</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-the-performanceentry-interface">
@@ -2315,7 +2348,7 @@ This would unintentionally leak some of the display timing of the image.</p>
   <aside class="dfn-panel" data-for="term-for-dfn-get-response-end-time">
    <a href="https://w3c.github.io/resource-timing#dfn-get-response-end-time">https://w3c.github.io/resource-timing#dfn-get-response-end-time</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dfn-get-response-end-time">2.1. PerformanceElementTiming interface</a>
+    <li><a href="#ref-for-dfn-get-response-end-time">3.8. Get response end time algorithm</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-dfn-timing-allow-check">
@@ -2390,6 +2423,7 @@ This would unintentionally leak some of the display timing of the image.</p>
    <li>
     <a data-link-type="biblio">[FETCH]</a> defines the following terms:
     <ul>
+     <li><span class="dfn-paneled" id="term-for-request" style="color:initial">Request</span>
      <li><span class="dfn-paneled" id="term-for-concept-request" style="color:initial">fetch request</span>
      <li><span class="dfn-paneled" id="term-for-concept-response" style="color:initial">fetch response</span>
     </ul>
@@ -2432,6 +2466,11 @@ This would unintentionally leak some of the display timing of the image.</p>
     <ul>
      <li><span class="dfn-paneled" id="term-for-intersectionobserver" style="color:initial">IntersectionObserver</span>
      <li><span class="dfn-paneled" id="term-for-calculate-intersection-rect-algo" style="color:initial">intersection rect algorithm</span>
+    </ul>
+   <li>
+    <a data-link-type="biblio">[LARGEST-CONTENTFUL-PAINT]</a> defines the following terms:
+    <ul>
+     <li><span class="dfn-paneled" id="term-for-potentially-add-a-performancelargestcontentfulpaintcandidate-entry" style="color:initial">potentially add a largest-contentful-paint-candidate entry</span>
     </ul>
    <li>
     <a data-link-type="biblio">[performance-timeline-2]</a> defines the following terms:
@@ -2487,6 +2526,8 @@ This would unintentionally leak some of the display timing of the image.</p>
    <dd>Anne van Kesteren; Domenic Denicola. <a href="https://infra.spec.whatwg.org/">Infra Standard</a>. Living Standard. URL: <a href="https://infra.spec.whatwg.org/">https://infra.spec.whatwg.org/</a>
    <dt id="biblio-intersection-observer">[INTERSECTION-OBSERVER]
    <dd>Stefan Zager; Michael Blain. <a href="https://www.w3.org/TR/intersection-observer/">Intersection Observer</a>. 31 May 2019. WD. URL: <a href="https://www.w3.org/TR/intersection-observer/">https://www.w3.org/TR/intersection-observer/</a>
+   <dt id="biblio-largest-contentful-paint">[LARGEST-CONTENTFUL-PAINT]
+   <dd><a href="https://wicg.github.io/largest-contentful-paint/">Largest Contentful Paint</a>. cg-draft. URL: <a href="https://wicg.github.io/largest-contentful-paint/">https://wicg.github.io/largest-contentful-paint/</a>
    <dt id="biblio-performance-timeline-2">[PERFORMANCE-TIMELINE-2]
    <dd>Ilya Grigorik. <a href="https://www.w3.org/TR/performance-timeline-2/">Performance Timeline Level 2</a>. 23 April 2019. WD. URL: <a href="https://www.w3.org/TR/performance-timeline-2/">https://www.w3.org/TR/performance-timeline-2/</a>
    <dt id="biblio-resource-timing-1">[RESOURCE-TIMING-1]
@@ -2506,7 +2547,7 @@ This would unintentionally leak some of the display timing of the image.</p>
     <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-unsigned-long" id="ref-for-idl-unsigned-long②"><c- b>unsigned</c-> <c- b>long</c-></a> <a data-readonly data-type="unsigned long" href="#dom-performanceelementtiming-naturalwidth"><code class="highlight"><c- g>naturalWidth</c-></code></a>;
     <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-unsigned-long" id="ref-for-idl-unsigned-long①①"><c- b>unsigned</c-> <c- b>long</c-></a> <a data-readonly data-type="unsigned long" href="#dom-performanceelementtiming-naturalheight"><code class="highlight"><c- g>naturalHeight</c-></code></a>;
     <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString" id="ref-for-idl-DOMString①①"><c- b>DOMString</c-></a> <a data-readonly data-type="DOMString" href="#dom-performanceelementtiming-id"><code class="highlight"><c- g>id</c-></code></a>;
-    <c- b>readonly</c-> <c- b>attribute</c-> <a class="n" data-link-type="idl-name" href="https://dom.spec.whatwg.org/#element" id="ref-for-element①⑧"><c- n>Element</c-></a>? <a data-readonly data-type="Element?" href="#dom-performanceelementtiming-element"><code class="highlight"><c- g>element</c-></code></a>;
+    <c- b>readonly</c-> <c- b>attribute</c-> <a class="n" data-link-type="idl-name" href="https://dom.spec.whatwg.org/#element" id="ref-for-element①⑨"><c- n>Element</c-></a>? <a data-readonly data-type="Element?" href="#dom-performanceelementtiming-element"><code class="highlight"><c- g>element</c-></code></a>;
     <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString" id="ref-for-idl-DOMString②①"><c- b>DOMString</c-></a> <a data-readonly data-type="DOMString" href="#dom-performanceelementtiming-url"><code class="highlight"><c- g>url</c-></code></a>;
 };
 
@@ -2584,15 +2625,14 @@ This would unintentionally leak some of the display timing of the image.</p>
   <aside class="dfn-panel" data-for="request">
    <b><a href="#request">#request</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-request">2.1. PerformanceElementTiming interface</a> <a href="#ref-for-request①">(2)</a> <a href="#ref-for-request②">(3)</a>
-    <li><a href="#ref-for-request③">3.4. Report image Element Timing</a>
+    <li><a href="#ref-for-request">2.1. PerformanceElementTiming interface</a> <a href="#ref-for-request①">(2)</a>
+    <li><a href="#ref-for-request②">3.4. Report image Element Timing</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="response">
    <b><a href="#response">#response</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-response">2.1. PerformanceElementTiming interface</a>
-    <li><a href="#ref-for-response①">3.4. Report image Element Timing</a>
+    <li><a href="#ref-for-response">3.4. Report image Element Timing</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="element">
@@ -2659,6 +2699,20 @@ This would unintentionally leak some of the display timing of the image.</p>
    <ul>
     <li><a href="#ref-for-element-timing-processing">3.3. Modifications to the HTML specification</a>
     <li><a href="#ref-for-element-timing-processing①">4. Security &amp; privacy considerations</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="get-an-element">
+   <b><a href="#get-an-element">#get-an-element</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-get-an-element">2.1. PerformanceElementTiming interface</a>
+    <li><a href="#ref-for-get-an-element①">3.4. Report image Element Timing</a>
+    <li><a href="#ref-for-get-an-element②">3.5. Report text Element Timing</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="get-response-end-time">
+   <b><a href="#get-response-end-time">#get-response-end-time</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-get-response-end-time">2.1. PerformanceElementTiming interface</a>
    </ul>
   </aside>
 <script>/* script-var-click-highlighting */
