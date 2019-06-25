@@ -159,7 +159,7 @@ The {{PerformanceEntry/duration}} attribute's getter must return 0.
 
 The {{PerformanceElementTiming/intersectionRect}} attribute must return the value it was initialized to.
 
-The {{PerformanceElementTiming/responseEnd}} attribute's getter must return the result of running <a>get response end time</a> with <a>context object</a>'s <a>request</a> as input.
+The {{PerformanceElementTiming/responseEnd}} attribute's getter must return the result of running <a>get response end time</a> with the <a>context object</a>'s <a>request</a> as input.
 
 The {{PerformanceElementTiming/identifier}} attribute's getter must return <a>element</a>'s {{elementtiming}} attribute value.
 
