@@ -169,7 +169,7 @@ The {{PerformanceElementTiming/naturalHeight}} attribute must return the value i
 
 The {{PerformanceElementTiming/id}} attribute's getter must return <a>element</a>'s {{Element/id}} attribute value.
 
-The {{PerformanceElementTiming/element}} attribute's getter must run the [=get an element=] algorithm with <a>context object</a>'s <a>element</a> as input.
+The {{PerformanceElementTiming/element}} attribute's getter must run the [=get an element=] algorithm with <a>context object</a>'s <a>element</a> and null as inputs.
 
 Note: This means that an element that is no longer <a>descendant</a> of the {{Document}} will no longer be returned by {{PerformanceElementTiming/element}}'s attribute getter.
 
@@ -245,13 +245,13 @@ Report image Element Timing {#sec-report-image-element}
 --------------------------------------------------------
 
 <div algorithm="report image element timing">
-    When asked to <dfn>report image element timing</dfn> given an |imageRequest|, a timestamp |renderTime| and a {{Docuemnt|| |document|, perform the following steps:
+    When asked to <dfn>report image element timing</dfn> given an |imageRequest|, a DOMHighResTimestamp |renderTime| and a {{Docuemnt|| |document|, perform the following steps:
 
     1. Let |image| be |imageRequest|'s <a>associated element</a>.
     1. Let |imageResponse| be the associated <a>fetch response</a> from fetching |imageRequest|.
     1. Let |intersectionRect| be the value returned by the <a>intersection rect algorithm</a> using |image| as the target and viewport as the root.
-    1. Let |exposedElement| be the result of running <a>get an element</a> with |image| and |document| as input.
-    1. If |exposedElement| is not null, call the <a>potentially add a Largest-Contentful-Paint-Candidate entry</a> algorithm with |intersectionRect|, |imageRequest|, |renderTime|, |image| and the result of running <a>get document</a>.
+    1. Let |exposedElement| be the result of running [=get an element=] with |image| and |document| as input.
+    1. If |exposedElement| is not null, call the <a>potentially add a Largest-Contentful-Paint-Candidate entry</a> algorithm with |intersectionRect|, |imageRequest|, |renderTime|, |image| and |document|.
     1. If the |image|'s {{Element/elementtiming}} attribute getter returns a {{DOMString}} of zero length, then abort these steps.
     1. Create a {{PerformanceElementTiming}} object |entry|.
     1. Set |entry|'s <a>request</a> to |imageRequest|.
@@ -268,14 +268,14 @@ Report text Element Timing {#sec-report-text}
 --------------------------------------------------------
 
 <div algorithm="report text element timing">
-    When asked to <dfn>report text element timing</dfn> given an {{Element}} |element|, a timestamp |renderTime| and a {{Document}} |document|, perform the following steps:
+    When asked to <dfn>report text element timing</dfn> given an {{Element}} |element|, a DOMHighResTimestamp |renderTime| and a {{Document}} |document|, perform the following steps:
 
     1. Let |intersectionRect| be an empty rectangle.
     1. For each {{Text}} <a>node</a> |text| in |element|'s <a>set of owned text nodes</a>:
         1. Augment |intersectionRect| to be smallest rectangle containing the border box of |text| and |intersectionRect|.
     1. Intersect |intersectionRect| with the visual viewport.
-    1. Let |exposedElement| be the result of running <a>get an element</a> with |element| and |document| as input.
-    1. If |exposedElement| is not null, call the <a>potentially add a Largest-Contentful-Paint-Candidate entry</a> algorithm with |intersectionRect|, null, |renderTime|, |exposedElement| and the result of running <a>get document</a>.
+    1. Let |exposedElement| be the result of running [=get an element=] with |element| and |document| as input.
+    1. If |exposedElement| is not null, call the <a>potentially add a Largest-Contentful-Paint-Candidate entry</a> algorithm with |intersectionRect|, null, |renderTime|, |exposedElement| and |document|.
     1. If |element|'s {{Element/elementtiming}} attribute getter returns a {{DOMString}} of zero length and if |intersectionRect|'s size is smaller than 15% of the viewport size, then abort these steps.
     1. Create a {{PerformanceElementTiming}} object |entry|.
     1. Set |entry|'s <a>element</a> to |element|.
@@ -293,13 +293,13 @@ Element Timing processing {#sec-element-processing}
     The <dfn>element timing processing</dfn> algorithm receives a {{Document}} |doc| and a timestamp |now| and performs the following steps:
 
     1. For each |imageRequest| in |doc|'s <a>images pending rendering</a> list:
-        1. Run the <a>report image element timing</a> algorithm passing in |imageRequest|, |now| and |doc|.
+        1. Run the <a>report image element timing</a> algorithm passing in |imageRequest|, |now|, and |doc|.
     1. Clear |doc|'s <a>images pending rendering</a> list.
     1. For each {{Element}} |element| in |doc|'s <a>descendants</a>:
         1. If |element| is contained in |doc|'s <a>set of elements with rendered text</a>, continue.
         1. If |element|'s <a>set of owned text nodes</a> is empty, continue.
         1. <a for="set">Append</a> |element| to |doc|'s <a>set of elements with rendered text</a>.
-        1. Run the <a>report text element timing</a> given |element|, |now| and |doc|.
+        1. Run the <a>report text element timing</a> given |element|, |now|, and |doc|.
 </div>
 
 Get an element algorithm {#sec-get-an-element}
@@ -308,7 +308,8 @@ Get an element algorithm {#sec-get-an-element}
 <div algorithm="PerformanceElementTiming element">
 When asked to run the <dfn>get an element</dfn> algorithm with {{Element}} |element| and {{Document}} |document| as inputs, run these steps:
     1. If |element| is not <a>connected</a>, return <code>null</code>.
-    1. if |document| is null, let |document| be the result of calling <a>get document</a>.
+    1. Let |settings| be the <a>context object</a>'s <a>relevant settings object</a>.
+    1. if |document| is null, let |document| be |settings|'s <a>responsible document</a>.
     1. If |element|'s <a for="tree">root</a> is not equal to |document|, return <code>null</code>.
     1. Return |element|.
 </div>
@@ -320,14 +321,6 @@ Get response end time algorithm {#sec-get-resonse-end}
 When asked to <dfn>get response end time</dfn> with {{Request}} |request| as input, run these steps:
     1. If the |request| is <code>null</code>, return 0.
     1. Return the {{response end time}} of the fetch associated to the |request|.
-</div>
-
-Get document {#sec-get-document}
--------------------------------
-<div algorithm="get document">
-When asked to <dfn>get document</dfn>, run the following steps:
-    1. Let |settings| be the <a>context object</a>'s <a>relevant settings object</a>.
-    1. Return |settings|'s <a>responsible document</a>.
 </div>
 
 
