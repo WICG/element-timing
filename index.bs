@@ -78,8 +78,7 @@ Existing approaches would require either registering observers too early or sign
 These approaches are discussed on the [[#sec-security]] section.
 
 Web developers are the experts in critical user interactions for their sites, so they should be allowed to tell the user agent which are the elements they care about.
-Nonetheless, providing some information by default has some value. For example, for analytics providers to provide some information out of the box.
-Thus, this API exposes two ways to determine which are the critical elements of a web page: allowing web-developer-annotated elements and exposing elements that are large.
+Thus, this API exposes rendering timing information about web-developer-annotated elements.
 
 Elements exposed {#sec-elements-exposed}
 ------------------------
@@ -98,7 +97,7 @@ Usage example {#sec-example}
 The following example shows an image that is registered for observation via its attribute, and an observer gathering the timing information.
 
 <xmp class="example highlight" highlight=html>
-    <img... elementtiming="foobar"/>
+    <img... elementtiming='foobar'/>
     <p elementtiming='important-paragraph'>This is text I care about.</p>
     ...
     <script>
@@ -106,7 +105,7 @@ The following example shows an image that is registered for observation via its 
       let perfEntries = list.getEntries();
       // Process the entries by iterating over them.
     });
-    observer.observe({entryTypes: ['element']});
+    observer.observe({type: 'element', buffered: true});
     </script>
 </xmp>
 
