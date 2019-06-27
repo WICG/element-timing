@@ -1215,7 +1215,7 @@ Possible extra rowspan handling
   <link href="https://www.w3.org/StyleSheets/TR/2016/W3C-ED" rel="stylesheet">
   <meta content="Bikeshed version 872cce6d3026423d677f3bd5837f1a1a46299a04" name="generator">
   <link href="https://wicg.github.io/element-timing" rel="canonical">
-  <meta content="2dee5ee810e32148ff7a9293194e65a72d56312f" name="document-revision">
+  <meta content="4f9b7ea236b7a4750f44fe5900a95d98d73a321c" name="document-revision">
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -1473,7 +1473,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">Element Timing API</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2019-06-25">25 June 2019</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2019-06-27">27 June 2019</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1703,7 +1703,7 @@ When an <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage#ima
    </ol>
    <h3 class="heading settled" data-level="3.4" id="sec-report-image-element"><span class="secno">3.4. </span><span class="content">Report image Element Timing</span><a class="self-link" href="#sec-report-image-element"></a></h3>
    <div class="algorithm" data-algorithm="report image element timing">
-     When asked to <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="report-image-element-timing">report image element timing</dfn> given an <var>imageRequest</var>, a DOMHighResTimestamp <var>renderTime</var> and a {{Docuemnt|| <var>document</var>, perform the following steps: 
+     When asked to <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="report-image-element-timing">report image element timing</dfn> given an <var>imageRequest</var>, a DOMHighResTimestamp <var>renderTime</var> and a <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#document" id="ref-for-document⑥">Document</a></code> <var>document</var>, perform the following steps: 
     <ol>
      <li data-md>
       <p>Let <var>image</var> be <var>imageRequest</var>’s <a data-link-type="dfn" href="#associated-element" id="ref-for-associated-element①">associated element</a>.</p>
@@ -1739,7 +1739,7 @@ When an <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage#ima
    </div>
    <h3 class="heading settled" data-level="3.5" id="sec-report-text"><span class="secno">3.5. </span><span class="content">Report text Element Timing</span><a class="self-link" href="#sec-report-text"></a></h3>
    <div class="algorithm" data-algorithm="report text element timing">
-     When asked to <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="report-text-element-timing">report text element timing</dfn> given an <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#element" id="ref-for-element①⑤">Element</a></code> <var>element</var>, a DOMHighResTimestamp <var>renderTime</var> and a <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#document" id="ref-for-document⑥">Document</a></code> <var>document</var>, perform the following steps: 
+     When asked to <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="report-text-element-timing">report text element timing</dfn> given an <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#element" id="ref-for-element①⑤">Element</a></code> <var>element</var>, a DOMHighResTimestamp <var>renderTime</var> and a <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#document" id="ref-for-document⑦">Document</a></code> <var>document</var>, perform the following steps: 
     <ol>
      <li data-md>
       <p>Let <var>intersectionRect</var> be an empty rectangle.</p>
@@ -1775,7 +1775,7 @@ When an <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage#ima
    </div>
    <h3 class="heading settled" data-level="3.6" id="sec-element-processing"><span class="secno">3.6. </span><span class="content">Element Timing processing</span><a class="self-link" href="#sec-element-processing"></a></h3>
    <div class="algorithm" data-algorithm="process element timing">
-     The <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="element-timing-processing">element timing processing</dfn> algorithm receives a <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#document" id="ref-for-document⑦">Document</a></code> <var>doc</var> and a timestamp <var>now</var> and performs the following steps: 
+     The <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="element-timing-processing">element timing processing</dfn> algorithm receives a <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#document" id="ref-for-document⑧">Document</a></code> <var>doc</var> and a timestamp <var>now</var> and performs the following steps: 
     <ol>
      <li data-md>
       <p>For each <var>imageRequest</var> in <var>doc</var>’s <a data-link-type="dfn" href="#images-pending-rendering" id="ref-for-images-pending-rendering①">images pending rendering</a> list:</p>
@@ -1801,7 +1801,7 @@ When an <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage#ima
    </div>
    <h3 class="heading settled" data-level="3.7" id="sec-get-an-element"><span class="secno">3.7. </span><span class="content">Get an element algorithm</span><a class="self-link" href="#sec-get-an-element"></a></h3>
    <div class="algorithm" data-algorithm="PerformanceElementTiming element">
-     When asked to run the <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="get-an-element">get an element</dfn> algorithm with <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#element" id="ref-for-element①⑧">Element</a></code> <var>element</var> and <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#document" id="ref-for-document⑧">Document</a></code> <var>document</var> as inputs, run these steps: 
+     When asked to run the <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="get-an-element">get an element</dfn> algorithm with <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#element" id="ref-for-element①⑧">Element</a></code> <var>element</var> and <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#document" id="ref-for-document⑨">Document</a></code> <var>document</var> as inputs, run these steps: 
     <ol>
      <li data-md>
       <p>If <var>element</var> is not <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#connected" id="ref-for-connected">connected</a>, return <code class="highlight"><c- kc>null</c-></code>.</p>
@@ -2080,9 +2080,10 @@ This would unintentionally leak some of the display timing of the image.</p>
     <li><a href="#ref-for-document">2.1. PerformanceElementTiming interface</a>
     <li><a href="#ref-for-document①">3.1. Modifications to the DOM specification</a> <a href="#ref-for-document②">(2)</a> <a href="#ref-for-document③">(3)</a>
     <li><a href="#ref-for-document④">3.3. Modifications to the HTML specification</a> <a href="#ref-for-document⑤">(2)</a>
-    <li><a href="#ref-for-document⑥">3.5. Report text Element Timing</a>
-    <li><a href="#ref-for-document⑦">3.6. Element Timing processing</a>
-    <li><a href="#ref-for-document⑧">3.7. Get an element algorithm</a>
+    <li><a href="#ref-for-document⑥">3.4. Report image Element Timing</a>
+    <li><a href="#ref-for-document⑦">3.5. Report text Element Timing</a>
+    <li><a href="#ref-for-document⑧">3.6. Element Timing processing</a>
+    <li><a href="#ref-for-document⑨">3.7. Get an element algorithm</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-element">
@@ -2529,7 +2530,7 @@ This would unintentionally leak some of the display timing of the image.</p>
    <dt id="biblio-largest-contentful-paint">[LARGEST-CONTENTFUL-PAINT]
    <dd><a href="https://wicg.github.io/largest-contentful-paint/">Largest Contentful Paint</a>. cg-draft. URL: <a href="https://wicg.github.io/largest-contentful-paint/">https://wicg.github.io/largest-contentful-paint/</a>
    <dt id="biblio-performance-timeline-2">[PERFORMANCE-TIMELINE-2]
-   <dd>Ilya Grigorik. <a href="https://www.w3.org/TR/performance-timeline-2/">Performance Timeline Level 2</a>. 23 April 2019. WD. URL: <a href="https://www.w3.org/TR/performance-timeline-2/">https://www.w3.org/TR/performance-timeline-2/</a>
+   <dd>Ilya Grigorik. <a href="https://www.w3.org/TR/performance-timeline-2/">Performance Timeline Level 2</a>. 26 June 2019. WD. URL: <a href="https://www.w3.org/TR/performance-timeline-2/">https://www.w3.org/TR/performance-timeline-2/</a>
    <dt id="biblio-resource-timing-1">[RESOURCE-TIMING-1]
    <dd>Arvind Jain; et al. <a href="https://www.w3.org/TR/resource-timing-1/">Resource Timing Level 1</a>. 30 March 2017. CR. URL: <a href="https://www.w3.org/TR/resource-timing-1/">https://www.w3.org/TR/resource-timing-1/</a>
    <dt id="biblio-rfc2119">[RFC2119]
