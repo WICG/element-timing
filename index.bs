@@ -245,7 +245,7 @@ Report image Element Timing {#sec-report-image-element}
 --------------------------------------------------------
 
 <div algorithm="report image element timing">
-    When asked to <dfn>report image element timing</dfn> given an |imageRequest|, a DOMHighResTimestamp |renderTime| and a {{Docuemnt|| |document|, perform the following steps:
+    When asked to <dfn>report image element timing</dfn> given an |imageRequest|, a DOMHighResTimestamp |renderTime| and a {{Document}} |document|, perform the following steps:
 
     1. Let |image| be |imageRequest|'s <a>associated element</a>.
     1. Let |imageResponse| be the associated <a>fetch response</a> from fetching |imageRequest|.
