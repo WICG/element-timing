@@ -170,7 +170,12 @@ The {{PerformanceElementTiming/element}} attribute's getter must run the [=get a
 
 Note: This means that an element that is no longer <a>descendant</a> of the {{Document}} will no longer be returned by {{PerformanceElementTiming/element}}'s attribute getter.
 
-The {{PerformanceElementTiming/url}} attribute's getter must return <a>request</a>'s <a>resolved URL</a>, trimmed to the first 100 characters if it is a data URL [[RFC2397]].
+The {{PerformanceElementTiming/url}} attribute's getter must perform the following steps:
+<div algorithm="PerformanceElementTiming url">
+    1. Let <var>url</var> be <a>request</a>'s <a>resolved URL</a>
+    1. If <var>url</var>'s <a spec=url>scheme</a> is "data:", trim <var>url</var> to its first 100 characters.
+    1. Return <var>url</var>.
+</div>
 
 Note: The URL is trimmed for data URLs to avoid excessive memory in the entry.
 
@@ -319,7 +324,7 @@ Get response end time algorithm {#sec-get-resonse-end}
 
 <div algorithm="PerformanceElementTiming responseEnd">
 When asked to <dfn>get response end time</dfn> with {{Request}} |request| as input, run these steps:
-    1. If the |request| is <code>null</code> or associated to a data URL, return 0.
+    1. If the |request| is <code>null</code> or if its <a for=request>url</a>'s <a spec=url>scheme</a> is "data:", return 0.
     1. Return the {{response end time}} of the fetch associated to the |request|.
 </div>
 
