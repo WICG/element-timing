@@ -53,7 +53,7 @@ Note: for background images, the element is the one being affected by the backgr
 
 Sample code:
 
-```
+```javascript
 <img src="my_image.jpg" elementtiming="foobar">
 
 const observer = new PerformanceObserver((list) => {
