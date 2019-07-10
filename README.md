@@ -27,9 +27,7 @@ Allowing third-party origins to measure the time an arbitrary image resource tak
 
 We say that a text node <a name="belong">**belongs to**</a> its [containing block](https://www.w3.org/TR/CSS2/visudet.html#containing-block-details). This means that an element could have 0 or many associated text nodes with it.
 
-We say that an element is **text-painted** if at least one text node [belongs to](#belong) and has been painted at least once.
-
-Thus, the **text rendering timestamp** of an element is the time when it becomes <em>text-painted</em>.
+We say that an element is *text-painted* if at least one text node [belongs to](#belong) and has been painted at least once. Thus, the <a name="text-time">**text rendering timestamp**</a> of an element is the time when it becomes *text-painted*.
 
 Let the *text rect* of a text node be the display rectangle of that node within the viewport. We define the **text rect** of an element as the smallest rectangle which contains the geometric union of the text rects of all text nodes which [belong to](#belong) the element.
 
@@ -38,7 +36,7 @@ Let the *text rect* of a text node be the display rectangle of that node within 
 A `PerformanceElementTiming` entry has the following attributes:
 * `name`: for images, "image-paint". For text: "text-paint".
 * `entryType`: it will always be the string "element".
-* `startTime`: for images, the <em>image rendering timestamp</em>, or 0 when the resource does not pass the [timing allow check](https://w3c.github.io/resource-timing/#dfn-timing-allow-check). For text, the <em>text rendering timestamp</em>.
+* `startTime`: for images, the <em>image rendering timestamp</em>, or 0 when the resource does not pass the [timing allow check](https://w3c.github.io/resource-timing/#dfn-timing-allow-check). For text, the [text rendering timestamp](#text-time).
 * `duration`: it will always be set to 0.
 * `intersectionRect`: for images, the display rectangle of the image within the viewport. For text, the <em>text rect</em> of the associated text (only counting text nodes which have been painted at least once).
 * `responseEnd`: for images, the timestamp of when the last byte of the resource response was received, same as ResourceTiming's [responseEnd](https://w3c.github.io/resource-timing/#dom-performanceresourcetiming-responseend). For text, 0.
