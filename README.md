@@ -25,13 +25,13 @@ Allowing third-party origins to measure the time an arbitrary image resource tak
 
 ### Text considerations
 
-We say that a text node **belongs to** its [containing block](https://www.w3.org/TR/CSS2/visudet.html#containing-block-details). This means that an element could have 0 or many associated text nodes with it.
+We say that a text node <a name="belong">**belongs to**</a> its [containing block](https://www.w3.org/TR/CSS2/visudet.html#containing-block-details). This means that an element could have 0 or many associated text nodes with it.
 
-We say that an element is **text-painted** if at least one text node <em>belongs to</em> and has been painted at least once.
+We say that an element is **text-painted** if at least one text node [belongs to](#belong) and has been painted at least once.
 
 Thus, the **text rendering timestamp** of an element is the time when it becomes <em>text-painted</em>.
 
-Let the *text rect* of a text node be the display rectangle of that node within the viewport. We define the **text rect** of an element as the smallest rectangle which contains the geometric union of the text rects of all text nodes which belong to the element.
+Let the *text rect* of a text node be the display rectangle of that node within the viewport. We define the **text rect** of an element as the smallest rectangle which contains the geometric union of the text rects of all text nodes which [belong to](#belong) the element.
 
 ### What information is exposed?
 
