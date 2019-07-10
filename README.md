@@ -31,7 +31,7 @@ We say that an element is **text-painted** if at least one text node <em>belongs
 
 Thus, the **text rendering timestamp** of an element is the time when it becomes <em>text-painted</em>.
 
-Given a group of text nodes, we define the **text rect** as the smallest rectangle which contains the geometric union of the text node display rectangles within the viewport.
+Let the *text rect* of a text node be the display rectangle of that node within the viewport. We define the **text rect** of an element as the smallest rectangle which contains the geometric union of the text rects of all text nodes which belong to the element.
 
 ### What information is exposed?
 
