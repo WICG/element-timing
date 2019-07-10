@@ -19,9 +19,9 @@ An element can be registered for observation via the `elementtiming` HTML attrib
 
 ### Image considerations
 
-We define the **image rendering timestamp** as the next paint that occurs after the image has become fully loaded. This is important to distinguish as progressively rendered images may have multiple initial renderings before the image has even been fully received by the user agent.
+We define the <a name="image-time">**image rendering timestamp**</a> as the next paint that occurs after the image has become fully loaded. This is important to distinguish as progressively rendered images may have multiple initial renderings before the image has even been fully received by the user agent.
 
-Allowing third-party origins to measure the time an arbitrary image resource takes to render could expose sensitive information such as whether a user is logged into a website. Therefore, for privacy and security reasons, the <em>image rendering timestamp</em> is only exposed in entries corresponding to resources that pass the [timing allow check](https://w3c.github.io/resource-timing/#dfn-timing-allow-check). However, to enable a more holistic picture, the rest of the information is exposed for arbitrary images.
+Allowing third-party origins to measure the time an arbitrary image resource takes to render could expose sensitive information such as whether a user is logged into a website. Therefore, for privacy and security reasons, the [image rendering timestamp](#image-time) is only exposed in entries corresponding to resources that pass the [timing allow check](https://w3c.github.io/resource-timing/#dfn-timing-allow-check). However, to enable a more holistic picture, the rest of the information is exposed for arbitrary images.
 
 ### Text considerations
 
@@ -29,16 +29,16 @@ We say that a text node <a name="belong">**belongs to**</a> its [containing bloc
 
 We say that an element is *text-painted* if at least one text node [belongs to](#belong) and has been painted at least once. Thus, the <a name="text-time">**text rendering timestamp**</a> of an element is the time when it becomes *text-painted*.
 
-Let the *text rect* of a text node be the display rectangle of that node within the viewport. We define the **text rect** of an element as the smallest rectangle which contains the geometric union of the text rects of all text nodes which [belong to](#belong) the element.
+Let the *text rect* of a text node be the display rectangle of that node within the viewport. We define the <a name="text-rect">**text rect**</a> of an element as the smallest rectangle which contains the geometric union of the text rects of all text nodes which [belong to](#belong) the element.
 
 ### What information is exposed?
 
 A `PerformanceElementTiming` entry has the following attributes:
 * `name`: for images, "image-paint". For text: "text-paint".
 * `entryType`: it will always be the string "element".
-* `startTime`: for images, the <em>image rendering timestamp</em>, or 0 when the resource does not pass the [timing allow check](https://w3c.github.io/resource-timing/#dfn-timing-allow-check). For text, the [text rendering timestamp](#text-time).
+* `startTime`: for images, the [image rendering timestamp](#image-time), or 0 when the resource does not pass the [timing allow check](https://w3c.github.io/resource-timing/#dfn-timing-allow-check). For text, the [text rendering timestamp](#text-time).
 * `duration`: it will always be set to 0.
-* `intersectionRect`: for images, the display rectangle of the image within the viewport. For text, the <em>text rect</em> of the associated text (only counting text nodes which have been painted at least once).
+* `intersectionRect`: for images, the display rectangle of the image within the viewport. For text, the [text rect](#text-rect) of the associated text (only counting text nodes which have been painted at least once).
 * `responseEnd`: for images, the timestamp of when the last byte of the resource response was received, same as ResourceTiming's [responseEnd](https://w3c.github.io/resource-timing/#dom-performanceresourcetiming-responseend). For text, 0.
 * `identifier`: the value of the `elementtiming` attribute of the element.
 * `naturalWidth`: the [intrinsic](https://drafts.csswg.org/css2/conform.html#intrinsic) width of the image. It matches with the corresponding DOM [attribute](https://html.spec.whatwg.org/multipage/embedded-content.html#dom-img-naturalwidth) for img. 0 for text.
