@@ -206,7 +206,7 @@ The request has an <dfn>associated element</dfn>, the {{Element}} causing this i
 
 NOTE: we assume that there is one <a>image request</a> for each {{Element}} that a <a>background-image</a> property affects and for each URL that the <a>background-image</a> property specifies. So, for example, if there is a style with two URLs affecting all <{div}>s, and there are two <{div}>s, then there will be four <a>image requests</a>. This means that a single <a>background-image</a> property could produce multiple {{PerformanceElementTiming}} entries because it can affect multiple elements and because it can specify multiple URLs.
 
-Every image resource that is obtained from a data URL [[RFC2397]] has an associated <a>image request</a> which is not fetched but still needs to be loaded and decoded.
+Note: Every image resource that is obtained from a URL whose <a spec=url>scheme</a> is equal to "data" has an associated <a>image request</a> which is not fetched but still needs to be loaded and decoded.
 This request also has an <a>associated element</a> which caused this image resource.
 
 Each {{Document}} has <dfn>images pending rendering</dfn>, a list of <a>image requests</a> which are considered loaded and decoded but not yet rendered.
@@ -324,7 +324,7 @@ Get response end time algorithm {#sec-get-resonse-end}
 
 <div algorithm="PerformanceElementTiming responseEnd">
 When asked to <dfn>get response end time</dfn> with {{Request}} |request| as input, run these steps:
-    1. If the |request| is <code>null</code> or if its <a for=request>url</a>'s <a spec=url>scheme</a> is "data:", return 0.
+    1. If the |request| is <code>null</code> or if its <a for=request>url</a>'s <a spec=url>scheme</a> is "data", return 0.
     1. Return the {{response end time}} of the fetch associated to the |request|.
 </div>
 
