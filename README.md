@@ -51,8 +51,8 @@ We define the <a name="text-rect">**text rect**</a> of an element as the smalles
 A `PerformanceElementTiming` entry has the following attributes:
 * `name`: for images, "image-paint". For text: "text-paint".
 * `entryType`: it will always be the string "element".
-* `startTime`: for images, the [image rendering timestamp](#image-time), or 0 when the resource does not pass the [timing allow check](https://w3c.github.io/resource-timing/#dfn-timing-allow-check). For text, the [text rendering timestamp](#text-time).
-* `duration`: it will always be set to 0.
+* `renderTime`: for images, the [image rendering timestamp](#image-time), or 0 when the resource does not pass the [timing allow check](https://w3c.github.io/resource-timing/#dfn-timing-allow-check). For text, the [text rendering timestamp](#text-time).
+* `startTime` and `duration`: these will always be set to 0.
 * `intersectionRect`: for images, the display rectangle of the image within the viewport. For text, the [text rect](#text-rect) of the associated text (only counting text nodes which have been painted at least once).
 * `responseEnd`: for images, the timestamp of when the last byte of the resource response was received, same as ResourceTiming's [responseEnd](https://w3c.github.io/resource-timing/#dom-performanceresourcetiming-responseend). For text, 0.
 * `identifier`: the value of the `elementtiming` attribute of the element.
@@ -72,9 +72,9 @@ Sample code:
 const observer = new PerformanceObserver((list) => {
   let perfEntries = list.getEntries().forEach(function(entry) {
       // Send the information to analytics, or in this case just log it to console.
-      // |entry.startTime| contains the timestamp of when the image is displayed.
+      // |entry.renderTime| contains the timestamp of when the image is displayed.
       if (entry.identifier === 'foobar')
-        console.log("My image took " + entry.startTime + " to render!");
+        console.log("My image took " + entry.renderTime + " to render!");
    });
 });
 observer.observe({entryTypes: ['element']});
