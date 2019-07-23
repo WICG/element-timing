@@ -207,11 +207,11 @@ Its value is read by the <a>report image element timing</a> and the <a>report te
 Every {{Element}} has an <dfn>associated image request</dfn> which is initially null.
 When either of {{HTMLImageElement}}, {{SVGImageElement}}, or {{HTMLVideoElement}} require a new image resource (to be displayed as an image or poster image), its <a>associated image request</a> is set to a new <a>image request</a> caused by the new resource.
 
-Note: Every image resource that is obtained from a URL whose <a spec=url>scheme</a> is equal to "data" has an associated <a>image request</a> which is not fetched but still needs to be loaded and decoded.
+Note: Every image resource that is obtained from a URL whose <a spec=url>scheme</a> is equal to "data" has an associated <a>image request</a> which is not fetched but still needs to be loaded.
 This request can be the <a>associated image request</a> of an {{Element}}.
 
-Each {{Document}} has <dfn>images pending rendering</dfn>, a list of triples ({{Element}}, <a>image request</a>, DOMHighResTimeStamp) which are considered loaded and decoded but not yet rendered.
-When an {{Element}}'s <a>associated image request</a> has become <a>completely available</a> and decoded, run the algorithm to <a>process an image that finished loading</a> passing in the {{Element}} and its <a>associated image request</a> as inputs.
+Each {{Document}} has <dfn>images pending rendering</dfn>, a list of triples ({{Element}}, <a>image request</a>, DOMHighResTimeStamp) which are considered loaded but not yet rendered.
+When an {{Element}}'s <a>associated image request</a> has become <a>completely available</a>, run the algorithm to <a>process an image that finished loading</a> passing in the {{Element}} and its <a>associated image request</a> as inputs.
 
 Each {{Document}} also has a <dfn>set of elements with rendered text</dfn>, which is initially an empty <a>ordered set</a>.
 
@@ -231,7 +231,7 @@ NOTE: A user agent might want to use a stack to efficiently compute the <a>set o
 
 Every {{Element}} has a list of <dfn>associated background image requests</dfn> which is initially an empty array.
 When the {{Element}}'s style requires a new image resource (to be displayed as background image), a new <a>image request</a> caused by the new resource is appended to the {{Element}}'s <a>associated background image requests</a>.
-Whenever an <a>image request</a> in an {{Element}}'s <a>associated background image requests</a> has become <a>completely available</a> and decoded, run the algorithm to <a>process an image that finished loading</a> with the {{Element}} and <a>image request</a> as inputs.
+Whenever an <a>image request</a> in an {{Element}}'s <a>associated background image requests</a> has become <a>completely available</a>, run the algorithm to <a>process an image that finished loading</a> with the {{Element}} and <a>image request</a> as inputs.
 
 NOTE: we assume that there is one <a>image request</a> for each {{Element}} that a <a>background-image</a> property affects and for each URL that the <a>background-image</a> property specifies.
 So, for example, if there is a style with two URLs affecting all <{div}>s, and there are two <{div}>s, then there will be four <a>image requests</a>.
