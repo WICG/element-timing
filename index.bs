@@ -39,6 +39,7 @@ urlPrefix: https://html.spec.whatwg.org/multipage; spec: HTML;
     type: dfn; url: #image-request; text: image request;
     type: dfn; url: /images.html#img-all; text: completely available;
     type: dfn; url: /urls-and-fetching.html#resolve-a-url; text: resolved url;
+    type: dfn; url: images.html#list-of-available-images; text: list of available images;
     type: attribute; for: img;
         text:naturalWidth; url: #dom-img-naturalwidth;
         text:naturalHeight; url: #dom-img-naturalheight;
@@ -209,6 +210,10 @@ When either of {{HTMLImageElement}}, {{SVGImageElement}}, or {{HTMLVideoElement}
 
 Note: Every image resource that is obtained from a URL whose <a spec=url>scheme</a> is equal to "data" has an associated <a>image request</a> which is not fetched but still needs to be loaded.
 This request can be the <a>associated image request</a> of an {{Element}}.
+
+Note: The current language is vague since it does not point to specific algorithms.
+This can be made more rigorous when the corresponding processing models have a more unified processing model.
+For instance, the only {{HTMLImageElement}} uses the [=list of available images=].
 
 Each {{Document}} has <dfn>images pending rendering</dfn>, a list of triples ({{Element}}, <a>image request</a>, DOMHighResTimeStamp) which are considered loaded but not yet rendered.
 When an {{Element}}'s <a>associated image request</a> has become <a>completely available</a>, run the algorithm to <a>process an image that finished loading</a> passing in the {{Element}} and its <a>associated image request</a> as inputs.
