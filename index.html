@@ -1215,7 +1215,7 @@ Possible extra rowspan handling
   <link href="https://www.w3.org/StyleSheets/TR/2016/W3C-ED" rel="stylesheet">
   <meta content="Bikeshed version b9c59eccbcc25454195a0043aa99cbc393f9772d" name="generator">
   <link href="https://wicg.github.io/element-timing" rel="canonical">
-  <meta content="92eef94322a4279bf7ec9873609ee23ede0149c9" name="document-revision">
+  <meta content="275ee1e0518f8d04142b0a0babdadd1f655d0343" name="document-revision">
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -1830,7 +1830,7 @@ This means that a single <a data-link-type="dfn" href="https://drafts.csswg.org/
      <li data-md>
       <p>if <var>document</var> is null, let <var>document</var> be <var>settings</var>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#responsible-document" id="ref-for-responsible-document">responsible document</a>.</p>
      <li data-md>
-      <p>If <var>element</var>’s <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-tree-root" id="ref-for-concept-tree-root①">root</a> is not equal to <var>document</var>, return <code class="highlight"><c- kc>null</c-></code>.</p>
+      <p>If <var>element</var>’s <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-tree-root" id="ref-for-concept-tree-root①">root</a> is not equal to <var>document</var> or if <var>document</var> is not <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#fully-active" id="ref-for-fully-active①">fully active</a>, return <code class="highlight"><c- kc>null</c-></code>.</p>
      <li data-md>
       <p>Return <var>element</var>.</p>
     </ol>
@@ -2222,6 +2222,7 @@ This would unintentionally leak some of the display timing of the image.</p>
    <a href="https://html.spec.whatwg.org/multipage/browsers.html#fully-active">https://html.spec.whatwg.org/multipage/browsers.html#fully-active</a><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-fully-active">3.3. Modifications to the HTML specification</a>
+    <li><a href="#ref-for-fully-active①">3.8. Get an element algorithm</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-image-request">
