@@ -89,7 +89,7 @@ The Element Timing API supports timing information about the following elements:
 * Elements with a <a>background-image</a>.
 * Groups of text nodes, which are aggregated as described in [[#sec-modifications-CSS]].
 
-The {{Element|Elements}} that are annotated using the "elementtiming" attribute are measured.
+Elements that have a "<code>elementtiming</code>" content attribute are reported in the <a>report image element timing</a> and the <a>report text element timing</a> algorithms.
 
 Usage example {#sec-example}
 ------------------------
@@ -162,7 +162,7 @@ The {{PerformanceElementTiming/loadTime}} attribute's getter must return the the
 
 The {{PerformanceElementTiming/intersectionRect}} attribute must return the value it was initialized to.
 
-The {{PerformanceElementTiming/identifier}} attribute's getter must return <a>element</a>'s {{elementtiming}} attribute value.
+The {{PerformanceElementTiming/identifier}} attribute's getter must <a>get an attribute value</a> given <a>context object</a>'s <a>element</a> and "<code>elementtiming</code>".
 
 The {{PerformanceElementTiming/naturalWidth}} attribute must return the value it was initialized to.
 
@@ -198,12 +198,11 @@ We extend the {{Element}} interface as follows:
 
 <pre class="idl">
 partial interface Element {
-    readonly attribute DOMString elementtiming;
+    [CEReactions] attribute DOMString elementTiming;
 };
 </pre>
 
-The {{Element/elementtiming}} attribute, when set to a {{DOMString}} of non-zero length, will indicate that the element must be registered for observation.
-Its value is read by the <a>report image element timing</a> and the <a>report text element timing</a> algorithms.
+The {{Element/elementTiming}} attribute must <a>reflect</a> the "<code>elementtiming</code>" content attribute.
 
 Every {{Element}} has an <dfn>associated image request</dfn> which is initially null.
 When either of {{HTMLImageElement}}, {{SVGImageElement}}, or {{HTMLVideoElement}} require a new image resource (to be displayed as an image or poster image), its <a>associated image request</a> is set to a new <a>image request</a> caused by the new resource.
@@ -274,7 +273,7 @@ Report image Element Timing {#sec-report-image-element}
     1. Let |intersectionRect| be the value returned by the <a>intersection rect algorithm</a> using |element| as the target and viewport as the root.
     1. Let |exposedElement| be the result of running [=get an element=] with |element| and |document| as input.
     1. If |exposedElement| is not null, call the <a>potentially add a Largest-Contentful-Paint-Candidate entry</a> algorithm with |intersectionRect|, |imageRequest|, |renderTime|, |element|, and |document|.
-    1. If the |element|'s {{Element/elementtiming}} attribute getter returns a {{DOMString}} of zero length, then abort these steps.
+    1. If |element|'s "<code>elementtiming</code>" content attribute is absent or if its value is the empty string, then abort these steps.
     1. Create a {{PerformanceElementTiming}} object |entry|.
     1. Set |entry|'s <a>request</a> to |imageRequest|.
     1. Set |entry|'s <a>element</a> to |element|.
@@ -296,9 +295,10 @@ Report text Element Timing {#sec-report-text}
     1. For each {{Text}} <a>node</a> |text| in |element|'s <a>set of owned text nodes</a>:
         1. Augment |intersectionRect| to be smallest rectangle containing the border box of |text| and |intersectionRect|.
     1. Intersect |intersectionRect| with the visual viewport.
+    1. If |intersectionRect|'s size is smaller than 15% of the viewport size, then abort these steps.
     1. Let |exposedElement| be the result of running [=get an element=] with |element| and |document| as input.
     1. If |exposedElement| is not null, call the <a>potentially add a Largest-Contentful-Paint-Candidate entry</a> algorithm with |intersectionRect|, null, |renderTime|, |exposedElement|, and |document|.
-    1. If |element|'s {{Element/elementtiming}} attribute getter returns a {{DOMString}} of zero length and if |intersectionRect|'s size is smaller than 15% of the viewport size, then abort these steps.
+    1. If |element|'s "<code>elementtiming</code>" content attribute is absent or if its value is the empty string, then abort these steps.
     1. Create a {{PerformanceElementTiming}} object |entry|.
     1. Set |entry|'s <a>element</a> to |element|.
     1. Set |entry|'s {{PerformanceEntry/name}} to the {{DOMString}} "text-paint".
