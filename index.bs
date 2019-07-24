@@ -162,13 +162,13 @@ The {{PerformanceElementTiming/loadTime}} attribute's getter must return the the
 
 The {{PerformanceElementTiming/intersectionRect}} attribute must return the value it was initialized to.
 
-The {{PerformanceElementTiming/identifier}} attribute's getter must <a>get an attribute value</a> given <a>context object</a>'s <a>element</a> and "<code>elementtiming</code>".
+The {{PerformanceElementTiming/identifier}} attribute's getter must return the value it was initialized to.
 
 The {{PerformanceElementTiming/naturalWidth}} attribute must return the value it was initialized to.
 
 The {{PerformanceElementTiming/naturalHeight}} attribute must return the value it was initialized to.
 
-The {{PerformanceElementTiming/id}} attribute's getter must return <a>element</a>'s {{Element/id}} attribute value.
+The {{PerformanceElementTiming/id}} attribute's getter must return the value it was initialized to.
 
 The {{PerformanceElementTiming/element}} attribute's getter must run the [=get an element=] algorithm with <a>context object</a>'s <a>element</a> and null as inputs.
 
@@ -281,7 +281,9 @@ Report image Element Timing {#sec-report-image-element}
     1. Set |entry|'s {{renderTime}} to |renderTime|.
     1. Set |entry|'s {{loadTime}} to |loadTime|.
     1. Set |entry|'s {{intersectionRect}} to |intersectionRect|.
+    1. Set |entry|'s {{identifier}} to |element|'s "<code>elementtiming</code>" content attribute.
     1. Set |entry|'s {{PerformanceElementTiming/naturalWidth}} and {{PerformanceElementTiming/naturalHeight}} by running the same steps for an <{img}>'s {{img/naturalWidth}} and {{img/naturalHeight}} attribute getters, but using |imageRequest| as the image.
+    1. Set |entry|'s {{id}} to |element|'s "<code>id</code>" content attribute.
     1. <a>Queue the PerformanceEntry</a> |entry|.
 </div>
 
@@ -303,7 +305,9 @@ Report text Element Timing {#sec-report-text}
     1. Set |entry|'s {{PerformanceEntry/name}} to the {{DOMString}} "text-paint".
     1. Set |entry|'s {{renderTime}} to |renderTime|.
     1. Set |entry|'s {{intersectionRect}} to |intersectionRect|.
+    1. Set |entry|'s {{identifier}} to |element|'s "<code>elementtiming</code>" content attribute.
     1. Set |entry|'s {{PerformanceElementTiming/naturalWidth}} and {{PerformanceElementTiming/naturalHeight}} to 0.
+    1. Set |entry|'s {{id}} to |element|'s "<code>id</code>" content attribute.
     1. <a>Queue the PerformanceEntry</a> |entry|.
 </div>
 
