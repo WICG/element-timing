@@ -46,9 +46,6 @@ urlPrefix: https://html.spec.whatwg.org/multipage; spec: HTML;
 urlPrefix: https://w3c.github.io/resource-timing; spec: RESOURCE-TIMING;
     type: dfn; url: #dfn-timing-allow-check; text: timing allow check;
     type: interface; url: #sec-performanceresourcetiming; text: PerformanceResourceTiming;
-    type: attribute; for: PerformanceResourceTiming;
-        text: responseEnd; url: #dom-performanceresourcetiming-responseend;
-    type: method; url: #dfn-get-response-end-time; text: response end time;
 urlPrefix: https://w3c.github.io/hr-time; spec: HR-TIME;
     type: dfn; url: #dfn-current-high-resolution-time; text: current high resolution time;
     type: interface; url: #dom-domhighrestimestamp; text: DOMHighResTimeStamp;
@@ -339,26 +336,16 @@ When asked to run the <dfn>get an element</dfn> algorithm with {{Element}} |elem
     1. Return |element|.
 </div>
 
-Get response end time algorithm {#sec-get-response-end}
-----------------------------------
-
-<div algorithm="PerformanceElementTiming responseEnd">
-When asked to <dfn export>get response end time</dfn> with {{Request}} |request| as input, run these steps:
-    1. If the |request| is <code>null</code> or if its <a for=request>url</a>'s <a spec=url>scheme</a> is "data", return 0.
-    1. Return the {{response end time}} of the fetch associated to the |request|.
-</div>
-
-
 Security & privacy considerations {#sec-security}
 ===============================================
 
 This API exposes some information about cross-origin images.
-In particular, images that do not pass the <a>timing allow check</a> still have their resource response end time exposed, which could be a source of privacy concerns.
+In particular, images that do not pass the <a>timing allow check</a> still have their resource load time exposed, which could be a source of privacy concerns.
 
-However, this is considered to not add new attacks to the web platform because the ResourceTiming API exposes this already.
-In addition, the onload handler exposes load timing when it is available, and the response end time is a close proxy to this.
+However, this is considered to not add new attacks to the web platform because the ResourceTiming API exposes a similar timestamp already.
+In addition, the onload handler exposes load timing when it is available, and the resource load time is a close proxy to this.
 The <a>current high resolution time</a> computed at the beginning of the onload handler would provide the image load time.
-We choose to expose the {{responseEnd}} because it is very easy to obtain even without an onload handler.
+We choose to expose the {{loadTime}} because it is very easy to obtain even without an onload handler.
 In addition, we believe any fix to remove the leak provided by image onload handlers or ResourceTiming could also fix the leak provided by this API.
 
 The {{renderTime}} (display timestamp) can also be polyfilled via the PaintTiming API.
