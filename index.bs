@@ -332,7 +332,7 @@ When asked to run the <dfn>get an element</dfn> algorithm with {{Element}} |elem
     1. If |element| is not <a>connected</a>, return <code>null</code>.
     1. Let |settings| be the <a>context object</a>'s <a>relevant settings object</a>.
     1. if |document| is null, let |document| be |settings|'s <a>responsible document</a>.
-    1. If |element|'s <a for="tree">root</a> is not equal to |document| or if |document| is not [=fully active=] return <code>null</code>.
+    1. If |element|'s <a for="tree">root</a> is not equal to |document| or if |document| is not [=fully active=], return <code>null</code>.
     1. Return |element|.
 </div>
 
