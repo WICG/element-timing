@@ -57,7 +57,7 @@ urlPrefix: https://fetch.spec.whatwg.org; spec: FETCH;
 urlPrefix: https://drafts.csswg.org/css2/zindex.html; spec: CSS;
     type: dfn; url:#painting-order; text: painting order;
 urlPrefix: https://wicg.github.io/largest-contentful-paint/; spec: LARGEST-CONTENTFUL-PAINT;
-    type: dfn; url:#potentially-add-a-performancelargestcontentfulpaintcandidate-entry; text: potentially add a Largest-Contentful-Paint-Candidate entry;
+    type: dfn; url:#potentially-add-a-largestcontentfulpaint-entry; text: potentially add a LargestContentfulPaint entry;
 </pre>
 
 Introduction {#sec-intro}
@@ -269,7 +269,7 @@ Report image Element Timing {#sec-report-image-element}
 
     1. Let |intersectionRect| be the value returned by the <a>intersection rect algorithm</a> using |element| as the target and viewport as the root.
     1. Let |exposedElement| be the result of running [=get an element=] with |element| and |document| as input.
-    1. If |exposedElement| is not null, call the <a>potentially add a Largest-Contentful-Paint-Candidate entry</a> algorithm with |intersectionRect|, |imageRequest|, |renderTime|, |element|, and |document|.
+    1. If |exposedElement| is not null, call the <a>potentially add a LargestContentfulPaint entry</a> algorithm with |intersectionRect|, |imageRequest|, |renderTime|, |element|, and |document|.
     1. If |element|'s "<code>elementtiming</code>" content attribute is absent or if its value is the empty string, then abort these steps.
     1. Create a {{PerformanceElementTiming}} object |entry|.
     1. Set |entry|'s <a>request</a> to |imageRequest|.
@@ -295,7 +295,7 @@ Report text Element Timing {#sec-report-text}
         1. Augment |intersectionRect| to be smallest rectangle containing the border box of |text| and |intersectionRect|.
     1. Intersect |intersectionRect| with the visual viewport.
     1. Let |exposedElement| be the result of running [=get an element=] with |element| and |document| as input.
-    1. If |exposedElement| is not null, call the <a>potentially add a Largest-Contentful-Paint-Candidate entry</a> algorithm with |intersectionRect|, null, |renderTime|, |exposedElement|, and |document|.
+    1. If |exposedElement| is not null, call the <a>potentially add a LargestContentfulPaint entry</a> algorithm with |intersectionRect|, null, |renderTime|, |exposedElement|, and |document|.
     1. If |element|'s "<code>elementtiming</code>" content attribute is absent or if its value is the empty string, then abort these steps.
     1. Create a {{PerformanceElementTiming}} object |entry|.
     1. Set |entry|'s <a>element</a> to |element|.
