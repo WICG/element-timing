@@ -1215,7 +1215,7 @@ Possible extra rowspan handling
   <link href="https://www.w3.org/StyleSheets/TR/2016/W3C-ED" rel="stylesheet">
   <meta content="Bikeshed version b9c59eccbcc25454195a0043aa99cbc393f9772d" name="generator">
   <link href="https://wicg.github.io/element-timing" rel="canonical">
-  <meta content="fe81248b06905fe02c448b570570ec3f1e2d293e" name="document-revision">
+  <meta content="c22bec112c93e9afa5cf81be3e10cdeb8e944be1" name="document-revision">
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -1473,7 +1473,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">Element Timing API</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2019-07-24">24 July 2019</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2019-07-25">25 July 2019</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1726,7 +1726,7 @@ This means that a single <a data-link-type="dfn" href="https://drafts.csswg.org/
      <li data-md>
       <p>Let <var>exposedElement</var> be the result of running <a data-link-type="dfn" href="#get-an-element" id="ref-for-get-an-element①">get an element</a> with <var>element</var> and <var>document</var> as input.</p>
      <li data-md>
-      <p>If <var>exposedElement</var> is not null, call the <a data-link-type="dfn" href="https://wicg.github.io/largest-contentful-paint/#potentially-add-a-performancelargestcontentfulpaintcandidate-entry" id="ref-for-potentially-add-a-performancelargestcontentfulpaintcandidate-entry">potentially add a Largest-Contentful-Paint-Candidate entry</a> algorithm with <var>intersectionRect</var>, <var>imageRequest</var>, <var>renderTime</var>, <var>element</var>, and <var>document</var>.</p>
+      <p>If <var>exposedElement</var> is not null, call the <a data-link-type="dfn" href="https://wicg.github.io/largest-contentful-paint/#potentially-add-a-largestcontentfulpaint-entry" id="ref-for-potentially-add-a-largestcontentfulpaint-entry">potentially add a LargestContentfulPaint entry</a> algorithm with <var>intersectionRect</var>, <var>imageRequest</var>, <var>renderTime</var>, <var>element</var>, and <var>document</var>.</p>
      <li data-md>
       <p>If <var>element</var>’s "<code class="highlight">elementtiming</code>" content attribute is absent or if its value is the empty string, then abort these steps.</p>
      <li data-md>
@@ -1770,7 +1770,7 @@ This means that a single <a data-link-type="dfn" href="https://drafts.csswg.org/
      <li data-md>
       <p>Let <var>exposedElement</var> be the result of running <a data-link-type="dfn" href="#get-an-element" id="ref-for-get-an-element②">get an element</a> with <var>element</var> and <var>document</var> as input.</p>
      <li data-md>
-      <p>If <var>exposedElement</var> is not null, call the <a data-link-type="dfn" href="https://wicg.github.io/largest-contentful-paint/#potentially-add-a-performancelargestcontentfulpaintcandidate-entry" id="ref-for-potentially-add-a-performancelargestcontentfulpaintcandidate-entry①">potentially add a Largest-Contentful-Paint-Candidate entry</a> algorithm with <var>intersectionRect</var>, null, <var>renderTime</var>, <var>exposedElement</var>, and <var>document</var>.</p>
+      <p>If <var>exposedElement</var> is not null, call the <a data-link-type="dfn" href="https://wicg.github.io/largest-contentful-paint/#potentially-add-a-largestcontentfulpaint-entry" id="ref-for-potentially-add-a-largestcontentfulpaint-entry①">potentially add a LargestContentfulPaint entry</a> algorithm with <var>intersectionRect</var>, null, <var>renderTime</var>, <var>exposedElement</var>, and <var>document</var>.</p>
      <li data-md>
       <p>If <var>element</var>’s "<code class="highlight">elementtiming</code>" content attribute is absent or if its value is the empty string, then abort these steps.</p>
      <li data-md>
@@ -2307,11 +2307,11 @@ This would unintentionally leak some of the display timing of the image.</p>
     <li><a href="#ref-for-calculate-intersection-rect-algo">3.5. Report image Element Timing</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="term-for-potentially-add-a-performancelargestcontentfulpaintcandidate-entry">
-   <a href="https://wicg.github.io/largest-contentful-paint/#potentially-add-a-performancelargestcontentfulpaintcandidate-entry">https://wicg.github.io/largest-contentful-paint/#potentially-add-a-performancelargestcontentfulpaintcandidate-entry</a><b>Referenced in:</b>
+  <aside class="dfn-panel" data-for="term-for-potentially-add-a-largestcontentfulpaint-entry">
+   <a href="https://wicg.github.io/largest-contentful-paint/#potentially-add-a-largestcontentfulpaint-entry">https://wicg.github.io/largest-contentful-paint/#potentially-add-a-largestcontentfulpaint-entry</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-potentially-add-a-performancelargestcontentfulpaintcandidate-entry">3.5. Report image Element Timing</a>
-    <li><a href="#ref-for-potentially-add-a-performancelargestcontentfulpaintcandidate-entry①">3.6. Report text Element Timing</a>
+    <li><a href="#ref-for-potentially-add-a-largestcontentfulpaint-entry">3.5. Report image Element Timing</a>
+    <li><a href="#ref-for-potentially-add-a-largestcontentfulpaint-entry①">3.6. Report text Element Timing</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-the-performanceentry-interface">
@@ -2494,7 +2494,7 @@ This would unintentionally leak some of the display timing of the image.</p>
    <li>
     <a data-link-type="biblio">[LARGEST-CONTENTFUL-PAINT]</a> defines the following terms:
     <ul>
-     <li><span class="dfn-paneled" id="term-for-potentially-add-a-performancelargestcontentfulpaintcandidate-entry" style="color:initial">potentially add a largest-contentful-paint-candidate entry</span>
+     <li><span class="dfn-paneled" id="term-for-potentially-add-a-largestcontentfulpaint-entry" style="color:initial">potentially add a largestcontentfulpaint entry</span>
     </ul>
    <li>
     <a data-link-type="biblio">[performance-timeline-2]</a> defines the following terms:
