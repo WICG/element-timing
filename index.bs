@@ -201,8 +201,8 @@ partial interface Element {
 
 The {{Element/elementTiming}} attribute must <a>reflect</a> the "<code>elementtiming</code>" content attribute.
 
-Every {{Element}} has an <dfn>associated image request</dfn> which is initially null.
-When either of {{HTMLImageElement}}, {{SVGImageElement}}, or {{HTMLVideoElement}} require a new image resource (to be displayed as an image or poster image), its <a>associated image request</a> is set to a new <a>image request</a> caused by the new resource.
+Each {{Element}} has an <dfn>associated image request</dfn> which is initially null.
+When the processing model for an {{Element}} <em>element</em> of type {{HTMLImageElement}}, {{SVGImageElement}}, or {{HTMLVideoElement}} creates a new image resource (e.g., to be displayed as an image or poster image), <em>element</em>'s <a>associated image request</a> is set to the <a>image request</a> of the created image resource.
 
 Note: Every image resource that is obtained from a URL whose <a spec=url>scheme</a> is equal to "data" has an associated <a>image request</a> which is not fetched but still needs to be loaded.
 This request can be the <a>associated image request</a> of an {{Element}}.
@@ -231,8 +231,8 @@ When the user agent is executing the <a>painting order</a>, it must populate the
 NOTE: A user agent might want to use a stack to efficiently compute the <a>set of owned text nodes</a> while implementing the <a>painting order</a>.
 
 Every {{Element}} has a list of <dfn>associated background image requests</dfn> which is initially an empty array.
-When the {{Element}}'s style requires a new image resource (to be displayed as background image), a new <a>image request</a> caused by the new resource is appended to the {{Element}}'s <a>associated background image requests</a>.
-Whenever an <a>image request</a> in an {{Element}}'s <a>associated background image requests</a> has become <a>completely available</a>, run the algorithm to <a>process an image that finished loading</a> with the {{Element}} and <a>image request</a> as inputs.
+When the processing model for the {{Element}} <em>element</em>'s style requires a new image resource (to be displayed as background image), the <a>image request</a> created by the new resource is appended to <em>element</em>'s <a>associated background image requests</a>.
+Whenever an <a>image request</a> in an {{Element}} <em>element</em>'s <a>associated background image requests</a> becomes <a>completely available</a>, run the algorithm to <a>process an image that finished loading</a> with <em>element</em> and <a>image request</a> as inputs.
 
 NOTE: we assume that there is one <a>image request</a> for each {{Element}} that a <a>background-image</a> property affects and for each URL that the <a>background-image</a> property specifies.
 So, for example, if there is a style with two URLs affecting all <{div}>s, and there are two <{div}>s, then there will be four <a>image requests</a>.
