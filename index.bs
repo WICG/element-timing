@@ -271,16 +271,16 @@ Report image Element Timing {#sec-report-image-element}
     1. Let |exposedElement| be the result of running [=get an element=] with |element| and |document| as input.
     1. If |exposedElement| is not null, call the <a>potentially add a LargestContentfulPaint entry</a> algorithm with |intersectionRect|, |imageRequest|, |renderTime|, |loadTime|, |element|, and |document|.
     1. If |element|'s "<code>elementtiming</code>" content attribute is absent or if its value is the empty string, then abort these steps.
-    1. Create a {{PerformanceElementTiming}} object |entry|.
-    1. Set |entry|'s <a>request</a> to |imageRequest|.
-    1. Set |entry|'s <a>element</a> to |element|.
-    1. Set |entry|'s {{PerformanceEntry/name}} to the {{DOMString}} "image-paint".
-    1. Set |entry|'s {{renderTime}} to |renderTime|.
-    1. Set |entry|'s {{loadTime}} to |loadTime|.
-    1. Set |entry|'s {{intersectionRect}} to |intersectionRect|.
-    1. Set |entry|'s {{identifier}} to |element|'s "<code>elementtiming</code>" content attribute.
-    1. Set |entry|'s {{PerformanceElementTiming/naturalWidth}} and {{PerformanceElementTiming/naturalHeight}} by running the same steps for an <{img}>'s {{img/naturalWidth}} and {{img/naturalHeight}} attribute getters, but using |imageRequest| as the image.
-    1. Set |entry|'s {{id}} to |element|'s "<code>id</code>" content attribute.
+    1. Create and initialize a {{PerformanceElementTiming}} object |entry|.
+        1. Initialize |entry|'s <a>request</a> to |imageRequest|.
+        1. Initialize |entry|'s <a>element</a> to |element|.
+        1. Initialize |entry|'s {{PerformanceEntry/name}} to the {{DOMString}} "image-paint".
+        1. Initialize |entry|'s {{renderTime}} to |renderTime|.
+        1. Initialize |entry|'s {{loadTime}} to |loadTime|.
+        1. Initialize |entry|'s {{intersectionRect}} to |intersectionRect|.
+        1. Initialize |entry|'s {{identifier}} to |element|'s "<code>elementtiming</code>" content attribute.
+        1. Initialize |entry|'s {{PerformanceElementTiming/naturalWidth}} and {{PerformanceElementTiming/naturalHeight}} by running the same steps for an <{img}>'s {{img/naturalWidth}} and {{img/naturalHeight}} attribute getters, but using |imageRequest| as the image.
+        1. Initialize |entry|'s {{id}} to |element|'s "<code>id</code>" content attribute.
     1. <a>Queue the PerformanceEntry</a> |entry|.
 </div>
 
@@ -297,15 +297,15 @@ Report text Element Timing {#sec-report-text}
     1. Let |exposedElement| be the result of running [=get an element=] with |element| and |document| as input.
     1. If |exposedElement| is not null, call the <a>potentially add a LargestContentfulPaint entry</a> algorithm with |intersectionRect|, null, |renderTime|, 0, |exposedElement|, and |document|.
     1. If |element|'s "<code>elementtiming</code>" content attribute is absent or if its value is the empty string, then abort these steps.
-    1. Create a {{PerformanceElementTiming}} object |entry|.
-    1. Set |entry|'s <a>element</a> to |element|.
-    1. Set |entry|'s {{PerformanceEntry/name}} to the {{DOMString}} "text-paint".
-    1. Set |entry|'s {{renderTime}} to |renderTime|.
-    1. Set |entry|'s {{loadTime}} to 0.
-    1. Set |entry|'s {{intersectionRect}} to |intersectionRect|.
-    1. Set |entry|'s {{identifier}} to |element|'s "<code>elementtiming</code>" content attribute.
-    1. Set |entry|'s {{PerformanceElementTiming/naturalWidth}} and {{PerformanceElementTiming/naturalHeight}} to 0.
-    1. Set |entry|'s {{id}} to |element|'s "<code>id</code>" content attribute.
+    1. Create and initialize a {{PerformanceElementTiming}} object |entry|.
+        1. Initialize |entry|'s <a>element</a> to |element|.
+        1. Initialize |entry|'s {{PerformanceEntry/name}} to the {{DOMString}} "text-paint".
+        1. Initialize |entry|'s {{renderTime}} to |renderTime|.
+        1. Initialize |entry|'s {{loadTime}} to 0.
+        1. Initialize |entry|'s {{intersectionRect}} to |intersectionRect|.
+        1. Initialize |entry|'s {{identifier}} to |element|'s "<code>elementtiming</code>" content attribute.
+        1. Initialize |entry|'s {{PerformanceElementTiming/naturalWidth}} and {{PerformanceElementTiming/naturalHeight}} to 0.
+        1. Initialize |entry|'s {{id}} to |element|'s "<code>id</code>" content attribute.
     1. <a>Queue the PerformanceEntry</a> |entry|.
 </div>
 
