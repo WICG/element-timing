@@ -66,10 +66,10 @@ Introduction {#sec-intro}
 <em>This section is non-normative.</em>
 
 Knowing when critical elements are displayed on screen is key to understanding page load performance.
-While fast rendering of the essential components is not sufficient for a satisfactory loading experience, it's certainly necessary.
+While fast rendering of the essential components is not sufficient for a satisfactory loading experience, it is necessary.
 Therefore, monitoring these rendering timestamps is important to improve and prevent regressions in page loads.
 
-This specification empowers developers and analytics providers by providing an API to measure rendering timestamps of critical elements.
+This specification gives developers and analytics providers an API to measure rendering timestamps of critical elements.
 There is currently no good way to measure these timestamps for real users.
 Existing approaches would require either registering observers too early or significant DOM manipulation.
 These approaches are discussed on the [[#sec-security]] section.
@@ -91,7 +91,7 @@ Elements that have a "<code>elementtiming</code>" content attribute are reported
 Usage example {#sec-example}
 ------------------------
 
-The following example shows an image that is registered for observation via its attribute, and an observer gathering the timing information.
+The following example shows an image that is registered for observation via its <code>elementtiming</code> attribute, and an observer gathering the timing information.
 
 <xmp class="example highlight" highlight=html>
     <img... elementtiming='foobar'/>
@@ -137,7 +137,7 @@ interface PerformanceElementTiming : PerformanceEntry {
 };
 </pre>
 
-A {{PerformanceElementTiming}} object reports timing information about one associated image.
+A {{PerformanceElementTiming}} object reports timing information about one associated element.
 
 Each {{PerformanceElementTiming}} object has these associated concepts, all of which are initially set to <code>null</code>:
 * A <dfn>request</dfn> containing the image request (if the entry is for image content).
@@ -199,7 +199,7 @@ partial interface Element {
 };
 </pre>
 
-The {{Element/elementTiming}} attribute must <a>reflect</a> the "<code>elementtiming</code>" content attribute.
+The {{Element/elementTiming}} attribute must <a>reflect</a> the element's "<code>elementtiming</code>" content attribute.
 
 Each {{Element}} has an <dfn>associated image request</dfn> which is initially null.
 When the processing model for an {{Element}} <em>element</em> of type {{HTMLImageElement}}, {{SVGImageElement}}, or {{HTMLVideoElement}} creates a new image resource (e.g., to be displayed as an image or poster image), <em>element</em>'s <a>associated image request</a> is set to the <a>image request</a> of the created image resource.
@@ -211,12 +211,12 @@ Note: The current language is vague since it does not point to specific algorith
 This can be made more rigorous when the corresponding processing models have a more unified processing model.
 For instance, the only {{HTMLImageElement}} uses the [=list of available images=].
 
-Each {{Document}} has <dfn>images pending rendering</dfn>, a list of triples ({{Element}}, <a>image request</a>, DOMHighResTimeStamp) which are considered loaded but not yet rendered.
-When an {{Element}}'s <a>associated image request</a> has become <a>completely available</a>, run the algorithm to <a>process an image that finished loading</a> passing in the {{Element}} and its <a>associated image request</a> as inputs.
-
-Each {{Document}} also has a <dfn>set of elements with rendered text</dfn>, which is initially an empty <a>ordered set</a>.
-
 Each {{Element}} has a <dfn>set of owned text nodes</dfn>, which is initially an empty <a>ordered set</a>.
+
+Each {{Document}} has <dfn>images pending rendering</dfn>, a list of triples ({{Element}}, <a>image request</a>, DOMHighResTimeStamp) which are considered loaded but not yet rendered.
+When an {{Element}} <em>element</em>'s <a>associated image request</a> has become <a>completely available</a>, run the algorithm to <a>process an image that finished loading</a> passing in <em>element</em> and its <a>associated image request</a> as inputs.
+
+Each {{Document}} also has a <dfn>set of elements with rendered text</dfn>, which is initially an empty, <a>ordered set</a>.
 
 Modifications to the CSS specification {#sec-modifications-CSS}
 --------------------------------------------------------
