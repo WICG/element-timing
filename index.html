@@ -1213,9 +1213,9 @@ Possible extra rowspan handling
 	}
 </style>
   <link href="https://www.w3.org/StyleSheets/TR/2016/W3C-ED" rel="stylesheet">
-  <meta content="Bikeshed version 220086d88511a9c99d7a1f9b5447db7e7b99e053" name="generator">
+  <meta content="Bikeshed version 450e0499b28bb4c684052ad936ad1e7d36c4eac5" name="generator">
   <link href="https://wicg.github.io/element-timing" rel="canonical">
-  <meta content="11caf9447ff1df1a94c696e01cc831360c62142e" name="document-revision">
+  <meta content="932b1f21c4674213f620ee54783db63aea804d66" name="document-revision">
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -1473,7 +1473,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">Element Timing API</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2019-08-07">7 August 2019</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2019-08-14">14 August 2019</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1570,6 +1570,8 @@ Thus, this API exposes rendering timing information about web-developer-annotate
      <p><code class="highlight"><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-img-element" id="ref-for-the-img-element">img</a></code> elements.</p>
     <li data-md>
      <p><code class="highlight"><a data-link-type="element" href="https://svgwg.org/svg2-draft/embedded.html#elementdef-image" id="ref-for-elementdef-image">image</a></code> elements inside an <code class="highlight"><a data-link-type="element" href="https://svgwg.org/svg2-draft/struct.html#elementdef-svg" id="ref-for-elementdef-svg">svg</a></code>.</p>
+    <li data-md>
+     <p>The poster images of <code class="highlight"><a data-link-type="element" href="https://html.spec.whatwg.org/multipage/media.html#video" id="ref-for-video">video</a></code> elements.</p>
     <li data-md>
      <p>Elements with a <a data-link-type="dfn" href="https://drafts.csswg.org/css-backgrounds-3#propdef-background-image" id="ref-for-propdef-background-image">background-image</a>.</p>
     <li data-md>
@@ -2288,6 +2290,12 @@ This would unintentionally leak some of the display timing of the image.</p>
     <li><a href="#ref-for-update-the-rendering①">4. Security &amp; privacy considerations</a>
    </ul>
   </aside>
+  <aside class="dfn-panel" data-for="term-for-video">
+   <a href="https://html.spec.whatwg.org/multipage/media.html#video">https://html.spec.whatwg.org/multipage/media.html#video</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-video">1.1. Elements exposed</a>
+   </ul>
+  </aside>
   <aside class="dfn-panel" data-for="term-for-set-append">
    <a href="https://infra.spec.whatwg.org/#set-append">https://infra.spec.whatwg.org/#set-append</a><b>Referenced in:</b>
    <ul>
@@ -2484,6 +2492,7 @@ This would unintentionally leak some of the display timing of the image.</p>
      <li><span class="dfn-paneled" id="term-for-resolve-a-url" style="color:initial">resolved url</span>
      <li><span class="dfn-paneled" id="term-for-responsible-document" style="color:initial">responsible document</span>
      <li><span class="dfn-paneled" id="term-for-update-the-rendering" style="color:initial">update the rendering</span>
+     <li><span class="dfn-paneled" id="term-for-video" style="color:initial">video</span>
     </ul>
    <li>
     <a data-link-type="biblio">[INFRA]</a> defines the following terms:
