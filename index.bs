@@ -83,6 +83,7 @@ Elements exposed {#sec-elements-exposed}
 The Element Timing API supports timing information about the following elements:
 * <{img}> elements.
 * <{image}> elements inside an <{svg}>.
+* The poster images of <{video}> elements.
 * Elements with a <a>background-image</a>.
 * Groups of text nodes, which are aggregated as described in [[#sec-modifications-CSS]].
 
