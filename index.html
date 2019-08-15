@@ -1215,7 +1215,7 @@ Possible extra rowspan handling
   <link href="https://www.w3.org/StyleSheets/TR/2016/W3C-ED" rel="stylesheet">
   <meta content="Bikeshed version 450e0499b28bb4c684052ad936ad1e7d36c4eac5" name="generator">
   <link href="https://wicg.github.io/element-timing" rel="canonical">
-  <meta content="932b1f21c4674213f620ee54783db63aea804d66" name="document-revision">
+  <meta content="894b4569c36d1e979ad3e2113456c74ea0495bd6" name="document-revision">
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -1473,7 +1473,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">Element Timing API</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2019-08-14">14 August 2019</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2019-08-15">15 August 2019</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1617,6 +1617,7 @@ For example, developers could monitor the time it takes for a widget to show up 
     <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString" id="ref-for-idl-DOMString①"><c- b>DOMString</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="PerformanceElementTiming" data-dfn-type="attribute" data-export data-readonly data-type="DOMString" id="dom-performanceelementtiming-id"><code class="highlight"><c- g>id</c-></code></dfn>;
     <c- b>readonly</c-> <c- b>attribute</c-> <a class="n" data-link-type="idl-name" href="https://dom.spec.whatwg.org/#element" id="ref-for-element"><c- n>Element</c-></a>? <dfn class="dfn-paneled idl-code" data-dfn-for="PerformanceElementTiming" data-dfn-type="attribute" data-export data-readonly data-type="Element?" id="dom-performanceelementtiming-element"><code class="highlight"><c- g>element</c-></code></dfn>;
     <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString" id="ref-for-idl-DOMString②"><c- b>DOMString</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="PerformanceElementTiming" data-dfn-type="attribute" data-export data-readonly data-type="DOMString" id="dom-performanceelementtiming-url"><code class="highlight"><c- g>url</c-></code></dfn>;
+    [<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Default" id="ref-for-Default"><c- g>Default</c-></a>] <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-object" id="ref-for-idl-object"><c- b>object</c-></a> <dfn class="idl-code" data-dfn-for="PerformanceElementTiming" data-dfn-type="method" data-export data-lt="toJSON()" id="dom-performanceelementtiming-tojson"><code class="highlight"><c- g>toJSON</c-></code><a class="self-link" href="#dom-performanceelementtiming-tojson"></a></dfn>();
 };
 </pre>
    <p>A <code class="idl"><a data-link-type="idl" href="#performanceelementtiming" id="ref-for-performanceelementtiming①">PerformanceElementTiming</a></code> object reports timing information about one associated element.</p>
@@ -2066,6 +2067,7 @@ This would unintentionally leak some of the display timing of the image.</p>
    <li><a href="#request">request</a><span>, in §2.1</span>
    <li><a href="#set-of-elements-with-rendered-text">set of elements with rendered text</a><span>, in §3.1</span>
    <li><a href="#set-of-owned-text-nodes">set of owned text nodes</a><span>, in §3.1</span>
+   <li><a href="#dom-performanceelementtiming-tojson">toJSON()</a><span>, in §2.1</span>
    <li><a href="#dom-performanceelementtiming-url">url</a><span>, in §2.1</span>
   </ul>
   <aside class="dfn-panel" data-for="term-for-painting-order">
@@ -2420,6 +2422,18 @@ This would unintentionally leak some of the display timing of the image.</p>
     <li><a href="#ref-for-idl-DOMString⑥">3.6. Report text Element Timing</a>
    </ul>
   </aside>
+  <aside class="dfn-panel" data-for="term-for-Default">
+   <a href="https://heycam.github.io/webidl/#Default">https://heycam.github.io/webidl/#Default</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-Default">2.1. PerformanceElementTiming interface</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-idl-object">
+   <a href="https://heycam.github.io/webidl/#idl-object">https://heycam.github.io/webidl/#idl-object</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-idl-object">2.1. PerformanceElementTiming interface</a>
+   </ul>
+  </aside>
   <aside class="dfn-panel" data-for="term-for-idl-unsigned-long">
    <a href="https://heycam.github.io/webidl/#idl-unsigned-long">https://heycam.github.io/webidl/#idl-unsigned-long</a><b>Referenced in:</b>
    <ul>
@@ -2544,6 +2558,8 @@ This would unintentionally leak some of the display timing of the image.</p>
     <a data-link-type="biblio">[WebIDL]</a> defines the following terms:
     <ul>
      <li><span class="dfn-paneled" id="term-for-idl-DOMString" style="color:initial">DOMString</span>
+     <li><span class="dfn-paneled" id="term-for-Default" style="color:initial">Default</span>
+     <li><span class="dfn-paneled" id="term-for-idl-object" style="color:initial">object</span>
      <li><span class="dfn-paneled" id="term-for-idl-unsigned-long" style="color:initial">unsigned long</span>
     </ul>
   </ul>
@@ -2599,6 +2615,7 @@ This would unintentionally leak some of the display timing of the image.</p>
     <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString" id="ref-for-idl-DOMString①①"><c- b>DOMString</c-></a> <a data-readonly data-type="DOMString" href="#dom-performanceelementtiming-id"><code class="highlight"><c- g>id</c-></code></a>;
     <c- b>readonly</c-> <c- b>attribute</c-> <a class="n" data-link-type="idl-name" href="https://dom.spec.whatwg.org/#element" id="ref-for-element②④"><c- n>Element</c-></a>? <a data-readonly data-type="Element?" href="#dom-performanceelementtiming-element"><code class="highlight"><c- g>element</c-></code></a>;
     <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString" id="ref-for-idl-DOMString②①"><c- b>DOMString</c-></a> <a data-readonly data-type="DOMString" href="#dom-performanceelementtiming-url"><code class="highlight"><c- g>url</c-></code></a>;
+    [<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Default" id="ref-for-Default①"><c- g>Default</c-></a>] <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-object" id="ref-for-idl-object①"><c- b>object</c-></a> <a href="#dom-performanceelementtiming-tojson"><code class="highlight"><c- g>toJSON</c-></code></a>();
 };
 
 <c- b>partial</c-> <c- b>interface</c-> <a class="idl-code" data-link-type="interface" href="https://dom.spec.whatwg.org/#element" id="ref-for-element④①"><c- g>Element</c-></a> {
