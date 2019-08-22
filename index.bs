@@ -318,8 +318,10 @@ Element Timing processing {#sec-element-processing}
     The <dfn>element timing processing</dfn> algorithm receives a {{Document}} |doc| and a timestamp |now| and performs the following steps:
 
     1. For each |imagePendingRenderingTriple| in |doc|'s <a>images pending rendering</a> list:
-        1. Run the <a>report image element timing</a> algorithm passing in |imagePendingRenderingTriple|, |now|, and |doc|.
-    1. Clear |doc|'s <a>images pending rendering</a> list.
+        1. Let |imageRequest| be the <a>image request</a> of |imagePendingRenderingTriple|.
+        1. If |imageRequest| is fully decoded, then run the following steps:
+            1. Run the <a>report image element timing</a> algorithm passing in |imagePendingRenderingTriple|, |now|, and |doc|.
+            1. Remove |imagePendingRenderingTriple| from |doc|'s <a>images pending rendering</a> list.
     1. For each {{Element}} |element| in |doc|'s <a>descendants</a>:
         1. If |element| is contained in |doc|'s <a>set of elements with rendered text</a>, continue.
         1. If |element|'s <a>set of owned text nodes</a> is empty, continue.
