@@ -51,7 +51,8 @@ We define the <a name="text-rect">**text rect**</a> of an element as the smalles
 A `PerformanceElementTiming` entry has the following attributes:
 * `name`: for images, "image-paint". For text: "text-paint".
 * `entryType`: it will always be the string "element".
-* `startTime` and `duration`: these will always be set to 0.
+* `startTime`: equal to `renderTime` if it is nonzero, otherwise equal to `loadTime`.
+* `duration`: always be set to 0.
 * `renderTime`: for images, the [image rendering timestamp](#image-time), or 0 when the resource does not pass the [timing allow check](https://w3c.github.io/resource-timing/#dfn-timing-allow-check). For text, the [text rendering timestamp](#text-time).
 * `loadTime`: for images, the latest between the time when the image resource is loaded and the time when the image resource is associated to the element. For text, 0.
 * `intersectionRect`: for images, the display rectangle of the image within the viewport. For text, the [text rect](#text-rect) of the associated text (only counting text nodes which have been painted at least once).
@@ -72,11 +73,12 @@ Sample code:
 const observer = new PerformanceObserver((list) => {
   let perfEntries = list.getEntries().forEach(function(entry) {
       // Send the information to analytics, or in this case just log it to console.
-      // |entry.renderTime| contains the timestamp of when the image is displayed.
-      // |entry.loadTime| contains the load timestamp of the image.
-      // It can be used as a proxy for the rendering time when renderTime is 0.
-      if (entry.identifier === 'foobar')
-        console.log("My image took " + entry.renderTime + " to render!");
+      if (entry.identifier === 'foobar') {
+        if (entry.renderTime)
+          console.log("My image took " + entry.renderTime + " to render!");
+        else
+          console.log("Rendering time not available. Image took " + entry.loadTime + " to load!");
+      }
    });
 });
 observer.observe({entryTypes: ['element']});
