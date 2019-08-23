@@ -125,6 +125,7 @@ Element Timing involves the following new interfaces:
 ------------------------------------------------------------------------
 
 <pre class="idl">
+[Exposed=Window]
 interface PerformanceElementTiming : PerformanceEntry {
     readonly attribute DOMHighResTimeStamp renderTime;
     readonly attribute DOMHighResTimeStamp loadTime;
