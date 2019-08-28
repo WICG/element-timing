@@ -1215,7 +1215,7 @@ Possible extra rowspan handling
   <link href="https://www.w3.org/StyleSheets/TR/2016/W3C-ED" rel="stylesheet">
   <meta content="Bikeshed version 08c4b0e94d147852f66673459784d3429bb3bda1" name="generator">
   <link href="https://wicg.github.io/element-timing" rel="canonical">
-  <meta content="1b866a16b1a4550dcb3cbca2a44c4e7ad1c1430c" name="document-revision">
+  <meta content="1611e47fbee4d2c08aca06fc3a98ab515ed8cd24" name="document-revision">
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -1473,7 +1473,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">Element Timing API</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2019-08-23">23 August 2019</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2019-08-28">28 August 2019</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1811,10 +1811,16 @@ This means that a single <a data-link-type="dfn" href="https://drafts.csswg.org/
       <p>For each <var>imagePendingRenderingTriple</var> in <var>doc</var>’s <a data-link-type="dfn" href="#images-pending-rendering" id="ref-for-images-pending-rendering①">images pending rendering</a> list:</p>
       <ol>
        <li data-md>
-        <p>Run the <a data-link-type="dfn" href="#report-image-element-timing" id="ref-for-report-image-element-timing②">report image element timing</a> algorithm passing in <var>imagePendingRenderingTriple</var>, <var>now</var>, and <var>doc</var>.</p>
+        <p>Let <var>imageRequest</var> be the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage#image-request" id="ref-for-image-request⑧">image request</a> of <var>imagePendingRenderingTriple</var>.</p>
+       <li data-md>
+        <p>If <var>imageRequest</var> is fully decoded, then run the following steps:</p>
+        <ol>
+         <li data-md>
+          <p>Run the <a data-link-type="dfn" href="#report-image-element-timing" id="ref-for-report-image-element-timing②">report image element timing</a> algorithm passing in <var>imagePendingRenderingTriple</var>, <var>now</var>, and <var>doc</var>.</p>
+         <li data-md>
+          <p>Remove <var>imagePendingRenderingTriple</var> from <var>doc</var>’s <a data-link-type="dfn" href="#images-pending-rendering" id="ref-for-images-pending-rendering②">images pending rendering</a> list.</p>
+        </ol>
       </ol>
-     <li data-md>
-      <p>Clear <var>doc</var>’s <a data-link-type="dfn" href="#images-pending-rendering" id="ref-for-images-pending-rendering②">images pending rendering</a> list.</p>
      <li data-md>
       <p>For each <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#element" id="ref-for-element②②">Element</a></code> <var>element</var> in <var>doc</var>’s <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-tree-descendant" id="ref-for-concept-tree-descendant①">descendants</a>:</p>
       <ol>
@@ -2241,6 +2247,7 @@ This would unintentionally leak some of the display timing of the image.</p>
    <ul>
     <li><a href="#ref-for-image-request">3.1. Modifications to the DOM specification</a> <a href="#ref-for-image-request①">(2)</a> <a href="#ref-for-image-request②">(3)</a>
     <li><a href="#ref-for-image-request③">3.2. Modifications to the CSS specification</a> <a href="#ref-for-image-request④">(2)</a> <a href="#ref-for-image-request⑤">(3)</a> <a href="#ref-for-image-request⑥">(4)</a> <a href="#ref-for-image-request⑦">(5)</a>
+    <li><a href="#ref-for-image-request⑧">3.7. Element Timing processing</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-the-img-element">
