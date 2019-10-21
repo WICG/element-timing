@@ -1213,9 +1213,9 @@ Possible extra rowspan handling
 	}
 </style>
   <link href="https://www.w3.org/StyleSheets/TR/2016/W3C-ED" rel="stylesheet">
-  <meta content="Bikeshed version 08c4b0e94d147852f66673459784d3429bb3bda1" name="generator">
+  <meta content="Bikeshed version 98212c11613b78977e54b28cc53499f2ee83d388" name="generator">
   <link href="https://wicg.github.io/element-timing" rel="canonical">
-  <meta content="1611e47fbee4d2c08aca06fc3a98ab515ed8cd24" name="document-revision">
+  <meta content="a0d8d097abf329cf10b02267ee5a25fb571da508" name="document-revision">
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -1473,7 +1473,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">Element Timing API</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2019-08-28">28 August 2019</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2019-10-21">21 October 2019</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1732,7 +1732,7 @@ This means that a single <a data-link-type="dfn" href="https://drafts.csswg.org/
      <li data-md>
       <p>If <var>exposedElement</var> is not null, call the <a data-link-type="dfn" href="https://wicg.github.io/largest-contentful-paint/#potentially-add-a-largestcontentfulpaint-entry" id="ref-for-potentially-add-a-largestcontentfulpaint-entry">potentially add a LargestContentfulPaint entry</a> algorithm with <var>intersectionRect</var>, <var>imageRequest</var>, <var>renderTime</var>, <var>loadTime</var>, <var>element</var>, and <var>document</var>.</p>
      <li data-md>
-      <p>If <var>element</var>’s "<code class="highlight">elementtiming</code>" content attribute is absent or if its value is the empty string, then abort these steps.</p>
+      <p>If <var>element</var>’s "<code class="highlight">elementtiming</code>" content attribute is absent, then abort these steps.</p>
      <li data-md>
       <p>Create and initialize a <code class="idl"><a data-link-type="idl" href="#performanceelementtiming" id="ref-for-performanceelementtiming⑤">PerformanceElementTiming</a></code> object <var>entry</var>.</p>
       <ol>
@@ -1778,7 +1778,7 @@ This means that a single <a data-link-type="dfn" href="https://drafts.csswg.org/
      <li data-md>
       <p>If <var>exposedElement</var> is not null, call the <a data-link-type="dfn" href="https://wicg.github.io/largest-contentful-paint/#potentially-add-a-largestcontentfulpaint-entry" id="ref-for-potentially-add-a-largestcontentfulpaint-entry①">potentially add a LargestContentfulPaint entry</a> algorithm with <var>intersectionRect</var>, null, <var>renderTime</var>, 0, <var>exposedElement</var>, and <var>document</var>.</p>
      <li data-md>
-      <p>If <var>element</var>’s "<code class="highlight">elementtiming</code>" content attribute is absent or if its value is the empty string, then abort these steps.</p>
+      <p>If <var>element</var>’s "<code class="highlight">elementtiming</code>" content attribute is absent, then abort these steps.</p>
      <li data-md>
       <p>Create and initialize a <code class="idl"><a data-link-type="idl" href="#performanceelementtiming" id="ref-for-performanceelementtiming⑥">PerformanceElementTiming</a></code> object <var>entry</var>.</p>
       <ol>
@@ -2602,7 +2602,7 @@ This would unintentionally leak some of the display timing of the image.</p>
    <dt id="biblio-largest-contentful-paint">[LARGEST-CONTENTFUL-PAINT]
    <dd><a href="https://wicg.github.io/largest-contentful-paint/">Largest Contentful Paint</a>. cg-draft. URL: <a href="https://wicg.github.io/largest-contentful-paint/">https://wicg.github.io/largest-contentful-paint/</a>
    <dt id="biblio-performance-timeline-2">[PERFORMANCE-TIMELINE-2]
-   <dd>Ilya Grigorik. <a href="https://www.w3.org/TR/performance-timeline-2/">Performance Timeline Level 2</a>. 26 June 2019. WD. URL: <a href="https://www.w3.org/TR/performance-timeline-2/">https://www.w3.org/TR/performance-timeline-2/</a>
+   <dd>Ilya Grigorik. <a href="https://www.w3.org/TR/performance-timeline-2/">Performance Timeline Level 2</a>. 17 September 2019. WD. URL: <a href="https://www.w3.org/TR/performance-timeline-2/">https://www.w3.org/TR/performance-timeline-2/</a>
    <dt id="biblio-resource-timing-1">[RESOURCE-TIMING-1]
    <dd>Arvind Jain; et al. <a href="https://www.w3.org/TR/resource-timing-1/">Resource Timing Level 1</a>. 30 March 2017. CR. URL: <a href="https://www.w3.org/TR/resource-timing-1/">https://www.w3.org/TR/resource-timing-1/</a>
    <dt id="biblio-rfc2119">[RFC2119]
