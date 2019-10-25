@@ -37,7 +37,7 @@ However, to enable a more holistic picture, the rest of the information is expos
 
 ### Text considerations
 
-We say that a text node <a name="belong">**belongs to**</a> its [containing block](https://www.w3.org/TR/CSS2/visudet.html#containing-block-details).
+We say that a text node <a name="belong">**belongs to**</a> the closest block-level [Element](https://dom.spec.whatwg.org/#element) ancestor of the node.
 This means that an element could have 0 or many associated text nodes with it.
 
 We say that an element is *text-painted* if at least one text node [belongs to](#belong) and has been painted at least once.
