@@ -1,6 +1,6 @@
 <pre class=metadata>
 Title: Element Timing API
-Status: ED
+Status: CG-DRAFT
 Shortname: element-timing
 Group: WICG
 Level: 1
