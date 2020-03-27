@@ -300,7 +300,7 @@ Report text Element Timing {#sec-report-text}
     1. Let |exposedElement| be the result of running [=get an element=] with |element| and |document| as input.
     1. If |exposedElement| is not null, call the <a>potentially add a LargestContentfulPaint entry</a> algorithm with |intersectionRect|, null, |renderTime|, 0, |exposedElement|, and |document|.
     1. If |element|'s "<code>elementtiming</code>" content attribute is absent, then abort these steps.
-    1. Create and initialize a {{PerformanceElementTiming}} object |entry|.
+    1. Create and initialize a {{PerformanceElementTiming}} object |entry| with |document|'s [=relevant realm=].
         1. Initialize |entry|'s <a>element</a> to |element|.
         1. Initialize |entry|'s {{PerformanceEntry/name}} to the {{DOMString}} "text-paint".
         1. Initialize |entry|'s {{renderTime}} to |renderTime|.
