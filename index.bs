@@ -259,7 +259,7 @@ To <dfn>process an image that finished loading</dfn> given |element| and |imageR
     1. Let |imageRequest| be |element|'s <a>associated image request</a>.
     1. Let |root| be |element|'s <a for="tree">root</a>.
     1. If |root| is not a {{Document}}, return.
-    1. Let |now| be the <a>current high resolution time</a>.
+    1. Let |now| be the <a>current high resolution time</a> given |element|'s <a>relevant global object</a>.
     1. If |imageRequest| is not a data URL [[RFC2397]] and if the <a>timing allow check</a> fails for |imageRequest|'s resource, run the <a>report image element timing</a> algorithm, passing in the triple (|element|, |imageRequest|, |now|), 0, and |root| as inputs.
     1. Otherwise, add the triple (|element|, |imageRequest|, |now|) to |root|'s <a>images pending rendering</a>.
 </div>
