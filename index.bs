@@ -212,7 +212,7 @@ This request can be the <a>associated image request</a> of an {{Element}}.
 
 Note: The current language is vague since it does not point to specific algorithms.
 This can be made more rigorous when the corresponding processing models have a more unified processing model.
-For instance, the only {{HTMLImageElement}} uses the [=list of available images=].
+For instance, only the {{HTMLImageElement}} uses the [=list of available images=].
 
 Each {{Element}} has a <dfn>set of owned text nodes</dfn>, which is initially an empty <a>ordered set</a>.
 
