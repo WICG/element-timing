@@ -227,14 +227,16 @@ Modifications to the CSS specification {#sec-modifications-CSS}
 When the user agent is executing the <a>painting order</a>, it must populate the <a>set of owned text nodes</a> of the painted {{Element|Elements}} so that the following is true:
 
 <div algorithm="text aggregation">
-    * If a {{Text}} object |text| will not be painted due to the font face being in its <a>font block period</a>, then it is not <a for="set">appended</a> to the <a>set of owned text nodes</a> of any {{Element}}.
-    * Otherwise, |text| is <a for="set">appended</a> to the <a>set of owned text nodes</a> of the {{Element}} which determines the <a>containing block</a> of |text|.
+    * If a {{Text}} object |text| will not be painted due to the font face being in its <a>font block period</a>, then it is not <a for="set">appended</a> to the <a>set of owned text nodes</a> of an {{Element}}.
+    * Let |element| be the {{Element}} which determines the <a>containing block</a> of |text|.
+    * If |element|'s "<code>elementtiming</code>" content attribute is absent, then there is no need to populate its <a>set of owned text nodes</a>.
+    * Otherwise, |text| is <a for="set">appended</a> to the <a>set of owned text nodes</a> of |element|.
 </div>
 
-NOTE: A user agent might want to use a stack to efficiently compute the <a>set of owned text nodes</a> while implementing the <a>painting order</a>.
+NOTE: A user agent might want to use a stack to efficiently compute the <a>set of owned text nodes</a> while implementing the <a>painting order</a>. The <a>set of owned text nodes</a> is only populated for {{Element|Elements}} whose "<code>elementtiming</code>" content attribute is present since it is otherwise unused.
 
 Every {{Element}} has a list of <dfn>associated background image requests</dfn> which is initially an empty array.
-When the processing model for the {{Element}} <em>element</em>'s style requires a new image resource (to be displayed as background image), the <a>image request</a> created by the new resource is appended to <em>element</em>'s <a>associated background image requests</a>.
+When the processing model for the {{Element}} <em>element</em>'s style requires a new image resource (to be displayed as background image), the <a>image request</a> created by the new resource is appended to <em>element</em>'s <a>associated background image requests</a> if the <em>element</em>'s "<code>elementtiming</code>" content attribute is not absent.
 Whenever an <a>image request</a> in an {{Element}} <em>element</em>'s <a>associated background image requests</a> becomes <a>completely available</a>, run the algorithm to <a>process an image that finished loading</a> with <em>element</em> and <a>image request</a> as inputs.
 
 NOTE: we assume that there is one <a>image request</a> for each {{Element}} that a <a>background-image</a> property affects and for each URL that the <a>background-image</a> property specifies.
@@ -255,7 +257,7 @@ Process image that finished loading {#sec-process-loaded-image}
 
 <div algorithm="image element loaded">
 To <dfn>process an image that finished loading</dfn> given |element| and |imageRequest| as inputs:
-    1. Let |element| be the input {{Element}}.
+    1. If |element|'s "<code>elementtiming</code>" content attribute is absent, return.
     1. Let |imageRequest| be |element|'s <a>associated image request</a>.
     1. Let |root| be |element|'s <a for="tree">root</a>.
     1. If |root| is not a {{Document}}, return.
@@ -324,6 +326,7 @@ Element Timing processing {#sec-element-processing}
             1. Run the <a>report image element timing</a> algorithm passing in |imagePendingRenderingTriple|, |now|, and |doc|.
             1. Remove |imagePendingRenderingTriple| from |doc|'s <a>images pending rendering</a> list.
     1. For each {{Element}} |element| in |doc|'s <a>descendants</a>:
+        1. If |element|'s "<code>elementtiming</code>" content attribute is absent, continue.
         1. If |element| is contained in |doc|'s <a>set of elements with rendered text</a>, continue.
         1. If |element|'s <a>set of owned text nodes</a> is empty, continue.
         1. <a for="set">Append</a> |element| to |doc|'s <a>set of elements with rendered text</a>.
