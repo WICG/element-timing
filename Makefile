@@ -18,7 +18,7 @@ index.html: index.bs
 
 remote: index.html
 
-ci: spec.bs
+ci: index.bs
 	mkdir -p out
 	make remote
 	mv index.html out/index.html
