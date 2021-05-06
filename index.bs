@@ -152,7 +152,7 @@ The {{PerformanceEntry/entryType}} attribute's getter must return the {{DOMStrin
 
 The {{PerformanceEntry/name}} attribute's getter must return the value it was initialized to.
 
-The {{PerformanceEntry/startTime}} attribute's getter must return the value of the <a>context object</a>'s {{renderTime}} if it is not 0, and the value of the <a>context object</a>'s {{loadTime}} otherwise.
+The {{PerformanceEntry/startTime}} attribute's getter must return the value of <a>this</a>'s {{renderTime}} if it is not 0, and the value of <a>this</a>'s {{loadTime}} otherwise.
 
 The {{PerformanceEntry/duration}} attribute's getter must return 0.
 
@@ -170,7 +170,7 @@ The {{PerformanceElementTiming/naturalHeight}} attribute must return the value i
 
 The {{PerformanceElementTiming/id}} attribute's getter must return the value it was initialized to.
 
-The {{PerformanceElementTiming/element}} attribute's getter must run the [=get an element=] algorithm with <a>context object</a>'s <a>element</a> and null as inputs.
+The {{PerformanceElementTiming/element}} attribute's getter must run the [=get an element=] algorithm <a>this</a>'s <a>element</a> and null as inputs.
 
 Note: This means that an element that is no longer <a>descendant</a> of the {{Document}} will no longer be returned by {{PerformanceElementTiming/element}}'s attribute getter.
 
@@ -336,7 +336,7 @@ Get an element algorithm {#sec-get-an-element}
 <div algorithm="PerformanceElementTiming element">
 When asked to run the <dfn>get an element</dfn> algorithm with {{Element}} |element| and {{Document}} |document| as inputs, run these steps:
     1. If |element| is not <a>connected</a>, return <code>null</code>.
-    1. Let |settings| be the <a>context object</a>'s <a>relevant settings object</a>.
+    1. Let |settings| be <a>this</a>'s <a>relevant settings object</a>.
     1. if |document| is null, let |document| be |settings|'s <a>responsible document</a>.
     1. If |element|'s <a for="tree">root</a> is not equal to |document| or if |document| is not [=fully active=], return <code>null</code>.
     1. Return |element|.
