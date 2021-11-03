@@ -176,9 +176,10 @@ Note: This means that an element that is no longer <a>descendant</a> of the {{Do
 
 The {{PerformanceElementTiming/url}} attribute's getter must perform the following steps:
 <div algorithm="PerformanceElementTiming url">
-    1. Let <var>url</var> be <a>request</a>'s <a>resolved URL</a>
-    1. If <var>url</var>'s <a spec=url>scheme</a> is "data:", trim <var>url</var> to its first 100 characters.
-    1. Return <var>url</var>.
+    1. Let |url| be <a>request</a>'s <a>resolved URL</a>.
+    1. Let |urlString| be the result of <a lt="URL serializer">serializing</a> |url|.
+    1. If |url|'s <a spec=url>scheme</a> is "data:", trim |urlString| to its first 100 characters.
+    1. Return |urlString|.
 </div>
 
 Note: The URL is trimmed for data URLs to avoid excessive memory in the entry.
