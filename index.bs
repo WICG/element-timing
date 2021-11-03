@@ -178,7 +178,7 @@ The {{PerformanceElementTiming/url}} attribute's getter must perform the followi
     1. If <a>this</a>'s <a>request</a> is null, return the empty string.
     1. Let |urlString| be <a>this</a>'s <a>request</a>'s <a>current URL</a>.
     1. Let |url| be the result of <a lt="URL parser">parsing</a> |urlString|.
-    1. If |url|'s <a spec=url>scheme</a> is "data", trim |urlString| to its first 100 characters.
+    1. If |url|'s <a spec=url>scheme</a> is "`data`", trim |urlString| to its first 100 characters.
     1. Return |urlString|.
 </div>
 
