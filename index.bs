@@ -36,7 +36,6 @@ urlPrefix: https://w3c.github.io/IntersectionObserver; spec: INTERSECTION-OBSERV
 urlPrefix: https://w3c.github.io/paint-timing/; spec: PAINT-TIMING;
     type: dfn; url: #first-paint; text: first paint;
 urlPrefix: https://html.spec.whatwg.org/multipage; spec: HTML;
-    type: dfn; url: #image-request; text: image request;
     type: dfn; url: /images.html#img-all; text: completely available;
     type: dfn; url: images.html#list-of-available-images; text: list of available images;
     type: attribute; for: img;
@@ -142,7 +141,7 @@ interface PerformanceElementTiming : PerformanceEntry {
 A {{PerformanceElementTiming}} object reports timing information about one associated element.
 
 Each {{PerformanceElementTiming}} object has these associated concepts, all of which are initially set to <code>null</code>:
-* A <dfn>request</dfn> containing the image request (if the entry is for image content).
+* A <dfn>request</dfn> containing the <a>image request</a> (if the entry is for image content).
 * An <dfn>element</dfn> containing the associated {{Element}}.
 
 The associated concepts and some attributes for {{PerformanceElementTiming}} are specified in the processing model in [[#sec-report-image-element]] and [[#sec-report-text]].
@@ -176,7 +175,7 @@ Note: This means that an element that is no longer <a>descendant</a> of the {{Do
 The {{PerformanceElementTiming/url}} attribute's getter must perform the following steps:
 <div algorithm="PerformanceElementTiming url">
     1. If <a>this</a>'s <a>request</a> is null, return the empty string.
-    1. Let |urlString| be <a>this</a>'s <a>request</a>'s <a>current URL</a>.
+    1. Let |urlString| be <a>this</a>'s <a>request</a>'s <a for="image request">current URL</a>.
     1. Let |url| be the result of <a lt="URL parser">parsing</a> |urlString|.
     1. If |url|'s <a spec=url>scheme</a> is "`data`", trim |urlString| to its first 100 characters.
     1. Return |urlString|.
