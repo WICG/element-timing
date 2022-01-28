@@ -21,37 +21,18 @@ urlPrefix: https://w3c.github.io/performance-timeline/; spec: PERFORMANCE-TIMELI
         text: entryType; url: #dom-performanceentry-entrytype;
         text: startTime; url: #dom-performanceentry-starttime;
         text: duration; url: #dom-performanceentry-duration;
-    type: dfn; url: #dfn-register-a-performance-entry-type; text: register a performance entry type;
     type: dfn; url: #dfn-queue-a-performanceentry; text: queue the PerformanceEntry;
     type: interface; url: #the-performanceobserver-interface; text: PerformanceObserver;
     type: attribute; for: PerformanceObserver;
         text: supportedEntryTypes; url: #supportedentrytypes-attribute;
-urlPrefix: https://dom.spec.whatwg.org/; spec: DOM;
-    type: attribute; for: Element;
-        text: element id; url: #dom-element-id;
-    type: dfn; url: #connected; text: connected;
 urlPrefix: https://w3c.github.io/IntersectionObserver; spec: INTERSECTION-OBSERVER;
-    type: interface; url: #intersectionobserver; text: IntersectionObserver;
     type: dfn; url: #calculate-intersection-rect-algo; text: intersection rect algorithm;
-urlPrefix: https://w3c.github.io/paint-timing/; spec: PAINT-TIMING;
-    type: dfn; url: #first-paint; text: first paint;
 urlPrefix: https://html.spec.whatwg.org/multipage; spec: HTML;
     type: dfn; url: /images.html#img-all; text: completely available;
-    type: dfn; url: images.html#list-of-available-images; text: list of available images;
-    type: attribute; for: img;
-        text:naturalWidth; url: #dom-img-naturalwidth;
-        text:naturalHeight; url: #dom-img-naturalheight;
 urlPrefix: https://w3c.github.io/resource-timing; spec: RESOURCE-TIMING;
     type: dfn; url: #dfn-timing-allow-check; text: timing allow check;
-    type: interface; url: #sec-performanceresourcetiming; text: PerformanceResourceTiming;
-urlPrefix: https://w3c.github.io/hr-time; spec: HR-TIME;
-    type: dfn; url: #dfn-current-high-resolution-time; text: current high resolution time;
-    type: interface; url: #dom-domhighrestimestamp; text: DOMHighResTimeStamp;
 urlPrefix: https://drafts.csswg.org/css-backgrounds-3; spec: CSS-BACKGROUNDS-3;
     type: dfn; url: #propdef-background-image; text: background-image;
-urlPrefix: https://fetch.spec.whatwg.org; spec: FETCH;
-    type: dfn; url: #concept-request; text: fetch request;
-    type: dfn; url: #concept-request-url; text: request URL;
 urlPrefix: https://drafts.csswg.org/css2/zindex.html; spec: CSS;
     type: dfn; url:#painting-order; text: painting order;
 urlPrefix: https://wicg.github.io/largest-contentful-paint/; spec: LARGEST-CONTENTFUL-PAINT;
@@ -212,7 +193,6 @@ This request can be the <a>associated image request</a> of an {{Element}}.
 
 Note: The current language is vague since it does not point to specific algorithms.
 This can be made more rigorous when the corresponding processing models have a more unified processing model.
-For instance, only the {{HTMLImageElement}} uses the [=list of available images=].
 
 Each {{Element}} has a <dfn>set of owned text nodes</dfn>, which is initially an empty <a>ordered set</a>.
 
@@ -282,7 +262,7 @@ Report image Element Timing {#sec-report-image-element}
         1. Initialize |entry|'s {{loadTime}} to |loadTime|.
         1. Initialize |entry|'s {{intersectionRect}} to |intersectionRect|.
         1. Initialize |entry|'s {{identifier}} to |element|'s "<code>elementtiming</code>" content attribute.
-        1. Initialize |entry|'s {{PerformanceElementTiming/naturalWidth}} and {{PerformanceElementTiming/naturalHeight}} by running the same steps for an <{img}>'s {{img/naturalWidth}} and {{img/naturalHeight}} attribute getters, but using |imageRequest| as the image.
+        1. Initialize |entry|'s {{PerformanceElementTiming/naturalWidth}} and {{PerformanceElementTiming/naturalHeight}} by running the same steps for an <{img}>'s {{HTMLImageElement/naturalWidth}} and {{HTMLImageElement/naturalHeight}} attribute getters, but using |imageRequest| as the image.
         1. Initialize |entry|'s {{id}} to |element|'s "<code>id</code>" content attribute.
     1. <a>Queue the PerformanceEntry</a> |entry|.
 </div>
