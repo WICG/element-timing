@@ -317,7 +317,7 @@ Get an element algorithm {#sec-get-an-element}
 When asked to run the <dfn>get an element</dfn> algorithm with {{Element}} |element| and {{Document}} |document| as inputs, run these steps:
     1. If |element| is not <a>connected</a>, return <code>null</code>.
     1. Let |settings| be <a>this</a>'s <a>relevant settings object</a>.
-    1. if |document| is null, let |document| be |settings|'s <a>responsible document</a>.
+    1. if |document| is null, let |document| be |settings|'s <a>relevant global object</a>'s <a>associated <code>Document</code></a>.
     1. If |element|'s <a for="tree">root</a> is not equal to |document| or if |document| is not [=fully active=], return <code>null</code>.
     1. Return |element|.
 </div>
