@@ -29,14 +29,14 @@ urlPrefix: https://w3c.github.io/IntersectionObserver; spec: INTERSECTION-OBSERV
     type: dfn; url: #calculate-intersection-rect-algo; text: intersection rect algorithm;
 urlPrefix: https://html.spec.whatwg.org/multipage; spec: HTML;
     type: dfn; url: /images.html#img-all; text: completely available;
-urlPrefix: https://w3c.github.io/resource-timing; spec: RESOURCE-TIMING;
-    type: dfn; url: #dfn-timing-allow-check; text: timing allow check;
 urlPrefix: https://drafts.csswg.org/css-backgrounds-3; spec: CSS-BACKGROUNDS-3;
     type: dfn; url: #propdef-background-image; text: background-image;
 urlPrefix: https://drafts.csswg.org/css2/zindex.html; spec: CSS;
     type: dfn; url:#painting-order; text: painting order;
 urlPrefix: https://wicg.github.io/largest-contentful-paint/; spec: LARGEST-CONTENTFUL-PAINT;
     type: dfn; url:#potentially-add-a-largestcontentfulpaint-entry; text: potentially add a LargestContentfulPaint entry;
+urlPrefix: https://fetch.spec.whatwg.org/; spec: FETCH;
+    type: dfn; url:#concept-tao-check; text: timing allow check;
 </pre>
 
 Introduction {#sec-intro}
