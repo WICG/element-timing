@@ -4,7 +4,7 @@
   <title>Element Timing API</title>
   <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
   <link href="https://www.w3.org/StyleSheets/TR/2021/cg-draft" rel="stylesheet">
-  <meta content="Bikeshed version fb1e763a4, updated Tue Mar 1 13:13:50 2022 -0800" name="generator">
+  <meta content="Bikeshed version 63e66730b, updated Tue Oct 25 12:35:05 2022 -0700" name="generator">
   <link href="https://wicg.github.io/element-timing" rel="canonical">
 <style>/* style-autolinks */
 
@@ -268,61 +268,226 @@ a[href].issue-return {
     margin-bottom: 0;
 }</style>
 <style>/* style-mdn-anno */
-
-            @media (max-width: 767px) { .mdn-anno { opacity: .1 } }
-            .mdn-anno { font: 1em sans-serif; padding: 0.3em; position: absolute; z-index: 8; right: 0.3em; background: #EEE; color: black; box-shadow: 0 0 3px #999; overflow: hidden; border-collapse: initial; border-spacing: initial; min-width: 9em; max-width: min-content; white-space: nowrap; word-wrap: normal; hyphens: none}
-            .mdn-anno:not(.wrapped) { opacity: 1}
-            .mdn-anno:hover { z-index: 9 }
-            .mdn-anno.wrapped { min-width: 0 }
-            .mdn-anno.wrapped > :not(button) { display: none; }
-            .mdn-anno > .mdn-anno-btn { cursor: pointer; border: none; color: #000; background: transparent; margin: -8px; float: right; padding: 10px 8px 8px 8px; outline: none; }
-            .mdn-anno > .mdn-anno-btn > .less-than-two-engines-flag { color: red; padding-right: 2px; }
-            .mdn-anno > .mdn-anno-btn > .all-engines-flag { color: green; padding-right: 2px; }
-            .mdn-anno > .mdn-anno-btn > span { color: #fff; background-color: #000; font-weight: normal; font-family: zillaslab, Palatino, "Palatino Linotype", serif; padding: 2px 3px 0px 3px; line-height: 1.3em; vertical-align: top; }
-            .mdn-anno > .feature { margin-top: 20px; }
-            .mdn-anno > .feature:not(:first-of-type) { border-top: 1px solid #999; margin-top: 6px; padding-top: 2px; }
-            .mdn-anno > .feature > .less-than-two-engines-text { color: red }
-            .mdn-anno > .feature > .all-engines-text { color: green }
-            .mdn-anno > .feature > p { font-size: .75em; margin-top: 6px; margin-bottom: 0; }
-            .mdn-anno > .feature > p + p { margin-top: 3px; }
-            .mdn-anno > .feature > .support { display: block; font-size: 0.6em; margin: 0; padding: 0; margin-top: 2px }
-            .mdn-anno > .feature > .support + div { padding-top: 0.5em; }
-            .mdn-anno > .feature > .support > hr { display: block; border: none; border-top: 1px dotted #999; padding: 3px 0px 0px 0px; margin: 2px 3px 0px 3px; }
-            .mdn-anno > .feature > .support > hr::before { content: ""; }
-            .mdn-anno > .feature > .support > span { padding: 0.2em 0; display: block; display: table; }
-            .mdn-anno > .feature > .support > span.no { color: #CCCCCC; filter: grayscale(100%); }
-            .mdn-anno > .feature > .support > span.no::before { opacity: 0.5; }
-            .mdn-anno > .feature > .support > span:first-of-type { padding-top: 0.5em; }
-            .mdn-anno > .feature > .support > span > span { padding: 0 0.5em; display: table-cell; }
-            .mdn-anno > .feature > .support > span > span:first-child { width: 100%; }
-            .mdn-anno > .feature > .support > span > span:last-child { width: 100%; white-space: pre; padding: 0; }
-            .mdn-anno > .feature > .support > span::before { content: ' '; display: table-cell; min-width: 1.5em; height: 1.5em; background: no-repeat center center; background-size: contain; text-align: right; font-size: 0.75em; font-weight: bold; }
-            .mdn-anno > .feature > .support > .chrome_android::before { background-image: url(https://resources.whatwg.org/browser-logos/chrome.svg); }
-            .mdn-anno > .feature > .support > .firefox_android::before { background-image: url(https://resources.whatwg.org/browser-logos/firefox.png); }
-            .mdn-anno > .feature > .support > .chrome::before { background-image: url(https://resources.whatwg.org/browser-logos/chrome.svg); }
-            .mdn-anno > .feature > .support > .edge_blink::before { background-image: url(https://resources.whatwg.org/browser-logos/edge.svg); }
-            .mdn-anno > .feature > .support > .edge::before { background-image: url(https://resources.whatwg.org/browser-logos/edge_legacy.svg); }
-            .mdn-anno > .feature > .support > .firefox::before { background-image: url(https://resources.whatwg.org/browser-logos/firefox.png); }
-            .mdn-anno > .feature > .support > .ie::before { background-image: url(https://resources.whatwg.org/browser-logos/ie.png); }
-            .mdn-anno > .feature > .support > .safari_ios::before { background-image: url(https://resources.whatwg.org/browser-logos/safari-ios.svg); }
-            .mdn-anno > .feature > .support > .nodejs::before { background-image: url(https://nodejs.org/static/images/favicons/favicon.ico); }
-            .mdn-anno > .feature > .support > .opera_android::before { background-image: url(https://resources.whatwg.org/browser-logos/opera.svg); }
-            .mdn-anno > .feature > .support > .opera::before { background-image: url(https://resources.whatwg.org/browser-logos/opera.svg); }
-            .mdn-anno > .feature > .support > .safari::before { background-image: url(https://resources.whatwg.org/browser-logos/safari.png); }
-            .mdn-anno > .feature > .support > .samsunginternet_android::before { background-image: url(https://resources.whatwg.org/browser-logos/samsung.svg); }
-            .mdn-anno > .feature > .support > .webview_android::before { background-image: url(https://resources.whatwg.org/browser-logos/android-webview.png); }
-            .name-slug-mismatch { color: red }
-            .caniuse-status:hover { z-index: 9; }
-
-            /* dt, li, .issue, .note, and .example are "position: relative", so to put annotation at right margin, must move to right of containing block */
-            .h-entry:not(.status-LS) dt > .mdn-anno, .h-entry:not(.status-LS) li > .mdn-anno, .h-entry:not(.status-LS) .issue > .mdn-anno, .h-entry:not(.status-LS) .note > .mdn-anno, .h-entry:not(.status-LS) .example > .mdn-anno { right: -6.7em; }
-            .h-entry p + .mdn-anno { margin-top: 0; }
-            h2 + .mdn-anno.after { margin: -48px 0 0 0; }
-            h3 + .mdn-anno.after { margin: -46px 0 0 0; }
-            h4 + .mdn-anno.after { margin: -42px 0 0 0; }
-            h5 + .mdn-anno.after { margin: -40px 0 0 0; }
-            h6 + .mdn-anno.after { margin: -40px 0 0 0; }
-            </style>
+@media (max-width: 767px) {
+	.mdn-anno {
+		opacity: .1;
+	}
+}
+:root {
+	--mdn-bg: #EEE;
+	--mdn-shadow: #999;
+	--mdn-nosupport-text: #ccc;
+}
+.mdn-anno {
+	font: 1em sans-serif;
+	padding: 0.3em;
+	position: absolute;
+	z-index: 8;
+	right: 0.3em;
+	background: var(--mdn-bg, #EEE);
+	color: var(--text, black);
+	box-shadow: 0 0 3px var(--mdn-shadow, #999);
+	overflow: hidden;
+	border-collapse: initial;
+	border-spacing: initial;
+	min-width: 9em;
+	max-width: min-content;
+	white-space: nowrap;
+	word-wrap: normal;
+	hyphens: none;
+	border-radius: .25em;
+}
+.mdn-anno:not(.wrapped) {
+	opacity: 1;
+	z-index: 9;
+}
+.mdn-anno.wrapped {
+	min-width: 0;
+}
+.mdn-anno.wrapped > :not(button) {
+	display: none;
+}
+.mdn-anno:hover {
+	outline: var(--text, black) 1px solid;
+}
+.mdn-anno > .mdn-anno-btn {
+	cursor: pointer;
+	border: none;
+	color: #000;
+	background: transparent;
+	margin: -8px;
+	float: right;
+	padding: 10px 8px 8px 8px;
+	outline: none;
+}
+.mdn-anno > .mdn-anno-btn > .less-than-two-engines-flag {
+	color: red;
+	padding-right: 2px;
+}
+.mdn-anno > .mdn-anno-btn > .all-engines-flag {
+	color: green;
+	padding-right: 2px;
+}
+.mdn-anno > .mdn-anno-btn > span {
+	color: #fff;
+	background-color: #000;
+	font-weight: normal;
+	font-family: zillaslab, Palatino, "Palatino Linotype", serif;
+	padding: 2px 3px 0px 3px;
+	line-height: 1.3em;
+	vertical-align: top;
+}
+.mdn-anno > .feature {
+	margin-top: 20px;
+}
+.mdn-anno > .feature:not(:first-of-type) {
+	border-top: 1px solid #999;
+	margin-top: 6px;
+	padding-top: 2px;
+}
+.mdn-anno > .feature > .less-than-two-engines-text {
+	color: red;
+}
+.mdn-anno > .feature > .all-engines-text {
+	color: green;
+}
+.mdn-anno > .feature > p {
+	font-size: .75em;
+	margin-top: 6px;
+	margin-bottom: 0;
+}
+.mdn-anno > .feature > p + p {
+	margin-top: 3px;
+}
+.mdn-anno > .feature > .support {
+	display: block;
+	font-size: 0.6em;
+	margin: 0;
+	padding: 0;
+	margin-top: 2px;
+}
+.mdn-anno > .feature > .support + div {
+	padding-top: 0.5em;
+}
+.mdn-anno > .feature > .support > hr {
+	display: block;
+	border: none;
+	border-top: 1px dotted #999;
+	padding: 3px 0px 0px 0px;
+	margin: 2px 3px 0px 3px;
+}
+.mdn-anno > .feature > .support > hr::before {
+	content: "";
+}
+.mdn-anno > .feature > .support > span {
+	padding: 0.2em 0;
+	display: block;
+	display: table;
+}
+.mdn-anno > .feature > .support > span.no {
+	color: var(--mdn-nosupport-text);
+	filter: grayscale(100%);
+}
+.mdn-anno > .feature > .support > span.no::before {
+	opacity: 0.5;
+}
+.mdn-anno > .feature > .support > span:first-of-type {
+	padding-top: 0.5em;
+}
+.mdn-anno > .feature > .support > span > span {
+	padding: 0 0.5em;
+	display: table-cell;
+}
+.mdn-anno > .feature > .support > span > span:first-child {
+	width: 100%;
+}
+.mdn-anno > .feature > .support > span > span:last-child {
+	width: 100%;
+	white-space: pre;
+	padding: 0;
+}
+.mdn-anno > .feature > .support > span::before {
+	content: ' ';
+	display: table-cell;
+	min-width: 1.5em;
+	height: 1.5em;
+	background: no-repeat center center;
+	background-size: contain;
+	text-align: right;
+	font-size: 0.75em;
+	font-weight: bold;
+}
+.mdn-anno > .feature > .support > .chrome_android::before {
+	background-image: url(https://resources.whatwg.org/browser-logos/chrome.svg);
+}
+.mdn-anno > .feature > .support > .firefox_android::before {
+	background-image: url(https://resources.whatwg.org/browser-logos/firefox.png);
+}
+.mdn-anno > .feature > .support > .chrome::before {
+	background-image: url(https://resources.whatwg.org/browser-logos/chrome.svg);
+}
+.mdn-anno > .feature > .support > .edge_blink::before {
+	background-image: url(https://resources.whatwg.org/browser-logos/edge.svg);
+}
+.mdn-anno > .feature > .support > .edge::before {
+	background-image: url(https://resources.whatwg.org/browser-logos/edge_legacy.svg);
+}
+.mdn-anno > .feature > .support > .firefox::before {
+	background-image: url(https://resources.whatwg.org/browser-logos/firefox.png);
+}
+.mdn-anno > .feature > .support > .ie::before {
+	background-image: url(https://resources.whatwg.org/browser-logos/ie.png);
+}
+.mdn-anno > .feature > .support > .safari_ios::before {
+	background-image: url(https://resources.whatwg.org/browser-logos/safari-ios.svg);
+}
+.mdn-anno > .feature > .support > .nodejs::before {
+	background-image: url(https://nodejs.org/static/images/favicons/favicon.ico);
+}
+.mdn-anno > .feature > .support > .opera_android::before {
+	background-image: url(https://resources.whatwg.org/browser-logos/opera.svg);
+}
+.mdn-anno > .feature > .support > .opera::before {
+	background-image: url(https://resources.whatwg.org/browser-logos/opera.svg);
+}
+.mdn-anno > .feature > .support > .safari::before {
+	background-image: url(https://resources.whatwg.org/browser-logos/safari.png);
+}
+.mdn-anno > .feature > .support > .samsunginternet_android::before {
+	background-image: url(https://resources.whatwg.org/browser-logos/samsung.svg);
+}
+.mdn-anno > .feature > .support > .webview_android::before {
+	background-image: url(https://resources.whatwg.org/browser-logos/android-webview.png);
+}
+.name-slug-mismatch {
+	color: red;
+}
+.caniuse-status:hover {
+	z-index: 9;
+}
+/* dt, li, .issue, .note, and .example are "position: relative", so to put annotation at right margin, must move to right of containing block */;
+.h-entry:not(.status-LS) dt > .mdn-anno, .h-entry:not(.status-LS) li > .mdn-anno, .h-entry:not(.status-LS) .issue > .mdn-anno, .h-entry:not(.status-LS) .note > .mdn-anno, .h-entry:not(.status-LS) .example > .mdn-anno {
+	right: -6.7em;
+}
+.h-entry p + .mdn-anno {
+	margin-top: 0;
+}
+ h2 + .mdn-anno.after {
+	margin: -48px 0 0 0;
+}
+ h3 + .mdn-anno.after {
+	margin: -46px 0 0 0;
+}
+ h4 + .mdn-anno.after {
+	margin: -42px 0 0 0;
+}
+ h5 + .mdn-anno.after {
+	margin: -40px 0 0 0;
+}
+ h6 + .mdn-anno.after {
+	margin: -40px 0 0 0;
+}
+</style>
 <style>/* style-selflinks */
 
 :root {
@@ -349,6 +514,14 @@ a.self-link:hover {
 }
 .heading > a.self-link {
     font-size: 83%;
+}
+.example > a.self-link,
+.note > a.self-link,
+.issue > a.self-link {
+    /* These blocks are overflow:auto, so positioning outside
+       doesn't work. */
+    left: auto;
+    right: 0;
 }
 li > a.self-link {
     left: calc(-1 * (3.5rem - 26px) - 2em);
@@ -575,6 +748,12 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
         --dfnpanel-bg: #222;
         --dfnpanel-text: var(--text);
     }
+}@media (prefers-color-scheme: dark) {
+	:root {
+		--mdn-bg: #222;
+		--mdn-shadow: #444;
+		--mdn-nosupport-text: #666;
+	}
 }
 @media (prefers-color-scheme: dark) {
     .highlight:not(.idl) { background: rgba(255, 255, 255, .05); }
@@ -643,7 +822,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2021/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">Element Timing API</h1>
-   <p id="w3c-state"><a href="https://www.w3.org/standards/types#CG-DRAFT">Draft Community Group Report</a>, <time class="dt-updated" datetime="2022-03-14">14 March 2022</time></p>
+   <p id="w3c-state"><a href="https://www.w3.org/standards/types#CG-DRAFT">Draft Community Group Report</a>, <time class="dt-updated" datetime="2022-11-22">22 November 2022</time></p>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -790,11 +969,11 @@ For example, developers could monitor the time it takes for a widget to show up 
      <div class="support">
       <span class="firefox no"><span>Firefox</span><span>None</span></span><span class="safari no"><span>Safari</span><span>None</span></span><span class="chrome yes"><span>Chrome</span><span>77+</span></span>
       <hr>
-      <span class="opera yes"><span>Opera</span><span>64+</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
+      <span class="opera no"><span>Opera</span><span>?</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
       <hr>
-      <span class="edge no"><span>Edge (Legacy)</span><span>None</span></span><span class="ie no"><span>IE</span><span>None</span></span>
+      <span class="edge no"><span>Edge (Legacy)</span><span>?</span></span><span class="ie no"><span>IE</span><span>None</span></span>
       <hr>
-      <span class="firefox_android no"><span>Firefox for Android</span><span>None</span></span><span class="safari_ios no"><span>iOS Safari</span><span>None</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>77+</span></span><span class="webview_android yes"><span>Android WebView</span><span>77+</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>12.0+</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>55+</span></span>
+      <span class="firefox_android no"><span>Firefox for Android</span><span>?</span></span><span class="safari_ios no"><span>iOS Safari</span><span>?</span></span><span class="chrome_android no"><span>Chrome for Android</span><span>?</span></span><span class="webview_android no"><span>Android WebView</span><span>?</span></span><span class="samsunginternet_android no"><span>Samsung Internet</span><span>?</span></span><span class="opera_android no"><span>Opera Mobile</span><span>?</span></span>
      </div>
     </div>
    </div>
@@ -806,11 +985,11 @@ For example, developers could monitor the time it takes for a widget to show up 
      <div class="support">
       <span class="firefox no"><span>Firefox</span><span>None</span></span><span class="safari no"><span>Safari</span><span>None</span></span><span class="chrome yes"><span>Chrome</span><span>77+</span></span>
       <hr>
-      <span class="opera yes"><span>Opera</span><span>64+</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
+      <span class="opera no"><span>Opera</span><span>?</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
       <hr>
-      <span class="edge no"><span>Edge (Legacy)</span><span>None</span></span><span class="ie no"><span>IE</span><span>None</span></span>
+      <span class="edge no"><span>Edge (Legacy)</span><span>?</span></span><span class="ie no"><span>IE</span><span>None</span></span>
       <hr>
-      <span class="firefox_android no"><span>Firefox for Android</span><span>None</span></span><span class="safari_ios no"><span>iOS Safari</span><span>None</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>77+</span></span><span class="webview_android yes"><span>Android WebView</span><span>77+</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>12.0+</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>55+</span></span>
+      <span class="firefox_android no"><span>Firefox for Android</span><span>?</span></span><span class="safari_ios no"><span>iOS Safari</span><span>?</span></span><span class="chrome_android no"><span>Chrome for Android</span><span>?</span></span><span class="webview_android no"><span>Android WebView</span><span>?</span></span><span class="samsunginternet_android no"><span>Samsung Internet</span><span>?</span></span><span class="opera_android no"><span>Opera Mobile</span><span>?</span></span>
      </div>
     </div>
    </div>
@@ -849,11 +1028,11 @@ For example, developers could monitor the time it takes for a widget to show up 
      <div class="support">
       <span class="firefox no"><span>Firefox</span><span>None</span></span><span class="safari no"><span>Safari</span><span>None</span></span><span class="chrome yes"><span>Chrome</span><span>77+</span></span>
       <hr>
-      <span class="opera yes"><span>Opera</span><span>64+</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
+      <span class="opera no"><span>Opera</span><span>?</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
       <hr>
-      <span class="edge no"><span>Edge (Legacy)</span><span>None</span></span><span class="ie no"><span>IE</span><span>None</span></span>
+      <span class="edge no"><span>Edge (Legacy)</span><span>?</span></span><span class="ie no"><span>IE</span><span>None</span></span>
       <hr>
-      <span class="firefox_android no"><span>Firefox for Android</span><span>None</span></span><span class="safari_ios no"><span>iOS Safari</span><span>None</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>77+</span></span><span class="webview_android yes"><span>Android WebView</span><span>77+</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>12.0+</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>55+</span></span>
+      <span class="firefox_android no"><span>Firefox for Android</span><span>?</span></span><span class="safari_ios no"><span>iOS Safari</span><span>?</span></span><span class="chrome_android no"><span>Chrome for Android</span><span>?</span></span><span class="webview_android no"><span>Android WebView</span><span>?</span></span><span class="samsunginternet_android no"><span>Samsung Internet</span><span>?</span></span><span class="opera_android no"><span>Opera Mobile</span><span>?</span></span>
      </div>
     </div>
    </div>
@@ -866,11 +1045,11 @@ For example, developers could monitor the time it takes for a widget to show up 
      <div class="support">
       <span class="firefox no"><span>Firefox</span><span>None</span></span><span class="safari no"><span>Safari</span><span>None</span></span><span class="chrome yes"><span>Chrome</span><span>77+</span></span>
       <hr>
-      <span class="opera yes"><span>Opera</span><span>64+</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
+      <span class="opera no"><span>Opera</span><span>?</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
       <hr>
-      <span class="edge no"><span>Edge (Legacy)</span><span>None</span></span><span class="ie no"><span>IE</span><span>None</span></span>
+      <span class="edge no"><span>Edge (Legacy)</span><span>?</span></span><span class="ie no"><span>IE</span><span>None</span></span>
       <hr>
-      <span class="firefox_android no"><span>Firefox for Android</span><span>None</span></span><span class="safari_ios no"><span>iOS Safari</span><span>None</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>77+</span></span><span class="webview_android yes"><span>Android WebView</span><span>77+</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>12.0+</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>55+</span></span>
+      <span class="firefox_android no"><span>Firefox for Android</span><span>?</span></span><span class="safari_ios no"><span>iOS Safari</span><span>?</span></span><span class="chrome_android no"><span>Chrome for Android</span><span>?</span></span><span class="webview_android no"><span>Android WebView</span><span>?</span></span><span class="samsunginternet_android no"><span>Samsung Internet</span><span>?</span></span><span class="opera_android no"><span>Opera Mobile</span><span>?</span></span>
      </div>
     </div>
    </div>
@@ -883,11 +1062,11 @@ For example, developers could monitor the time it takes for a widget to show up 
      <div class="support">
       <span class="firefox no"><span>Firefox</span><span>None</span></span><span class="safari no"><span>Safari</span><span>None</span></span><span class="chrome yes"><span>Chrome</span><span>77+</span></span>
       <hr>
-      <span class="opera yes"><span>Opera</span><span>64+</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
+      <span class="opera no"><span>Opera</span><span>?</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
       <hr>
-      <span class="edge no"><span>Edge (Legacy)</span><span>None</span></span><span class="ie no"><span>IE</span><span>None</span></span>
+      <span class="edge no"><span>Edge (Legacy)</span><span>?</span></span><span class="ie no"><span>IE</span><span>None</span></span>
       <hr>
-      <span class="firefox_android no"><span>Firefox for Android</span><span>None</span></span><span class="safari_ios no"><span>iOS Safari</span><span>None</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>77+</span></span><span class="webview_android yes"><span>Android WebView</span><span>77+</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>12.0+</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>55+</span></span>
+      <span class="firefox_android no"><span>Firefox for Android</span><span>?</span></span><span class="safari_ios no"><span>iOS Safari</span><span>?</span></span><span class="chrome_android no"><span>Chrome for Android</span><span>?</span></span><span class="webview_android no"><span>Android WebView</span><span>?</span></span><span class="samsunginternet_android no"><span>Samsung Internet</span><span>?</span></span><span class="opera_android no"><span>Opera Mobile</span><span>?</span></span>
      </div>
     </div>
    </div>
@@ -900,11 +1079,11 @@ For example, developers could monitor the time it takes for a widget to show up 
      <div class="support">
       <span class="firefox no"><span>Firefox</span><span>None</span></span><span class="safari no"><span>Safari</span><span>None</span></span><span class="chrome yes"><span>Chrome</span><span>77+</span></span>
       <hr>
-      <span class="opera yes"><span>Opera</span><span>64+</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
+      <span class="opera no"><span>Opera</span><span>?</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
       <hr>
-      <span class="edge no"><span>Edge (Legacy)</span><span>None</span></span><span class="ie no"><span>IE</span><span>None</span></span>
+      <span class="edge no"><span>Edge (Legacy)</span><span>?</span></span><span class="ie no"><span>IE</span><span>None</span></span>
       <hr>
-      <span class="firefox_android no"><span>Firefox for Android</span><span>None</span></span><span class="safari_ios no"><span>iOS Safari</span><span>None</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>77+</span></span><span class="webview_android yes"><span>Android WebView</span><span>77+</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>12.0+</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>55+</span></span>
+      <span class="firefox_android no"><span>Firefox for Android</span><span>?</span></span><span class="safari_ios no"><span>iOS Safari</span><span>?</span></span><span class="chrome_android no"><span>Chrome for Android</span><span>?</span></span><span class="webview_android no"><span>Android WebView</span><span>?</span></span><span class="samsunginternet_android no"><span>Samsung Internet</span><span>?</span></span><span class="opera_android no"><span>Opera Mobile</span><span>?</span></span>
      </div>
     </div>
    </div>
@@ -917,11 +1096,11 @@ For example, developers could monitor the time it takes for a widget to show up 
      <div class="support">
       <span class="firefox no"><span>Firefox</span><span>None</span></span><span class="safari no"><span>Safari</span><span>None</span></span><span class="chrome yes"><span>Chrome</span><span>77+</span></span>
       <hr>
-      <span class="opera yes"><span>Opera</span><span>64+</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
+      <span class="opera no"><span>Opera</span><span>?</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
       <hr>
-      <span class="edge no"><span>Edge (Legacy)</span><span>None</span></span><span class="ie no"><span>IE</span><span>None</span></span>
+      <span class="edge no"><span>Edge (Legacy)</span><span>?</span></span><span class="ie no"><span>IE</span><span>None</span></span>
       <hr>
-      <span class="firefox_android no"><span>Firefox for Android</span><span>None</span></span><span class="safari_ios no"><span>iOS Safari</span><span>None</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>77+</span></span><span class="webview_android yes"><span>Android WebView</span><span>77+</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>12.0+</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>55+</span></span>
+      <span class="firefox_android no"><span>Firefox for Android</span><span>?</span></span><span class="safari_ios no"><span>iOS Safari</span><span>?</span></span><span class="chrome_android no"><span>Chrome for Android</span><span>?</span></span><span class="webview_android no"><span>Android WebView</span><span>?</span></span><span class="samsunginternet_android no"><span>Samsung Internet</span><span>?</span></span><span class="opera_android no"><span>Opera Mobile</span><span>?</span></span>
      </div>
     </div>
    </div>
@@ -934,11 +1113,11 @@ For example, developers could monitor the time it takes for a widget to show up 
      <div class="support">
       <span class="firefox no"><span>Firefox</span><span>None</span></span><span class="safari no"><span>Safari</span><span>None</span></span><span class="chrome yes"><span>Chrome</span><span>77+</span></span>
       <hr>
-      <span class="opera yes"><span>Opera</span><span>64+</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
+      <span class="opera no"><span>Opera</span><span>?</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
       <hr>
-      <span class="edge no"><span>Edge (Legacy)</span><span>None</span></span><span class="ie no"><span>IE</span><span>None</span></span>
+      <span class="edge no"><span>Edge (Legacy)</span><span>?</span></span><span class="ie no"><span>IE</span><span>None</span></span>
       <hr>
-      <span class="firefox_android no"><span>Firefox for Android</span><span>None</span></span><span class="safari_ios no"><span>iOS Safari</span><span>None</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>77+</span></span><span class="webview_android yes"><span>Android WebView</span><span>77+</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>12.0+</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>55+</span></span>
+      <span class="firefox_android no"><span>Firefox for Android</span><span>?</span></span><span class="safari_ios no"><span>iOS Safari</span><span>?</span></span><span class="chrome_android no"><span>Chrome for Android</span><span>?</span></span><span class="webview_android no"><span>Android WebView</span><span>?</span></span><span class="samsunginternet_android no"><span>Samsung Internet</span><span>?</span></span><span class="opera_android no"><span>Opera Mobile</span><span>?</span></span>
      </div>
     </div>
    </div>
@@ -951,11 +1130,11 @@ For example, developers could monitor the time it takes for a widget to show up 
      <div class="support">
       <span class="firefox no"><span>Firefox</span><span>None</span></span><span class="safari no"><span>Safari</span><span>None</span></span><span class="chrome yes"><span>Chrome</span><span>77+</span></span>
       <hr>
-      <span class="opera yes"><span>Opera</span><span>64+</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
+      <span class="opera no"><span>Opera</span><span>?</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
       <hr>
-      <span class="edge no"><span>Edge (Legacy)</span><span>None</span></span><span class="ie no"><span>IE</span><span>None</span></span>
+      <span class="edge no"><span>Edge (Legacy)</span><span>?</span></span><span class="ie no"><span>IE</span><span>None</span></span>
       <hr>
-      <span class="firefox_android no"><span>Firefox for Android</span><span>None</span></span><span class="safari_ios no"><span>iOS Safari</span><span>None</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>77+</span></span><span class="webview_android yes"><span>Android WebView</span><span>77+</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>12.0+</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>55+</span></span>
+      <span class="firefox_android no"><span>Firefox for Android</span><span>?</span></span><span class="safari_ios no"><span>iOS Safari</span><span>?</span></span><span class="chrome_android no"><span>Chrome for Android</span><span>?</span></span><span class="webview_android no"><span>Android WebView</span><span>?</span></span><span class="samsunginternet_android no"><span>Samsung Internet</span><span>?</span></span><span class="opera_android no"><span>Opera Mobile</span><span>?</span></span>
      </div>
     </div>
    </div>
@@ -968,11 +1147,11 @@ For example, developers could monitor the time it takes for a widget to show up 
      <div class="support">
       <span class="firefox no"><span>Firefox</span><span>None</span></span><span class="safari no"><span>Safari</span><span>None</span></span><span class="chrome yes"><span>Chrome</span><span>77+</span></span>
       <hr>
-      <span class="opera yes"><span>Opera</span><span>64+</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
+      <span class="opera no"><span>Opera</span><span>?</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
       <hr>
-      <span class="edge no"><span>Edge (Legacy)</span><span>None</span></span><span class="ie no"><span>IE</span><span>None</span></span>
+      <span class="edge no"><span>Edge (Legacy)</span><span>?</span></span><span class="ie no"><span>IE</span><span>None</span></span>
       <hr>
-      <span class="firefox_android no"><span>Firefox for Android</span><span>None</span></span><span class="safari_ios no"><span>iOS Safari</span><span>None</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>77+</span></span><span class="webview_android yes"><span>Android WebView</span><span>77+</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>12.0+</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>55+</span></span>
+      <span class="firefox_android no"><span>Firefox for Android</span><span>?</span></span><span class="safari_ios no"><span>iOS Safari</span><span>?</span></span><span class="chrome_android no"><span>Chrome for Android</span><span>?</span></span><span class="webview_android no"><span>Android WebView</span><span>?</span></span><span class="samsunginternet_android no"><span>Samsung Internet</span><span>?</span></span><span class="opera_android no"><span>Opera Mobile</span><span>?</span></span>
      </div>
     </div>
    </div>
@@ -986,11 +1165,11 @@ For example, developers could monitor the time it takes for a widget to show up 
      <div class="support">
       <span class="firefox no"><span>Firefox</span><span>None</span></span><span class="safari no"><span>Safari</span><span>None</span></span><span class="chrome yes"><span>Chrome</span><span>77+</span></span>
       <hr>
-      <span class="opera yes"><span>Opera</span><span>64+</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
+      <span class="opera no"><span>Opera</span><span>?</span></span><span class="edge_blink yes"><span>Edge</span><span>79+</span></span>
       <hr>
-      <span class="edge no"><span>Edge (Legacy)</span><span>None</span></span><span class="ie no"><span>IE</span><span>None</span></span>
+      <span class="edge no"><span>Edge (Legacy)</span><span>?</span></span><span class="ie no"><span>IE</span><span>None</span></span>
       <hr>
-      <span class="firefox_android no"><span>Firefox for Android</span><span>None</span></span><span class="safari_ios no"><span>iOS Safari</span><span>None</span></span><span class="chrome_android yes"><span>Chrome for Android</span><span>77+</span></span><span class="webview_android yes"><span>Android WebView</span><span>77+</span></span><span class="samsunginternet_android yes"><span>Samsung Internet</span><span>12.0+</span></span><span class="opera_android yes"><span>Opera Mobile</span><span>55+</span></span>
+      <span class="firefox_android no"><span>Firefox for Android</span><span>?</span></span><span class="safari_ios no"><span>iOS Safari</span><span>?</span></span><span class="chrome_android no"><span>Chrome for Android</span><span>?</span></span><span class="webview_android no"><span>Android WebView</span><span>?</span></span><span class="samsunginternet_android no"><span>Samsung Internet</span><span>?</span></span><span class="opera_android no"><span>Opera Mobile</span><span>?</span></span>
      </div>
     </div>
    </div>
@@ -1011,7 +1190,7 @@ For example, developers could monitor the time it takes for a widget to show up 
    </div>
    <p class="note" role="note"><span>Note:</span> The URL is trimmed for data URLs to avoid excessive memory in the entry.</p>
    <h2 class="heading settled" data-level="3" id="sec-processing-model"><span class="secno">3. </span><span class="content">Processing model</span><a class="self-link" href="#sec-processing-model"></a></h2>
-   <p class="note" role="note"><span>Note:</span> A user agent implementing the Element Timing API would need to include <code class="highlight"><c- u>"element"</c-></code> in <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/performance-timeline/#supportedentrytypes-attribute" id="ref-for-supportedentrytypes-attribute">supportedEntryTypes</a></code> for <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/window-object.html#window" id="ref-for-window">Window</a></code> contexts.
+   <p class="note" role="note"><span>Note:</span> A user agent implementing the Element Timing API would need to include <code class="highlight"><c- u>"element"</c-></code> in <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/performance-timeline/#supportedentrytypes-attribute" id="ref-for-supportedentrytypes-attribute">supportedEntryTypes</a></code> for <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/nav-history-apis.html#window" id="ref-for-window">Window</a></code> contexts.
 This allows developers to detect support for element timing.</p>
    <h3 class="heading settled" data-level="3.1" id="sec-modifications-DOM"><span class="secno">3.1. </span><span class="content">Modifications to the DOM specification</span><a class="self-link" href="#sec-modifications-DOM"></a></h3>
    <p><em>This section will be removed once the <a data-link-type="biblio" href="#biblio-dom">[DOM]</a> specification has been modified.</em></p>
@@ -1053,7 +1232,7 @@ This means that a single <a data-link-type="dfn" href="https://drafts.csswg.org/
    <p>In the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#update-the-rendering" id="ref-for-update-the-rendering">update the rendering</a> step of the <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#event-loop-processing-model" id="ref-for-event-loop-processing-model">event loop processing model</a>, add the following substep at the end:</p>
    <ol>
     <li data-md>
-     <p>For each <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#fully-active" id="ref-for-fully-active">fully active</a> <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#document" id="ref-for-document③">Document</a></code> in <em>docs</em>, run the <a data-link-type="dfn" href="#element-timing-processing" id="ref-for-element-timing-processing">element timing processing</a> algorithm passing in the <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#document" id="ref-for-document④">Document</a></code> and <em>now</em>.</p>
+     <p>For each <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/document-sequences.html#fully-active" id="ref-for-fully-active">fully active</a> <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#document" id="ref-for-document③">Document</a></code> in <em>docs</em>, run the <a data-link-type="dfn" href="#element-timing-processing" id="ref-for-element-timing-processing">element timing processing</a> algorithm passing in the <code class="idl"><a data-link-type="idl" href="https://dom.spec.whatwg.org/#document" id="ref-for-document④">Document</a></code> and <em>now</em>.</p>
    </ol>
    <h3 class="heading settled" data-level="3.4" id="sec-process-loaded-image"><span class="secno">3.4. </span><span class="content">Process image that finished loading</span><a class="self-link" href="#sec-process-loaded-image"></a></h3>
    <div class="algorithm" data-algorithm="image element loaded">
@@ -1070,7 +1249,7 @@ This means that a single <a data-link-type="dfn" href="https://drafts.csswg.org/
      <li data-md>
       <p>Let <var>now</var> be the <a data-link-type="dfn" href="https://www.w3.org/TR/hr-time-2/#dfn-current-high-resolution-time" id="ref-for-dfn-current-high-resolution-time">current high resolution time</a> given <var>element</var>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global" id="ref-for-concept-relevant-global">relevant global object</a>.</p>
      <li data-md>
-      <p>If <var>imageRequest</var> is not a data URL <a data-link-type="biblio" href="#biblio-rfc2397">[RFC2397]</a> and if the <a data-link-type="dfn" href="https://w3c.github.io/resource-timing#dfn-timing-allow-check" id="ref-for-dfn-timing-allow-check">timing allow check</a> fails for <var>imageRequest</var>’s resource, run the <a data-link-type="dfn" href="#report-image-element-timing" id="ref-for-report-image-element-timing①">report image element timing</a> algorithm, passing in the triple (<var>element</var>, <var>imageRequest</var>, <var>now</var>), 0, and <var>root</var> as inputs.</p>
+      <p>If <var>imageRequest</var> is not a data URL <a data-link-type="biblio" href="#biblio-rfc2397">[RFC2397]</a> and if the <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-tao-check" id="ref-for-concept-tao-check">timing allow check</a> fails for <var>imageRequest</var>’s resource, run the <a data-link-type="dfn" href="#report-image-element-timing" id="ref-for-report-image-element-timing①">report image element timing</a> algorithm, passing in the triple (<var>element</var>, <var>imageRequest</var>, <var>now</var>), 0, and <var>root</var> as inputs.</p>
      <li data-md>
       <p>Otherwise, add the triple (<var>element</var>, <var>imageRequest</var>, <var>now</var>) to <var>root</var>’s <a data-link-type="dfn" href="#images-pending-rendering" id="ref-for-images-pending-rendering">images pending rendering</a>.</p>
     </ol>
@@ -1198,16 +1377,16 @@ This means that a single <a data-link-type="dfn" href="https://drafts.csswg.org/
      <li data-md>
       <p>Let <var>settings</var> be <a data-link-type="dfn" href="https://webidl.spec.whatwg.org/#this" id="ref-for-this⑤">this</a>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#relevant-settings-object" id="ref-for-relevant-settings-object">relevant settings object</a>.</p>
      <li data-md>
-      <p>if <var>document</var> is null, let <var>document</var> be <var>settings</var>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global" id="ref-for-concept-relevant-global①">relevant global object</a>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/window-object.html#concept-document-window" id="ref-for-concept-document-window">associated <code class="highlight">Document</code></a>.</p>
+      <p>if <var>document</var> is null, let <var>document</var> be <var>settings</var>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/webappapis.html#concept-relevant-global" id="ref-for-concept-relevant-global①">relevant global object</a>’s <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/nav-history-apis.html#concept-document-window" id="ref-for-concept-document-window">associated <code class="highlight">Document</code></a>.</p>
      <li data-md>
-      <p>If <var>element</var>’s <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-tree-root" id="ref-for-concept-tree-root①">root</a> is not equal to <var>document</var> or if <var>document</var> is not <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/browsers.html#fully-active" id="ref-for-fully-active①">fully active</a>, return <code class="highlight"><c- kc>null</c-></code>.</p>
+      <p>If <var>element</var>’s <a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-tree-root" id="ref-for-concept-tree-root①">root</a> is not equal to <var>document</var> or if <var>document</var> is not <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/document-sequences.html#fully-active" id="ref-for-fully-active①">fully active</a>, return <code class="highlight"><c- kc>null</c-></code>.</p>
      <li data-md>
       <p>Return <var>element</var>.</p>
     </ol>
    </div>
    <h2 class="heading settled" data-level="4" id="sec-security"><span class="secno">4. </span><span class="content">Security &amp; privacy considerations</span><a class="self-link" href="#sec-security"></a></h2>
    <p>This API exposes some information about cross-origin images.
-In particular, images that do not pass the <a data-link-type="dfn" href="https://w3c.github.io/resource-timing#dfn-timing-allow-check" id="ref-for-dfn-timing-allow-check①">timing allow check</a> still have their resource load time exposed, which could be a source of privacy concerns.</p>
+In particular, images that do not pass the <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-tao-check" id="ref-for-concept-tao-check①">timing allow check</a> still have their resource load time exposed, which could be a source of privacy concerns.</p>
    <p>However, this is considered to not add new attacks to the web platform because the ResourceTiming API exposes a similar timestamp already.
 In addition, the onload handler exposes load timing when it is available, and the resource load time is a close proxy to this.
 The <a data-link-type="dfn" href="https://www.w3.org/TR/hr-time-2/#dfn-current-high-resolution-time" id="ref-for-dfn-current-high-resolution-time①">current high resolution time</a> computed at the beginning of the onload handler would provide the image load time.
@@ -1217,7 +1396,7 @@ In addition, we believe any fix to remove the leak provided by image onload hand
 To do this, add an iframe that contains trivial content on the onload handler of the target image or text content.
 Then, query the first paint of that iframe to obtain the rendering timestamp of the content.
 This is quite inefficient and the polyfill itself might affect the timing obtained.
-Due to the difficulty in obtaining this information today, we choose not to expose the display timestamp for images that fail the <a data-link-type="dfn" href="https://w3c.github.io/resource-timing#dfn-timing-allow-check" id="ref-for-dfn-timing-allow-check②">timing allow check</a>.
+Due to the difficulty in obtaining this information today, we choose not to expose the display timestamp for images that fail the <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-tao-check" id="ref-for-concept-tao-check②">timing allow check</a>.
 For clarity, here is a code snippet using the PaintTiming API:</p>
 <pre class="example highlight" id="example-5e4b94b5"><a class="self-link" href="#example-5e4b94b5"></a>// In the attacker frame.
 <c- p>&lt;</c-><c- f>iframe</c-> <c- e>src</c-><c- o>=</c-><c- s>attack.html</c-><c- p>>&lt;/</c-><c- f>iframe</c-><c- p>></c->
@@ -1242,7 +1421,7 @@ For clarity, here is a code snippet using the PaintTiming API:</p>
 This can already be polyfilled, for example using <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/IntersectionObserver/#intersectionobserver" id="ref-for-intersectionobserver">IntersectionObserver</a></code>.
 The polyfill process would be similar: add an <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/IntersectionObserver/#intersectionobserver" id="ref-for-intersectionobserver①">IntersectionObserver</a></code> on the onload handler of the target image or text content.
 This solution is inefficient because it requires registering the observer once the content has loaded, but it should still provide the same level of accuracy.
-For images, we compute the <code class="idl"><a data-link-type="idl" href="#dom-performanceelementtiming-intersectionrect" id="ref-for-dom-performanceelementtiming-intersectionrect④">intersectionRect</a></code> once the image has loaded if it does not pass the <a data-link-type="dfn" href="https://w3c.github.io/resource-timing#dfn-timing-allow-check" id="ref-for-dfn-timing-allow-check③">timing allow check</a>.
+For images, we compute the <code class="idl"><a data-link-type="idl" href="#dom-performanceelementtiming-intersectionrect" id="ref-for-dom-performanceelementtiming-intersectionrect④">intersectionRect</a></code> once the image has loaded if it does not pass the <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-tao-check" id="ref-for-concept-tao-check③">timing allow check</a>.
 Computing it at this point in time allows exposing the entry at that time.
 If we were to compute the rect only until the image is fully displayed, we’d only be able to expose the entry after that time.</p>
    <p>If we do not want to expose the rendering timetamp of an image, it’s preferable to dispatch the entry to the <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/performance-timeline/#the-performanceobserver-interface" id="ref-for-the-performanceobserver-interface">PerformanceObserver</a></code> right away.
@@ -1278,7 +1457,7 @@ This would unintentionally leak some of the display timing of the image.</p>
     and are set apart from the normative text
     with <code class="highlight"><c- a>class</c-><c- o>=</c-><c- u>"note"</c-></code>,
     like this: </p>
-   <p class="note" role="note">Note, this is an informative note. </p>
+   <p class="note" role="note">Note, this is an informative note.</p>
    <h3 class="no-ref no-num heading settled" id="w3c-conformant-algorithms"><span class="content">Conformant Algorithms</span><a class="self-link" href="#w3c-conformant-algorithms"></a></h3>
    <p>Requirements phrased in the imperative as part of algorithms
     (such as "strip any leading space characters"
@@ -1416,6 +1595,13 @@ This would unintentionally leak some of the display timing of the image.</p>
     <li><a href="#ref-for-concept-tree-root①">3.8. Get an element algorithm</a>
    </ul>
   </aside>
+  <aside class="dfn-panel" data-for="term-for-concept-tao-check">
+   <a href="https://fetch.spec.whatwg.org/#concept-tao-check">https://fetch.spec.whatwg.org/#concept-tao-check</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-concept-tao-check">3.4. Process image that finished loading</a>
+    <li><a href="#ref-for-concept-tao-check①">4. Security &amp; privacy considerations</a> <a href="#ref-for-concept-tao-check②">(2)</a> <a href="#ref-for-concept-tao-check③">(3)</a>
+   </ul>
+  </aside>
   <aside class="dfn-panel" data-for="term-for-domrectreadonly">
    <a href="https://drafts.fxtf.org/geometry-1/#domrectreadonly">https://drafts.fxtf.org/geometry-1/#domrectreadonly</a><b>Referenced in:</b>
    <ul>
@@ -1454,13 +1640,13 @@ This would unintentionally leak some of the display timing of the image.</p>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-window">
-   <a href="https://html.spec.whatwg.org/multipage/window-object.html#window">https://html.spec.whatwg.org/multipage/window-object.html#window</a><b>Referenced in:</b>
+   <a href="https://html.spec.whatwg.org/multipage/nav-history-apis.html#window">https://html.spec.whatwg.org/multipage/nav-history-apis.html#window</a><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-window">3. Processing model</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-concept-document-window">
-   <a href="https://html.spec.whatwg.org/multipage/window-object.html#concept-document-window">https://html.spec.whatwg.org/multipage/window-object.html#concept-document-window</a><b>Referenced in:</b>
+   <a href="https://html.spec.whatwg.org/multipage/nav-history-apis.html#concept-document-window">https://html.spec.whatwg.org/multipage/nav-history-apis.html#concept-document-window</a><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-concept-document-window">3.8. Get an element algorithm</a>
    </ul>
@@ -1491,7 +1677,7 @@ This would unintentionally leak some of the display timing of the image.</p>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-fully-active">
-   <a href="https://html.spec.whatwg.org/multipage/browsers.html#fully-active">https://html.spec.whatwg.org/multipage/browsers.html#fully-active</a><b>Referenced in:</b>
+   <a href="https://html.spec.whatwg.org/multipage/document-sequences.html#fully-active">https://html.spec.whatwg.org/multipage/document-sequences.html#fully-active</a><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-fully-active">3.3. Modifications to the HTML specification</a>
     <li><a href="#ref-for-fully-active①">3.8. Get an element algorithm</a>
@@ -1640,13 +1826,6 @@ This would unintentionally leak some of the display timing of the image.</p>
     <li><a href="#ref-for-supportedentrytypes-attribute">3. Processing model</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="term-for-dfn-timing-allow-check">
-   <a href="https://w3c.github.io/resource-timing#dfn-timing-allow-check">https://w3c.github.io/resource-timing#dfn-timing-allow-check</a><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dfn-timing-allow-check">3.4. Process image that finished loading</a>
-    <li><a href="#ref-for-dfn-timing-allow-check①">4. Security &amp; privacy considerations</a> <a href="#ref-for-dfn-timing-allow-check②">(2)</a> <a href="#ref-for-dfn-timing-allow-check③">(3)</a>
-   </ul>
-  </aside>
   <aside class="dfn-panel" data-for="term-for-InterfaceSVGImageElement">
    <a href="https://svgwg.org/svg2-draft/embedded.html#InterfaceSVGImageElement">https://svgwg.org/svg2-draft/embedded.html#InterfaceSVGImageElement</a><b>Referenced in:</b>
    <ul>
@@ -1721,22 +1900,22 @@ This would unintentionally leak some of the display timing of the image.</p>
   <h3 class="no-num no-ref heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
   <ul class="index">
    <li>
-    <a data-link-type="biblio">[css]</a> defines the following terms:
+    <a data-link-type="biblio">[CSS]</a> defines the following terms:
     <ul>
      <li><span class="dfn-paneled" id="term-for-painting-order">painting order</span>
     </ul>
    <li>
-    <a data-link-type="biblio">[css-backgrounds-3]</a> defines the following terms:
+    <a data-link-type="biblio">[CSS-BACKGROUNDS-3]</a> defines the following terms:
     <ul>
      <li><span class="dfn-paneled" id="term-for-propdef-background-image">background-image</span>
     </ul>
    <li>
-    <a data-link-type="biblio">[css-display-3]</a> defines the following terms:
+    <a data-link-type="biblio">[CSS-DISPLAY-3]</a> defines the following terms:
     <ul>
      <li><span class="dfn-paneled" id="term-for-containing-block">containing block</span>
     </ul>
    <li>
-    <a data-link-type="biblio">[css-fonts-4]</a> defines the following terms:
+    <a data-link-type="biblio">[CSS-FONTS-4]</a> defines the following terms:
     <ul>
      <li><span class="dfn-paneled" id="term-for-font-block-period">font block period</span>
     </ul>
@@ -1753,12 +1932,17 @@ This would unintentionally leak some of the display timing of the image.</p>
      <li><span class="dfn-paneled" id="term-for-concept-tree-root">root</span>
     </ul>
    <li>
-    <a data-link-type="biblio">[geometry-1]</a> defines the following terms:
+    <a data-link-type="biblio">[FETCH]</a> defines the following terms:
+    <ul>
+     <li><span class="dfn-paneled" id="term-for-concept-tao-check">timing allow check</span>
+    </ul>
+   <li>
+    <a data-link-type="biblio">[GEOMETRY-1]</a> defines the following terms:
     <ul>
      <li><span class="dfn-paneled" id="term-for-domrectreadonly">DOMRectReadOnly</span>
     </ul>
    <li>
-    <a data-link-type="biblio">[hr-time-2]</a> defines the following terms:
+    <a data-link-type="biblio">[HR-TIME-2]</a> defines the following terms:
     <ul>
      <li><span class="dfn-paneled" id="term-for-dom-domhighrestimestamp">DOMHighResTimeStamp</span>
      <li><span class="dfn-paneled" id="term-for-dfn-current-high-resolution-time">current high resolution time</span>
@@ -1793,7 +1977,7 @@ This would unintentionally leak some of the display timing of the image.</p>
      <li><span class="dfn-paneled" id="term-for-ordered-set">ordered set</span>
     </ul>
    <li>
-    <a data-link-type="biblio">[intersection-observer]</a> defines the following terms:
+    <a data-link-type="biblio">[INTERSECTION-OBSERVER]</a> defines the following terms:
     <ul>
      <li><span class="dfn-paneled" id="term-for-intersectionobserver">IntersectionObserver</span>
      <li><span class="dfn-paneled" id="term-for-calculate-intersection-rect-algo">intersection rect algorithm</span>
@@ -1804,7 +1988,7 @@ This would unintentionally leak some of the display timing of the image.</p>
      <li><span class="dfn-paneled" id="term-for-potentially-add-a-largestcontentfulpaint-entry">potentially add a largestcontentfulpaint entry</span>
     </ul>
    <li>
-    <a data-link-type="biblio">[performance-timeline]</a> defines the following terms:
+    <a data-link-type="biblio">[PERFORMANCE-TIMELINE]</a> defines the following terms:
     <ul>
      <li><span class="dfn-paneled" id="term-for-the-performanceentry-interface">PerformanceEntry</span>
      <li><span class="dfn-paneled" id="term-for-the-performanceobserver-interface">PerformanceObserver</span>
@@ -1814,11 +1998,6 @@ This would unintentionally leak some of the display timing of the image.</p>
      <li><span class="dfn-paneled" id="term-for-dfn-queue-a-performanceentry">queue the performanceentry</span>
      <li><span class="dfn-paneled" id="term-for-dom-performanceentry-starttime">startTime</span>
      <li><span class="dfn-paneled" id="term-for-supportedentrytypes-attribute">supportedEntryTypes</span>
-    </ul>
-   <li>
-    <a data-link-type="biblio">[resource-timing-2]</a> defines the following terms:
-    <ul>
-     <li><span class="dfn-paneled" id="term-for-dfn-timing-allow-check">timing allow check</span>
     </ul>
    <li>
     <a data-link-type="biblio">[SVG2]</a> defines the following terms:
@@ -1848,33 +2027,33 @@ This would unintentionally leak some of the display timing of the image.</p>
   <h3 class="no-num no-ref heading settled" id="normative"><span class="content">Normative References</span><a class="self-link" href="#normative"></a></h3>
   <dl>
    <dt id="biblio-css-backgrounds-3">[CSS-BACKGROUNDS-3]
-   <dd>Bert Bos; Elika Etemad; Brad Kemper. <a href="https://www.w3.org/TR/css-backgrounds-3/"><cite>CSS Backgrounds and Borders Module Level 3</cite></a>. 26 July 2021. CR. URL: <a href="https://www.w3.org/TR/css-backgrounds-3/">https://www.w3.org/TR/css-backgrounds-3/</a>
+   <dd>Bert Bos; Elika Etemad; Brad Kemper. <a href="https://drafts.csswg.org/css-backgrounds/"><cite>CSS Backgrounds and Borders Module Level 3</cite></a>. URL: <a href="https://drafts.csswg.org/css-backgrounds/">https://drafts.csswg.org/css-backgrounds/</a>
    <dt id="biblio-css-display-3">[CSS-DISPLAY-3]
-   <dd>Tab Atkins Jr.; Elika Etemad. <a href="https://www.w3.org/TR/css-display-3/"><cite>CSS Display Module Level 3</cite></a>. 3 September 2021. CR. URL: <a href="https://www.w3.org/TR/css-display-3/">https://www.w3.org/TR/css-display-3/</a>
+   <dd>Tab Atkins Jr.; Elika Etemad. <a href="https://drafts.csswg.org/css-display/"><cite>CSS Display Module Level 3</cite></a>. URL: <a href="https://drafts.csswg.org/css-display/">https://drafts.csswg.org/css-display/</a>
    <dt id="biblio-css-fonts-4">[CSS-FONTS-4]
-   <dd>John Daggett; Myles Maxfield; Chris Lilley. <a href="https://www.w3.org/TR/css-fonts-4/"><cite>CSS Fonts Module Level 4</cite></a>. 21 December 2021. WD. URL: <a href="https://www.w3.org/TR/css-fonts-4/">https://www.w3.org/TR/css-fonts-4/</a>
+   <dd>John Daggett; Myles Maxfield; Chris Lilley. <a href="https://drafts.csswg.org/css-fonts-4/"><cite>CSS Fonts Module Level 4</cite></a>. URL: <a href="https://drafts.csswg.org/css-fonts-4/">https://drafts.csswg.org/css-fonts-4/</a>
    <dt id="biblio-dom">[DOM]
    <dd>Anne van Kesteren. <a href="https://dom.spec.whatwg.org/"><cite>DOM Standard</cite></a>. Living Standard. URL: <a href="https://dom.spec.whatwg.org/">https://dom.spec.whatwg.org/</a>
+   <dt id="biblio-fetch">[FETCH]
+   <dd>Anne van Kesteren. <a href="https://fetch.spec.whatwg.org/"><cite>Fetch Standard</cite></a>. Living Standard. URL: <a href="https://fetch.spec.whatwg.org/">https://fetch.spec.whatwg.org/</a>
    <dt id="biblio-geometry-1">[GEOMETRY-1]
-   <dd>Simon Pieters; Chris Harrelson. <a href="https://www.w3.org/TR/geometry-1/"><cite>Geometry Interfaces Module Level 1</cite></a>. 4 December 2018. CR. URL: <a href="https://www.w3.org/TR/geometry-1/">https://www.w3.org/TR/geometry-1/</a>
+   <dd>Simon Pieters; Chris Harrelson. <a href="https://drafts.fxtf.org/geometry/"><cite>Geometry Interfaces Module Level 1</cite></a>. URL: <a href="https://drafts.fxtf.org/geometry/">https://drafts.fxtf.org/geometry/</a>
    <dt id="biblio-hr-time-2">[HR-TIME-2]
-   <dd>Ilya Grigorik. <a href="https://www.w3.org/TR/hr-time-2/"><cite>High Resolution Time Level 2</cite></a>. 21 November 2019. REC. URL: <a href="https://www.w3.org/TR/hr-time-2/">https://www.w3.org/TR/hr-time-2/</a>
+   <dd>Ilya Grigorik. <a href="https://w3c.github.io/hr-time/"><cite>High Resolution Time Level 2</cite></a>. URL: <a href="https://w3c.github.io/hr-time/">https://w3c.github.io/hr-time/</a>
    <dt id="biblio-html">[HTML]
    <dd>Anne van Kesteren; et al. <a href="https://html.spec.whatwg.org/multipage/"><cite>HTML Standard</cite></a>. Living Standard. URL: <a href="https://html.spec.whatwg.org/multipage/">https://html.spec.whatwg.org/multipage/</a>
    <dt id="biblio-infra">[INFRA]
    <dd>Anne van Kesteren; Domenic Denicola. <a href="https://infra.spec.whatwg.org/"><cite>Infra Standard</cite></a>. Living Standard. URL: <a href="https://infra.spec.whatwg.org/">https://infra.spec.whatwg.org/</a>
    <dt id="biblio-intersection-observer">[INTERSECTION-OBSERVER]
-   <dd>Stefan Zager; Emilio Cobos Álvarez; Michael Blain. <a href="https://www.w3.org/TR/intersection-observer/"><cite>Intersection Observer</cite></a>. 24 June 2021. WD. URL: <a href="https://www.w3.org/TR/intersection-observer/">https://www.w3.org/TR/intersection-observer/</a>
+   <dd>Stefan Zager; Emilio Cobos Álvarez. <a href="https://w3c.github.io/IntersectionObserver/"><cite>Intersection Observer</cite></a>. URL: <a href="https://w3c.github.io/IntersectionObserver/">https://w3c.github.io/IntersectionObserver/</a>
    <dt id="biblio-largest-contentful-paint">[LARGEST-CONTENTFUL-PAINT]
-   <dd>Yoav Weiss; Nicolás Peña Moreno. <a href="https://w3c.github.io/largest-contentful-paint/"><cite>Largest Contentful Paint</cite></a>. ED. URL: <a href="https://w3c.github.io/largest-contentful-paint/">https://w3c.github.io/largest-contentful-paint/</a>
+   <dd>Yoav Weiss; Nicolas Pena Moreno. <a href="https://w3c.github.io/largest-contentful-paint/"><cite>Largest Contentful Paint</cite></a>. URL: <a href="https://w3c.github.io/largest-contentful-paint/">https://w3c.github.io/largest-contentful-paint/</a>
    <dt id="biblio-performance-timeline">[PERFORMANCE-TIMELINE]
-   <dd>Nicolas Pena Moreno. <a href="https://www.w3.org/TR/performance-timeline/"><cite>Performance Timeline</cite></a>. 2 December 2021. CR. URL: <a href="https://www.w3.org/TR/performance-timeline/">https://www.w3.org/TR/performance-timeline/</a>
-   <dt id="biblio-resource-timing-2">[RESOURCE-TIMING-2]
-   <dd>Yoav Weiss; Noam Rosenthal. <a href="https://www.w3.org/TR/resource-timing-2/"><cite>Resource Timing Level 2</cite></a>. 27 January 2022. WD. URL: <a href="https://www.w3.org/TR/resource-timing-2/">https://www.w3.org/TR/resource-timing-2/</a>
+   <dd>Nicolas Pena Moreno. <a href="https://w3c.github.io/performance-timeline/"><cite>Performance Timeline</cite></a>. URL: <a href="https://w3c.github.io/performance-timeline/">https://w3c.github.io/performance-timeline/</a>
    <dt id="biblio-rfc2119">[RFC2119]
    <dd>S. Bradner. <a href="https://datatracker.ietf.org/doc/html/rfc2119"><cite>Key words for use in RFCs to Indicate Requirement Levels</cite></a>. March 1997. Best Current Practice. URL: <a href="https://datatracker.ietf.org/doc/html/rfc2119">https://datatracker.ietf.org/doc/html/rfc2119</a>
    <dt id="biblio-svg2">[SVG2]
-   <dd>Amelia Bellamy-Royds; et al. <a href="https://www.w3.org/TR/SVG2/"><cite>Scalable Vector Graphics (SVG) 2</cite></a>. 4 October 2018. CR. URL: <a href="https://www.w3.org/TR/SVG2/">https://www.w3.org/TR/SVG2/</a>
+   <dd>Amelia Bellamy-Royds; et al. <a href="https://svgwg.org/svg2-draft/"><cite>Scalable Vector Graphics (SVG) 2</cite></a>. URL: <a href="https://svgwg.org/svg2-draft/">https://svgwg.org/svg2-draft/</a>
    <dt id="biblio-url">[URL]
    <dd>Anne van Kesteren. <a href="https://url.spec.whatwg.org/"><cite>URL Standard</cite></a>. Living Standard. URL: <a href="https://url.spec.whatwg.org/">https://url.spec.whatwg.org/</a>
    <dt id="biblio-webidl">[WEBIDL]
@@ -2135,13 +2314,11 @@ document.body.addEventListener("click", function(e) {
 });
 </script>
 <script>/* script-mdn-anno */
-
-            document.body.addEventListener("click", (e) => {
-                if(e.target.closest(".mdn-anno-btn")) {
-                    e.target.closest(".mdn-anno").classList.toggle("wrapped");
-                }
-            });
-            </script>
+document.body.addEventListener("click", (e) => {
+    if(e.target.closest(".mdn-anno-btn")) {
+        e.target.closest(".mdn-anno").classList.toggle("wrapped");
+    }
+});</script>
 <script>/* script-var-click-highlighting */
 
     document.addEventListener("click", e=>{
