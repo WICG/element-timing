@@ -250,7 +250,7 @@ Report image Element Timing {#sec-report-image-element}
 <div algorithm="report image element timing">
     When asked to <dfn>report image element timing</dfn> given a triple (|element|, |imageRequest|, |loadTime|), a DOMHighResTimestamp |renderTime| and a {{Document}} |document|, perform the following steps:
 
-    1. Let |intersectionRect| be the value returned by the <a>intersection rect algorithm</a> using |element| as the target and viewport as the root.
+    1. Let |intersectionRect| be the value returned by the <a>intersection rect algorithm</a> using |element| as the target and |document|'s [=initial containing block=] as the root.
     1. Let |exposedElement| be the result of running [=get an element=] with |element| and |document| as input.
     1. If |exposedElement| is not null, call the <a>potentially add a LargestContentfulPaint entry</a> algorithm with |intersectionRect|, |imageRequest|, |renderTime|, |loadTime|, |element|, and |document|.
     1. If |element|'s "<code>elementtiming</code>" content attribute is absent, then abort these steps.
