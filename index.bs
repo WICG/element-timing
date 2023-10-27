@@ -29,6 +29,7 @@ urlPrefix: https://w3c.github.io/IntersectionObserver; spec: INTERSECTION-OBSERV
     type: dfn; url: #calculate-intersection-rect-algo; text: intersection rect algorithm;
 urlPrefix: https://html.spec.whatwg.org/multipage; spec: HTML;
     type: dfn; url: /images.html#img-all; text: completely available;
+    type: dfn; url: //webappapis.html#event-loop-processing-model; text: event loop processing model;
 urlPrefix: https://drafts.csswg.org/css-backgrounds-3; spec: CSS-BACKGROUNDS-3;
     type: dfn; url: #propdef-background-image; text: background-image;
 urlPrefix: https://drafts.csswg.org/css2/zindex.html; spec: CSS;
@@ -37,6 +38,9 @@ urlPrefix: https://wicg.github.io/largest-contentful-paint/; spec: LARGEST-CONTE
     type: dfn; url:#potentially-add-a-largestcontentfulpaint-entry; text: potentially add a LargestContentfulPaint entry;
 urlPrefix: https://fetch.spec.whatwg.org/; spec: FETCH;
     type: dfn; url:#concept-tao-check; text: timing allow check;
+</pre>
+<pre class=link-defaults>
+spec:dom; type:dfn; text:descendant
 </pre>
 
 Introduction {#sec-intro}
