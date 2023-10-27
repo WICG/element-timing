@@ -38,6 +38,13 @@ urlPrefix: https://wicg.github.io/largest-contentful-paint/; spec: LARGEST-CONTE
     type: dfn; url:#potentially-add-a-largestcontentfulpaint-entry; text: potentially add a LargestContentfulPaint entry;
 urlPrefix: https://fetch.spec.whatwg.org/; spec: FETCH;
     type: dfn; url:#concept-tao-check; text: timing allow check;
+urlPrefix: file:///Users/iclelland/Code/Standards/paint-timing/; spec: PAINT-TIMING;
+    type: dfn; url:abc; text: set of owned text nodes;
+    type: dfn; url:abc; text: process image that finished loading;
+    type: dfn; url:abc; text: process an image that finished loading;
+</pre>
+<pre class=link-defaults>
+spec:dom; type:dfn; text:descendant
 </pre>
 <pre class=link-defaults>
 spec:dom; type:dfn; text:descendant
@@ -189,22 +196,6 @@ partial interface Element {
 
 The {{Element/elementTiming}} attribute must <a>reflect</a> the element's "<code>elementtiming</code>" content attribute.
 
-Each {{Element}} has an <dfn>associated image request</dfn> which is initially null.
-When the processing model for an {{Element}} <em>element</em> of type {{HTMLImageElement}}, {{SVGImageElement}}, or {{HTMLVideoElement}} creates a new image resource (e.g., to be displayed as an image or poster image), <em>element</em>'s <a>associated image request</a> is set to the <a>image request</a> of the created image resource.
-
-Note: Every image resource that is obtained from a URL whose <a spec=url>scheme</a> is equal to "data" has an associated <a>image request</a> which is not fetched but still needs to be loaded.
-This request can be the <a>associated image request</a> of an {{Element}}.
-
-Note: The current language is vague since it does not point to specific algorithms.
-This can be made more rigorous when the corresponding processing models have a more unified processing model.
-
-Each {{Element}} has a <dfn>set of owned text nodes</dfn>, which is initially an empty <a>ordered set</a>.
-
-Each {{Document}} has <dfn>images pending rendering</dfn>, a list of triples ({{Element}}, <a>image request</a>, DOMHighResTimeStamp) which are considered loaded but not yet rendered.
-When an {{Element}} <em>element</em>'s <a>associated image request</a> has become <a>completely available</a>, run the algorithm to <a>process an image that finished loading</a> passing in <em>element</em> and its <a>associated image request</a> as inputs.
-
-Each {{Document}} also has a <dfn>set of elements with rendered text</dfn>, which is initially an empty, <a>ordered set</a>.
-
 Modifications to the CSS specification {#sec-modifications-CSS}
 --------------------------------------------------------
 
@@ -225,28 +216,12 @@ NOTE: we assume that there is one <a>image request</a> for each {{Element}} that
 So, for example, if there is a style with two URLs affecting all <{div}>s, and there are two <{div}>s, then there will be four <a>image requests</a>.
 This means that a single <a>background-image</a> property could produce multiple {{PerformanceElementTiming}} entries because it can affect multiple elements and because it can specify multiple URLs.
 
-Modifications to the HTML specification {#sec-modifications-HTML}
---------------------------------------------------------
+Modifications to the Paint Timing specification {#sec-modifications-paint-timing}
+---------------------------------------------------------------------------------
 
-<em>This section will be removed once the [[HTML]] specification has been modified.</em>
+Append the following step to the [=Process image that finished loading=] algorithm:
 
-In the <a>update the rendering</a> step of the <a>event loop processing model</a>, add the following substep at the end:
-
-1. For each <a>fully active</a> {{Document}} in <em>docs</em>, run the <a>element timing processing</a> algorithm passing in the {{Document}} and <em>now</em>.
-
-Process image that finished loading {#sec-process-loaded-image}
---------------------------------------------------------
-
-<div algorithm="image element loaded">
-To <dfn>process an image that finished loading</dfn> given |element| and |imageRequest| as inputs:
-    1. Let |element| be the input {{Element}}.
-    1. Let |imageRequest| be |element|'s <a>associated image request</a>.
-    1. Let |root| be |element|'s <a for="tree">root</a>.
-    1. If |root| is not a {{Document}}, return.
-    1. Let |now| be the <a>current high resolution time</a> given |element|'s <a>relevant global object</a>.
-    1. If |imageRequest| is not a data URL [[RFC2397]] and if the <a>timing allow check</a> fails for |imageRequest|'s resource, run the <a>report image element timing</a> algorithm, passing in the triple (|element|, |imageRequest|, |now|), 0, and |root| as inputs.
-    1. Otherwise, add the triple (|element|, |imageRequest|, |now|) to |root|'s <a>images pending rendering</a>.
-</div>
+    1. Otherwise, run the <a>report image element timing</a> algorithm, passing in the triple (|element|, |imageRequest|, |now|), 0, and |root| as inputs.
 
 Report image Element Timing {#sec-report-image-element}
 --------------------------------------------------------
@@ -300,17 +275,11 @@ Element Timing processing {#sec-element-processing}
 --------------------------------------------------------
 
 <div algorithm="process element timing">
-    The <dfn>element timing processing</dfn> algorithm receives a {{Document}} |doc| and a timestamp |now| and performs the following steps:
+    The <dfn>element timing processing</dfn> algorithm receives a {{Document}} |doc|, a timestamp |now|, an [=ordered set=] of [=/elements=] <var ignore>paintedImages</var>, and an [=ordered set=] of [=/elements=] <var ignore>paintedTextNodes</var>, and performs the following steps:
 
-    1. For each |imagePendingRenderingTriple| in |doc|'s <a>images pending rendering</a> list:
-        1. Let |imageRequest| be the <a>image request</a> of |imagePendingRenderingTriple|.
-        1. If |imageRequest| is fully decoded, then run the following steps:
-            1. Run the <a>report image element timing</a> algorithm passing in |imagePendingRenderingTriple|, |now|, and |doc|.
-            1. Remove |imagePendingRenderingTriple| from |doc|'s <a>images pending rendering</a> list.
-    1. For each {{Element}} |element| in |doc|'s <a>descendants</a>:
-        1. If |element| is contained in |doc|'s <a>set of elements with rendered text</a>, continue.
-        1. If |element|'s <a>set of owned text nodes</a> is empty, continue.
-        1. <a for="set">Append</a> |element| to |doc|'s <a>set of elements with rendered text</a>.
+    1. For each |imagePendingRenderingTriple| in |paintedImages|:
+        1. Run the <a>report image element timing</a> algorithm passing in |imagePendingRenderingTriple|, |now|, and |doc|.
+    1. For each {{Element}} |element| in |paintedTextNodes|:
         1. Run the <a>report text element timing</a> given |element|, |now|, and |doc|.
 </div>
 
