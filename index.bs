@@ -28,23 +28,13 @@ urlPrefix: https://w3c.github.io/performance-timeline/; spec: PERFORMANCE-TIMELI
 urlPrefix: https://w3c.github.io/IntersectionObserver; spec: INTERSECTION-OBSERVER;
     type: dfn; url: #calculate-intersection-rect-algo; text: intersection rect algorithm;
 urlPrefix: https://html.spec.whatwg.org/multipage; spec: HTML;
-    type: dfn; url: /images.html#img-all; text: completely available;
     type: dfn; url: //webappapis.html#event-loop-processing-model; text: event loop processing model;
 urlPrefix: https://drafts.csswg.org/css-backgrounds-3; spec: CSS-BACKGROUNDS-3;
     type: dfn; url: #propdef-background-image; text: background-image;
-urlPrefix: https://drafts.csswg.org/css2/zindex.html; spec: CSS;
-    type: dfn; url:#painting-order; text: painting order;
 urlPrefix: https://wicg.github.io/largest-contentful-paint/; spec: LARGEST-CONTENTFUL-PAINT;
     type: dfn; url:#potentially-add-a-largestcontentfulpaint-entry; text: potentially add a LargestContentfulPaint entry;
 urlPrefix: https://fetch.spec.whatwg.org/; spec: FETCH;
     type: dfn; url:#concept-tao-check; text: timing allow check;
-urlPrefix: file:///Users/iclelland/Code/Standards/paint-timing/; spec: PAINT-TIMING;
-    type: dfn; url:abc; text: set of owned text nodes;
-    type: dfn; url:abc; text: process image that finished loading;
-    type: dfn; url:abc; text: process an image that finished loading;
-</pre>
-<pre class=link-defaults>
-spec:dom; type:dfn; text:descendant
 </pre>
 <pre class=link-defaults>
 spec:dom; type:dfn; text:descendant
@@ -70,12 +60,8 @@ Thus, this API exposes rendering timing information about web-developer-annotate
 Elements exposed {#sec-elements-exposed}
 ------------------------
 
-The Element Timing API supports timing information about the following elements:
-* <{img}> elements.
-* <{image}> elements inside an <{svg}>.
-* The poster images of <{video}> elements.
-* Elements with a <a>background-image</a>.
-* Groups of text nodes, which are aggregated as described in [[#sec-modifications-CSS]].
+The Element Timing API supports timing information about <a>timing-eligible</a>
+elements, as defined by [[PAINT-TIMING]].
 
 Elements that have a "<code>elementtiming</code>" content attribute are reported in the <a>report image element timing</a> and the <a>report text element timing</a> algorithms.
 
@@ -160,7 +146,11 @@ The {{PerformanceElementTiming/naturalHeight}} attribute must return the value i
 
 The {{PerformanceElementTiming/id}} attribute's getter must return the value it was initialized to.
 
-The {{PerformanceElementTiming/element}} attribute's getter must run the [=get an element=] algorithm <a>this</a>'s <a>element</a> and null as inputs.
+The {{PerformanceElementTiming/element}} attribute's getter must perform the following steps:
+<div algorithm="PerformanceElementTiming element">
+    1. If <a>this</a>'s <a>element</a> is not [=exposed for paint timing=] given null, return null.
+    1. Return <a>this</a>'s <a>element</a>.
+</div>
 
 Note: This means that an element that is no longer <a>descendant</a> of the {{Document}} will no longer be returned by {{PerformanceElementTiming/element}}'s attribute getter.
 
@@ -196,32 +186,16 @@ partial interface Element {
 
 The {{Element/elementTiming}} attribute must <a>reflect</a> the element's "<code>elementtiming</code>" content attribute.
 
-Modifications to the CSS specification {#sec-modifications-CSS}
---------------------------------------------------------
-
-When the user agent is executing the <a>painting order</a>, it must populate the <a>set of owned text nodes</a> of the painted {{Element|Elements}} so that the following is true:
-
-<div algorithm="text aggregation">
-    * If a {{Text}} object |text| will not be painted due to the font face being in its <a>font block period</a>, then it is not <a for="set">appended</a> to the <a>set of owned text nodes</a> of any {{Element}}.
-    * Otherwise, |text| is <a for="set">appended</a> to the <a>set of owned text nodes</a> of the {{Element}} which determines the <a>containing block</a> of |text|.
-</div>
-
-NOTE: A user agent might want to use a stack to efficiently compute the <a>set of owned text nodes</a> while implementing the <a>painting order</a>.
-
-Every {{Element}} has a list of <dfn>associated background image requests</dfn> which is initially an empty array.
-When the processing model for the {{Element}} <em>element</em>'s style requires a new image resource (to be displayed as background image), the <a>image request</a> created by the new resource is appended to <em>element</em>'s <a>associated background image requests</a>.
-Whenever an <a>image request</a> in an {{Element}} <em>element</em>'s <a>associated background image requests</a> becomes <a>completely available</a>, run the algorithm to <a>process an image that finished loading</a> with <em>element</em> and <a>image request</a> as inputs.
-
-NOTE: we assume that there is one <a>image request</a> for each {{Element}} that a <a>background-image</a> property affects and for each URL that the <a>background-image</a> property specifies.
-So, for example, if there is a style with two URLs affecting all <{div}>s, and there are two <{div}>s, then there will be four <a>image requests</a>.
-This means that a single <a>background-image</a> property could produce multiple {{PerformanceElementTiming}} entries because it can affect multiple elements and because it can specify multiple URLs.
-
 Modifications to the Paint Timing specification {#sec-modifications-paint-timing}
 ---------------------------------------------------------------------------------
 
 Append the following step to the [=Process image that finished loading=] algorithm:
 
-    1. Otherwise, run the <a>report image element timing</a> algorithm, passing in the triple (|element|, |imageRequest|, |now|), 0, and |root| as inputs.
+    1. Otherwise, run the <a>report image element timing</a> algorithm, passing in the triple (<var ignore>element</var>, <var ignore>imageRequest</var>, <var ignore>now</var>), 0, and <var ignore>root</var> as inputs.
+
+Append the following step to [=the paint timing steps=]:
+
+    1. Run the [=element timing processing=] algorithm given <var ignore>document</var>, <var ignore>paintTimestamp</var>, <var ignore>paintedImages</var> and <var ignore>paintedTextNodes</var>.
 
 Report image Element Timing {#sec-report-image-element}
 --------------------------------------------------------
@@ -229,11 +203,9 @@ Report image Element Timing {#sec-report-image-element}
 <div algorithm="report image element timing">
     When asked to <dfn>report image element timing</dfn> given a triple (|element|, |imageRequest|, |loadTime|), a DOMHighResTimestamp |renderTime| and a {{Document}} |document|, perform the following steps:
 
-    1. Let |intersectionRect| be the value returned by the <a>intersection rect algorithm</a> using |element| as the target and viewport as the root.
-    1. Let |exposedElement| be the result of running [=get an element=] with |element| and |document| as input.
-    1. If |exposedElement| is not null, call the <a>potentially add a LargestContentfulPaint entry</a> algorithm with |intersectionRect|, |imageRequest|, |renderTime|, |loadTime|, |element|, and |document|.
     1. If |element|'s "<code>elementtiming</code>" content attribute is absent, then abort these steps.
-    1. Create and initialize a {{PerformanceElementTiming}} object |entry|.
+    1. Let |intersectionRect| be the value returned by the <a>intersection rect algorithm</a> using |element| as the target and viewport as the root.
+    1. Create and initialize a {{PerformanceElementTiming}} object |entry| with |document|'s [=relevant realm=].
         1. Initialize |entry|'s <a>request</a> to |imageRequest|.
         1. Initialize |entry|'s <a>element</a> to |element|.
         1. Initialize |entry|'s {{PerformanceEntry/name}} to the {{DOMString}} "image-paint".
@@ -252,13 +224,11 @@ Report text Element Timing {#sec-report-text}
 <div algorithm="report text element timing">
     When asked to <dfn>report text element timing</dfn> given an {{Element}} |element|, a DOMHighResTimestamp |renderTime| and a {{Document}} |document|, perform the following steps:
 
+    1. If |element|'s "<code>elementtiming</code>" content attribute is absent, then abort these steps.
     1. Let |intersectionRect| be an empty rectangle.
     1. For each {{Text}} <a>node</a> |text| in |element|'s <a>set of owned text nodes</a>:
         1. Augment |intersectionRect| to be smallest rectangle containing the border box of |text| and |intersectionRect|.
     1. Intersect |intersectionRect| with the visual viewport.
-    1. Let |exposedElement| be the result of running [=get an element=] with |element| and |document| as input.
-    1. If |exposedElement| is not null, call the <a>potentially add a LargestContentfulPaint entry</a> algorithm with |intersectionRect|, null, |renderTime|, 0, |exposedElement|, and |document|.
-    1. If |element|'s "<code>elementtiming</code>" content attribute is absent, then abort these steps.
     1. Create and initialize a {{PerformanceElementTiming}} object |entry| with |document|'s [=relevant realm=].
         1. Initialize |entry|'s <a>element</a> to |element|.
         1. Initialize |entry|'s {{PerformanceEntry/name}} to the {{DOMString}} "text-paint".
@@ -275,24 +245,12 @@ Element Timing processing {#sec-element-processing}
 --------------------------------------------------------
 
 <div algorithm="process element timing">
-    The <dfn>element timing processing</dfn> algorithm receives a {{Document}} |doc|, a timestamp |now|, an [=ordered set=] of [=/elements=] <var ignore>paintedImages</var>, and an [=ordered set=] of [=/elements=] <var ignore>paintedTextNodes</var>, and performs the following steps:
+    The <dfn>element timing processing</dfn> algorithm receives a {{Document}} |doc|, a timestamp |now|, an [=ordered set=] of [=/elements=] |paintedImages|, and an [=ordered set=] of [=/elements=] |paintedTextNodes|, and performs the following steps:
 
     1. For each |imagePendingRenderingTriple| in |paintedImages|:
         1. Run the <a>report image element timing</a> algorithm passing in |imagePendingRenderingTriple|, |now|, and |doc|.
     1. For each {{Element}} |element| in |paintedTextNodes|:
         1. Run the <a>report text element timing</a> given |element|, |now|, and |doc|.
-</div>
-
-Get an element algorithm {#sec-get-an-element}
----------------------------------
-
-<div algorithm="PerformanceElementTiming element">
-When asked to run the <dfn>get an element</dfn> algorithm with {{Element}} |element| and {{Document}} |document| as inputs, run these steps:
-    1. If |element| is not <a>connected</a>, return <code>null</code>.
-    1. Let |settings| be <a>this</a>'s <a>relevant settings object</a>.
-    1. if |document| is null, let |document| be |settings|'s <a>relevant global object</a>'s <a>associated <code>Document</code></a>.
-    1. If |element|'s <a for="tree">root</a> is not equal to |document| or if |document| is not [=fully active=], return <code>null</code>.
-    1. Return |element|.
 </div>
 
 Security & privacy considerations {#sec-security}
