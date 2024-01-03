@@ -186,39 +186,40 @@ partial interface Element {
 
 The {{Element/elementTiming}} attribute must <a>reflect</a> the element's "<code>elementtiming</code>" content attribute.
 
-Modifications to the Paint Timing specification {#sec-modifications-paint-timing}
----------------------------------------------------------------------------------
+Report Element Timing {#sec-report-element-timing}
+--------------------------------------------------
 
-Append the following step to the [=Process image that finished loading=] algorithm:
+<div export algorithm="report element timing">
+    When asked to <dfn>report element timing</dfn> given a {{Document}} |doc|, a timestamp |now|, an [=ordered set=] of [=pending image records=] |paintedImages|, and an [=ordered set=] of [=/elements=] |paintedTextNodes|, perform the following steps:
 
-    1. Otherwise, run the <a>report image element timing</a> algorithm, passing in the triple (<var ignore>element</var>, <var ignore>imageRequest</var>, <var ignore>now</var>), 0, and <var ignore>root</var> as inputs.
+    1. For each |record| in |paintedImages|:
+        1. Run the <a>report image element timing</a> algorithm passing in |record|, |now|, and |doc|.
+    1. For each {{Element}} |element| in |paintedTextNodes|:
+        1. Run the <a>report text element timing</a> given |element|, |now|, and |doc|.
+</div>
 
-Append the following step to [=the paint timing steps=]:
-
-    1. Run the [=element timing processing=] algorithm given <var ignore>document</var>, <var ignore>paintTimestamp</var>, <var ignore>paintedImages</var> and <var ignore>paintedTextNodes</var>.
-
-Report image Element Timing {#sec-report-image-element}
+Report Image Element Timing {#sec-report-image-element}
 --------------------------------------------------------
 
 <div algorithm="report image element timing">
-    When asked to <dfn>report image element timing</dfn> given a triple (|element|, |imageRequest|, |loadTime|), a DOMHighResTimestamp |renderTime| and a {{Document}} |document|, perform the following steps:
+    When asked to <dfn>report image element timing</dfn> given a [=pending image record=] |record|, a DOMHighResTimestamp |renderTime| and a {{Document}} |document|, perform the following steps:
 
-    1. If |element|'s "<code>elementtiming</code>" content attribute is absent, then abort these steps.
-    1. Let |intersectionRect| be the value returned by the <a>intersection rect algorithm</a> using |element| as the target and viewport as the root.
+    1. If |record|'s [=pending image record/element=]'s "<code>elementtiming</code>" content attribute is absent, then abort these steps.
+    1. Let |intersectionRect| be the value returned by the <a>intersection rect algorithm</a> using |record|'s [=pending image record/element=] as the target and viewport as the root.
     1. Create and initialize a {{PerformanceElementTiming}} object |entry| with |document|'s [=relevant realm=].
-        1. Initialize |entry|'s <a>request</a> to |imageRequest|.
-        1. Initialize |entry|'s <a>element</a> to |element|.
+        1. Initialize |entry|'s <a>request</a> to |record|'s [=pending image record/request=].
+        1. Initialize |entry|'s <a>element</a> to |record|'s [=pending image record/element=].
         1. Initialize |entry|'s {{PerformanceEntry/name}} to the {{DOMString}} "image-paint".
         1. Initialize |entry|'s {{renderTime}} to |renderTime|.
-        1. Initialize |entry|'s {{loadTime}} to |loadTime|.
+        1. Initialize |entry|'s {{loadTime}} to |record|'s [=pending image record/loadTime=].
         1. Initialize |entry|'s {{intersectionRect}} to |intersectionRect|.
-        1. Initialize |entry|'s {{identifier}} to |element|'s "<code>elementtiming</code>" content attribute.
-        1. Initialize |entry|'s {{PerformanceElementTiming/naturalWidth}} and {{PerformanceElementTiming/naturalHeight}} by running the same steps for an <{img}>'s {{HTMLImageElement/naturalWidth}} and {{HTMLImageElement/naturalHeight}} attribute getters, but using |imageRequest| as the image.
-        1. Initialize |entry|'s {{id}} to |element|'s "<code>id</code>" content attribute.
+        1. Initialize |entry|'s {{identifier}} to |record|'s [=pending image record/element=]'s "<code>elementtiming</code>" content attribute.
+        1. Initialize |entry|'s {{PerformanceElementTiming/naturalWidth}} and {{PerformanceElementTiming/naturalHeight}} by running the same steps for an <{img}>'s {{HTMLImageElement/naturalWidth}} and {{HTMLImageElement/naturalHeight}} attribute getters, but using |record|'s [=pending image record/request=] as the image.
+        1. Initialize |entry|'s {{id}} to |record|'s [=pending image record/element=]'s "<code>id</code>" content attribute.
     1. <a>Queue the PerformanceEntry</a> |entry|.
 </div>
 
-Report text Element Timing {#sec-report-text}
+Report Text Element Timing {#sec-report-text}
 --------------------------------------------------------
 
 <div algorithm="report text element timing">
@@ -239,18 +240,6 @@ Report text Element Timing {#sec-report-text}
         1. Initialize |entry|'s {{PerformanceElementTiming/naturalWidth}} and {{PerformanceElementTiming/naturalHeight}} to 0.
         1. Initialize |entry|'s {{id}} to |element|'s "<code>id</code>" content attribute.
     1. <a>Queue the PerformanceEntry</a> |entry|.
-</div>
-
-Element Timing processing {#sec-element-processing}
---------------------------------------------------------
-
-<div algorithm="process element timing">
-    The <dfn>element timing processing</dfn> algorithm receives a {{Document}} |doc|, a timestamp |now|, an [=ordered set=] of [=/elements=] |paintedImages|, and an [=ordered set=] of [=/elements=] |paintedTextNodes|, and performs the following steps:
-
-    1. For each |imagePendingRenderingTriple| in |paintedImages|:
-        1. Run the <a>report image element timing</a> algorithm passing in |imagePendingRenderingTriple|, |now|, and |doc|.
-    1. For each {{Element}} |element| in |paintedTextNodes|:
-        1. Run the <a>report text element timing</a> given |element|, |now|, and |doc|.
 </div>
 
 Security & privacy considerations {#sec-security}
@@ -302,7 +291,7 @@ Computing it at this point in time allows exposing the entry at that time.
 If we were to compute the rect only until the image is fully displayed, we'd only be able to expose the entry after that time.
 
 If we do not want to expose the rendering timetamp of an image, it's preferable to dispatch the entry to the {{PerformanceObserver}} right away.
-Suppose we waited and exposed all the entries during the <a>element timing processing</a> algorithm.
+Suppose we waited and exposed all the entries during the <a>report element timing</a> algorithm.
 An attacker could infer nontrivial information about the rendering timestamp of an image.
 It would do so by only observing the timing for that image.
 Even though the timestamp is not exposed as a member of the {{PerformanceElementTiming}} entry received,
