@@ -4,8 +4,9 @@ Status: CG-DRAFT
 Shortname: element-timing
 Group: WICG
 Level: 1
-Editor: Nicolás Peña Moreno, Google https://google.com, npm@chromium.org
+Editor: Ian Clelland, Google https://google.com, iclelland@chromium.org, w3cid 76841
         Tim Dresser, Google https://google.com, tdresser@chromium.org
+Former Editor: Nicolás Peña Moreno, Google https://google.com, npm@chromium.org
 URL: https://wicg.github.io/element-timing
 Repository: https://github.com/WICG/element-timing
 Test Suite: https://github.com/web-platform-tests/wpt/tree/master/element-timing
