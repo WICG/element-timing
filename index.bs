@@ -36,6 +36,16 @@ urlPrefix: https://wicg.github.io/largest-contentful-paint/; spec: LARGEST-CONTE
     type: dfn; url:#potentially-add-a-largestcontentfulpaint-entry; text: potentially add a LargestContentfulPaint entry;
 urlPrefix: https://fetch.spec.whatwg.org/; spec: FETCH;
     type: dfn; url:#concept-tao-check; text: timing allow check;
+urlPrefix: https://w3c.github.io/paint-timing/; spec: PAINT-TIMING;
+    type: dfn; url:#set-of-owned-text-nodes; text: set of owned text nodes;
+    type: dfn; url:#process-image-that-finished-loading; text: process image that finished loading;
+    type: dfn; url:#timing-eligible; text: timing-eligible
+    type: dfn; url:#the-paint-timing-steps; text: the paint timing steps
+    type: dfn; url:#exposed-for-paint-timing; text: exposed for paint timing
+    type: dfn; url:#pending-image-record; text: pending image record
+    type: dfn; for:pending image record; url:#pending-image-record-element; text: element
+    type: dfn; for:pending image record; url:#pending-image-record-loadtime; text: loadTime
+    type: dfn; for:pending image record; url:#pending-image-record-request; text: request
 </pre>
 <pre class=link-defaults>
 spec:dom; type:dfn; text:descendant
