@@ -264,7 +264,7 @@ We choose to expose the {{loadTime}} because it is very easy to obtain even with
 In addition, we believe any fix to remove the leak provided by image onload handlers or ResourceTiming could also fix the leak provided by this API.
 
 The {{renderTime}} (display timestamp) is indeed newly exposed information. Implementations are advised to coarsen that timestamp further,
-o a 4 milliseconds resolution at least, to avoid exposing differences in decoding time between cross-origin images. Note that other checks,
+to a 4 milliseconds resolution or coarser, to avoid exposing differences in decoding time between cross-origin images. Note that other checks,
 such as `Timing-Allow-Origin`, does not work here due to same-origin and cross-origin images being rendered at the same time.
 Exposing a coarse {{renderTime}} is anyway not a substantial attack vector, given that image [=natural size=] and loading time are exposed in other ways.
 
