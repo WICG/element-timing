@@ -44,7 +44,12 @@ urlPrefix: https://w3c.github.io/paint-timing/; spec: PAINT-TIMING;
     type: dfn; for:pending image record; url:#pending-image-record-element; text: element
     type: dfn; for:pending image record; url:#pending-image-record-loadtime; text: loadTime
     type: dfn; for:pending image record; url:#pending-image-record-request; text: request
+    type: dfn; url:#paint-timing-info; text: paint timing info
+    type: dfn; for: paint timing info; text: default paint timestamp;
+    type: dfn; for:PaintTimingMixin; url:#painttimingmixin-paint-timing-info; text: paint timing info
+    type: interface; text:PaintTimingMixin; url:#painttimingmixin
 </pre>
+
 <pre class=link-defaults>
 spec:dom; type:dfn; text:descendant
 </pre>
@@ -123,6 +128,8 @@ interface PerformanceElementTiming : PerformanceEntry {
     readonly attribute DOMString url;
     [Default] object toJSON();
 };
+
+PerformanceElementTiming includes PaintTimingMixin;
 </pre>
 
 A {{PerformanceElementTiming}} object reports timing information about one associated element.
@@ -141,7 +148,7 @@ The {{PerformanceEntry/startTime}} attribute's getter must return the value of <
 
 The {{PerformanceEntry/duration}} attribute's getter must return 0.
 
-The {{PerformanceElementTiming/renderTime}} attribute must return the value it was initialized to.
+The {{PerformanceElementTiming/renderTime}} attribute getter step is to return the [=default paint timestamp=] given [=this=]'s [=PaintTimingMixin/paint timing info=].
 
 The {{PerformanceElementTiming/loadTime}} attribute's getter must return the the value it was initialized to.
 
@@ -199,27 +206,26 @@ Report Element Timing {#sec-report-element-timing}
 --------------------------------------------------
 
 <div export algorithm="report element timing">
-    When asked to <dfn>report element timing</dfn> given a {{Document}} |doc|, a timestamp |now|, an [=ordered set=] of [=pending image records=] |paintedImages|, and an [=ordered set=] of [=/elements=] |paintedTextNodes|, perform the following steps:
+    When asked to <dfn>report element timing</dfn> given a {{Document}} |doc|, a [/=paint timing info=] |paintTimingInfo|, an [=ordered set=] of [=pending image records=] |paintedImages|, and an [=ordered set=] of [=/elements=] |paintedTextNodes|, perform the following steps:
 
     1. For each |record| in |paintedImages|:
-        1. Run the <a>report image element timing</a> algorithm passing in |record|, |now|, and |doc|.
+        1. Run the <a>report image element timing</a> algorithm passing in |record|, |paintTimingInfo|, and |doc|.
     1. For each {{Element}} |element| in |paintedTextNodes|:
-        1. Run the <a>report text element timing</a> given |element|, |now|, and |doc|.
+        1. Run the <a>report text element timing</a> given |element|, |paintTimingInfo|, and |doc|.
 </div>
 
 Report Image Element Timing {#sec-report-image-element}
 --------------------------------------------------------
 
 <div algorithm="report image element timing">
-    When asked to <dfn>report image element timing</dfn> given a [=pending image record=] |record|, a DOMHighResTimestamp |renderTime| and a {{Document}} |document|, perform the following steps:
+    When asked to <dfn>report image element timing</dfn> given a [=pending image record=] |record|, a [=/paint timing info=] |paintTimingInfo| and a {{Document}} |document|, perform the following steps:
 
     1. If |record|'s [=pending image record/element=]'s "<code>elementtiming</code>" content attribute is absent, then abort these steps.
     1. Let |intersectionRect| be the value returned by the <a>intersection rect algorithm</a> using |record|'s [=pending image record/element=] as the target and viewport as the root.
-    1. Create and initialize a {{PerformanceElementTiming}} object |entry| with |document|'s [=relevant realm=].
+    1. Create and initialize a {{PerformanceElementTiming}} object |entry| with |document|'s [=relevant realm=], whose [=PaintTimingMixin/paint timing info=] is |paintTimingInfo|.
         1. Initialize |entry|'s <a>request</a> to |record|'s [=pending image record/request=].
         1. Initialize |entry|'s <a>element</a> to |record|'s [=pending image record/element=].
         1. Initialize |entry|'s {{PerformanceEntry/name}} to the {{DOMString}} "image-paint".
-        1. Initialize |entry|'s {{renderTime}} to |renderTime|.
         1. Initialize |entry|'s {{loadTime}} to |record|'s [=pending image record/loadTime=].
         1. Initialize |entry|'s {{intersectionRect}} to |intersectionRect|.
         1. Initialize |entry|'s {{identifier}} to |record|'s [=pending image record/element=]'s "<code>elementtiming</code>" content attribute.
@@ -232,17 +238,16 @@ Report Text Element Timing {#sec-report-text}
 --------------------------------------------------------
 
 <div algorithm="report text element timing">
-    When asked to <dfn>report text element timing</dfn> given an {{Element}} |element|, a DOMHighResTimestamp |renderTime| and a {{Document}} |document|, perform the following steps:
+    When asked to <dfn>report text element timing</dfn> given an {{Element}} |element|, a [=/paint timing info=] |paintTimingInfo| and a {{Document}} |document|, perform the following steps:
 
     1. If |element|'s "<code>elementtiming</code>" content attribute is absent, then abort these steps.
     1. Let |intersectionRect| be an empty rectangle.
     1. For each {{Text}} <a>node</a> |text| in |element|'s <a>set of owned text nodes</a>:
         1. Augment |intersectionRect| to be smallest rectangle containing the border box of |text| and |intersectionRect|.
     1. Intersect |intersectionRect| with the visual viewport.
-    1. Create and initialize a {{PerformanceElementTiming}} object |entry| with |document|'s [=relevant realm=].
+    1. Create and initialize a {{PerformanceElementTiming}} object |entry| with |document|'s [=relevant realm=], whose [=PaintTimingMixin/paint timing info=] is |paintTimingInfo|.
         1. Initialize |entry|'s <a>element</a> to |element|.
         1. Initialize |entry|'s {{PerformanceEntry/name}} to the {{DOMString}} "text-paint".
-        1. Initialize |entry|'s {{renderTime}} to |renderTime|.
         1. Initialize |entry|'s {{loadTime}} to 0.
         1. Initialize |entry|'s {{intersectionRect}} to |intersectionRect|.
         1. Initialize |entry|'s {{identifier}} to |element|'s "<code>elementtiming</code>" content attribute.
